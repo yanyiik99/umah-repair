@@ -1,9 +1,9 @@
-import { Button, Card, Carousel, Col, Flex, Form, Image, Input, notification, Rate, Row, Space, Typography } from 'antd';
+import { Breadcrumb, Button, Card, Carousel, Col, Flex, Form, Image, Input, notification, Rate, Row, Space, Typography } from 'antd';
 import './index.css';
 
 import Img from '../../assets/clean-service.jpg';
 import ImgPromo from '../../assets/promo-banner.jpg';
-import { AppstoreAddOutlined, ClockCircleFilled, ContainerFilled, CustomerServiceOutlined, FileProtectOutlined, FullscreenOutlined } from '@ant-design/icons';
+import { AppstoreAddOutlined, ClockCircleFilled, ContainerFilled, CustomerServiceOutlined, FileProtectOutlined, FullscreenOutlined, HomeOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import Countdown from 'react-countdown';
 const { Title, Paragraph, Text } = Typography;
@@ -12,6 +12,7 @@ const { Compact } = Space;
 import { BiBadgeCheck } from "react-icons/bi";
 import { showReadmore } from '../../utils/ui';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 
 
 const testimonials = [
@@ -56,6 +57,7 @@ const Jasadetail = () => {
   const [validPromocode, setValidPromocode] = useState(false);
   const [api, contextHolder] = notification.useNotification();
   const dummyPromocode = 'XXX123';
+  const navigate = useNavigate();
 
   
   const showAlert = (status, title, description) => {
@@ -90,7 +92,6 @@ const Jasadetail = () => {
 
   return (
     <div>
-
       <Row className='bg-violet-200 w-full h-72'>
         {contextHolder}
         <Col xs={24}>
@@ -98,9 +99,17 @@ const Jasadetail = () => {
             <h1 className='text-4xl font-bold mb-2'>
               Detail Home Service
             </h1>
-            <h5>
-              Homepage / Detail Jasa
-            </h5>
+            <Breadcrumb
+                  items={[
+                    {
+                      href: '/',
+                      title: <HomeOutlined />,
+                    },
+                    {
+                      title: 'Detail Jasa',
+                    },
+                  ]}
+            />
           </Flex>
         </Col>
       </Row>
@@ -305,7 +314,7 @@ const Jasadetail = () => {
                   </span>
                 </Flex>
               </Flex>
-              <Button className='bg-purple-600 text-white font-semibold w-full py-6 text-xl mt-10 hover:!border-violet-700 hover:!text-violet-950' >
+              <Button onClick={()=>navigate('/proses-transaksi')} className='bg-purple-600 text-white font-semibold w-full py-6 text-xl mt-10 hover:!border-violet-700 hover:!text-violet-950' >
                 Pesan Jasa
               </Button>
             </Card>
