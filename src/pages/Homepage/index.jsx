@@ -5,8 +5,6 @@ import './index.css';
 import ImageCard from './img/1.png';
 import classNames from "classnames";
 
-const { Content } = Layout;
-
 const dataDummy = [
   {key: 1, title: "Develop Your Skills Laravel and Filament", category: "Living Room", description: "The boy wtih blue hat", price: "150.000", tools: "Customer-Provided Tools", duration: "1 Hours"},
   {key: 2, title: "Web Event and Workshop Tickets Online", category: "Garden", description: "The girl wtih red hat", price: "150.000", tools: "Service-Provided Tools", duration: "3 Hours"},
