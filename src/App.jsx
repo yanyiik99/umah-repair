@@ -1,15 +1,15 @@
 import { Route, Routes } from "react-router-dom"
 import Homepage from "./pages/Homepage";
-import JasaDetail from "./pages/JasaDetail";
+import Jasadetail from "./pages/Jasadetail";
 
-function App() {
+function App() {  
 
   return (
     <>
       <div>
         <Routes>
             <Route path="/" element={<Homepage/>} />
-            <Route path="/jasa-detail" element={<JasaDetail/>} />
+            <Route path="/jasadetail" element={<Jasadetail/>} />
         </Routes>
       </div>
     </>
