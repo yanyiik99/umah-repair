@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Row, Col, Flex, Card, Modal, Form, Input, notification} from 'antd';
-import { UserOutlined, MailOutlined, PhoneOutlined, EditOutlined, PushpinOutlined, EnvironmentOutlined, BankOutlined, CompressOutlined, ExpandOutlined, LeftOutlined, EyeOutlined} from '@ant-design/icons';
+import { UserOutlined, MailOutlined, PhoneOutlined, EditOutlined, PushpinOutlined, EnvironmentOutlined, BankOutlined, CompressOutlined, ExpandOutlined, LeftOutlined, EyeOutlined, ArrowLeftOutlined} from '@ant-design/icons';
 import './index.css';
 import AvatarImage from './img/1.jpg';
 import { useNavigate } from "react-router-dom";
@@ -22,6 +22,7 @@ const Profile = () => {
     const [form] = Form.useForm();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [profile, setProfile] = useState(dataProfile);
+    const [isModalPreviewOpen, setIsModalPreviewOpen] = useState(false);
 
     const showAlert = (status, title, description) => {
         notification[status]({
@@ -29,6 +30,14 @@ const Profile = () => {
             description: description
         })
     }
+
+    const showModalPreview = () => {
+        setIsModalPreviewOpen(true)
+    };
+
+    const handleCancelPreview = () => {
+        setIsModalPreviewOpen(false)
+    };
 
     const showModal = () => {
         form.setFieldsValue(profile);
@@ -169,16 +178,27 @@ const Profile = () => {
                 </Form>
             </Modal>
 
-            <Row className='bg-violet-500 w-full h-72'>
+            <Modal
+                open={isModalPreviewOpen}
+                footer={null}
+                onCancel={handleCancelPreview}
+                centered>
+                <img src={AvatarImage} alt="Preview Avatar" className="rounded-full w-48 h-48 mx-auto my-10" />
+            </Modal>
+
+            <Row className='bg-violet-500 w-full h-96'>
                 <Col xs={24}>
                     <div className="layout !bg-violet-500">
-                        <Flex className="pt-5"  justify='start' align='end'>
-                        <LeftOutlined onClick={()=>navigate('/')} className="text-xl text-white"/>
+                        <Flex className="pt-10"  justify='space-between'>
+                            <div className="left">
+                                <p onClick={()=>navigate('/')} className="text-white font-semibold cursor-pointer"><ArrowLeftOutlined className="mr-2 bg-white p-2 rounded-full text-violet-500"/> Back to Homepage</p>                            
+                            </div>
+                            <UserOutlined onClick={()=>navigate('/profile')} className="bg-white p-2 rounded-full text-violet-500"/>
                         </Flex>
                     </div>
                     <Flex className='h-full pt-10' vertical justify='start' align='center'>
                         <h1 className='text-4xl font-bold mb-2 mt-10 text-white'>Your Profile</h1>
-                        <p className="text-slate-300">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <p className="text-slate-300">Easily edit your information to keep everything up-to-date.</p>
                     </Flex>
                 </Col>
             </Row>
@@ -198,7 +218,7 @@ const Profile = () => {
                                     <p>{profile.email}</p>
                                 </div>
                             </div>
-                            <button className="mt-8 border border-violet-500 text-violet-500 h-8 w-24 rounded-full">Edit <EditOutlined className="ml-2"/></button>
+                            <button onClick={showModalPreview} className="mt-8 border border-violet-500 text-violet-500 h-8 w-28 rounded-full hover:bg-purple-500 hover:text-white transition">Preview <EyeOutlined className="ml-2"/></button>
                         </Flex>
                     </Card>
                 </div>
@@ -209,7 +229,7 @@ const Profile = () => {
                         title="Personal Informations" 
                         style={{ fontFamily: 'Poppins', padding: '20px' }} 
                         bordered={false}
-                        extra={<button onClick={showModal} className="border border-violet-500 text-violet-500 py-1 px-6 mb-3 rounded-full">Edit <EditOutlined className="ml-2"/></button>}>
+                        extra={<button onClick={showModal} className="border border-violet-500 text-violet-500 py-1 px-7 mb-3 rounded-full hover:bg-purple-500 hover:text-white transition">Edit <EditOutlined className="ml-2"/></button>}>
                         <Row>
                             <Col xl={12} sm={24}>
                                 <div className="personal flex mt-5">
