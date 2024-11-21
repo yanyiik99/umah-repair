@@ -1,18 +1,26 @@
 import { useState } from "react";
 import { Row, Col, Flex, Card} from 'antd';
-import { UserOutlined, MailOutlined, PhoneOutlined, EditOutlined, PushpinOutlined, EnvironmentOutlined, BankOutlined, CompressOutlined, ExpandOutlined} from '@ant-design/icons';
+import { UserOutlined, MailOutlined, PhoneOutlined, EditOutlined, PushpinOutlined, EnvironmentOutlined, BankOutlined, CompressOutlined, ExpandOutlined, ArrowLeftOutlined, LeftOutlined} from '@ant-design/icons';
 import './index.css';
 import AvatarImage from './img/1.jpg';
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+    const navigate = useNavigate();
+
     return (
         <div>
             <Row className='bg-violet-500 w-full h-72'>
                 <Col xs={24}>
-                <Flex className='h-full pt-10' vertical justify='start' align='center'>
-                    <h1 className='text-4xl font-bold mb-2 mt-10 text-white'>Your Profile</h1>
-                    <p className="text-slate-300">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                </Flex>
+                    <div className="layout !bg-violet-500">
+                        <Flex className="pt-5"  justify='start' align='end'>
+                        <LeftOutlined onClick={()=>navigate('/')} className="text-xl text-white"/>
+                        </Flex>
+                    </div>
+                    <Flex className='h-full pt-10' vertical justify='start' align='center'>
+                        <h1 className='text-4xl font-bold mb-2 mt-10 text-white'>Your Profile</h1>
+                        <p className="text-slate-300">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </Flex>
                 </Col>
             </Row>
 

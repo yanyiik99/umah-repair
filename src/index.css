@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ant-breadcrumb-link {
+    color: #e4e4e4 !important; /* Change breadcrumb link color */
+}
+
+

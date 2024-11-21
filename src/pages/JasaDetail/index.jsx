@@ -37,7 +37,7 @@ const testimonials = [
     name: "Dea Amanda",
     title: "Designer",
     company: "Creative Studio",
-    feedback: "Beautifully designed and incredibly intuitive!",
+    feedback: "Beautifully designed and incredibly intuitive! Beautifully designed and incredibly",
     avatar: "https://randomuser.me/api/portraits/women/1.jpg",
   },
   {
@@ -45,7 +45,7 @@ const testimonials = [
     name: "Ayu Suputri",
     title: "Freelance",
     company: "Creative Studio",
-    feedback: "Beautifully designed and incredibly intuitive!",
+    feedback: "Beautifully designed and incredibly intuitive! Beautifully designed and incredibly",
     avatar: "https://randomuser.me/api/portraits/women/3.jpg",
   },
 ];
@@ -86,35 +86,32 @@ const Jasadetail = () => {
     }
   }
 
-  
-  
-
 
   return (
     <div>
-      <Row className='bg-violet-200 w-full h-72'>
+      <Row className='bg-violet-500 w-full h-72'>
         {contextHolder}
         <Col xs={24}>
           <Flex className='h-full pt-10' vertical justify='start' align='center'>
-            <h1 className='text-4xl font-bold mb-2'>
+            <h1 className='text-4xl font-bold mb-2 text-white'>
               Detail Home Service
             </h1>
             <Breadcrumb
-                  items={[
-                    {
-                      href: '/',
-                      title: <HomeOutlined />,
-                    },
-                    {
-                      title: 'Detail Jasa',
-                    },
-                  ]}
+              items={[
+                {
+                  href: '/',
+                  title: <HomeOutlined />,
+                },
+                {
+                  title: 'Detail Jasa',
+                },
+              ]}
             />
           </Flex>
         </Col>
       </Row>
 
-      <div className="container mx-auto relative -top-32">
+      <div className="container px-5 mx-auto relative -top-32">
         <Row gutter={[20, 12]} >
           <Col xs={24} lg={16}>
             <Card className='rounded-xl shadow-lg'>

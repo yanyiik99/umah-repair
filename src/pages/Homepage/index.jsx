@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Button, Layout, Card, Row, Col, Flex, List, Input } from 'antd';
-import { FormatPainterFilled, RightCircleFilled, SearchOutlined, ClockCircleFilled, StarFilled } from '@ant-design/icons'
+import { FormatPainterFilled, RightCircleFilled, SearchOutlined, ClockCircleFilled, StarFilled, UserOutlined } from '@ant-design/icons'
 import './index.css';
 import ImageCard from './img/1.png';
 import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
 
 const dataDummy = [
   {key: 1, title: "Develop Your Skills Laravel and Filament", category: "Living Room", description: "The boy wtih blue hat", price: "150.000", tools: "Customer-Provided Tools", duration: "1 Hours"},
@@ -25,6 +26,7 @@ const Homepage = () => {
 
   const [activeTabs, setActiveTabs] = useState("all");
   const [searchCategory, setSearchCategory] = useState("");
+  const navigate = useNavigate();
 
   const tabsFiltered = (item) => {
     setActiveTabs(item?.value);
@@ -44,8 +46,13 @@ const Homepage = () => {
     <div>
       <Row className='bg-violet-500 w-full h-72'>
         <Col xs={24}>
-          <Flex className='h-full pt-10' vertical justify='start' align='center'>
-            <h1 className='text-4xl font-bold mb-2 mt-10 text-white'>Discover Top Hom Service</h1>
+          <div className="layout !bg-violet-500">
+            <Flex className="pt-5"  justify='end' align='end'>
+              <UserOutlined onClick={()=>navigate('/profile')} className="text-3xl text-white"/>
+            </Flex>
+          </div>
+          <Flex className='h-full pt-5' vertical justify='start' align='center'>
+            <h1 className='text-4xl font-bold mb-2 mt-10 text-white text-center'>Discover Top Hom Service </h1>
             <p className="text-slate-300">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
           </Flex>
         </Col>
@@ -110,7 +117,7 @@ const Homepage = () => {
             dataSource={filteredData}
             renderItem={(item) => (
             <List.Item>
-              <Card style={{ borderRadius: 20, marginTop: 25, border: 'none' }}>
+              <Card  style={{ borderRadius: 20, marginTop: 25, border: 'none' }}>
                 <div className="img-card">
                   <div className="rate">
                     <span>4.5</span> <StarFilled style={{ marginTop: '4px', color: 'orange' }}/>
@@ -135,7 +142,7 @@ const Homepage = () => {
 
                 <div className="harga-card text-xl" style={{ marginTop: 30, display: 'flex', justifyContent: 'space-between'}}>
                   <h2 className="text-violet-500">Rp {item?.price}</h2>
-                  <RightCircleFilled className="text-violet-500" style={{ marginTop: '-5px', marginRight: 5, fontWeight: 700, fontSize: 30 }}/>
+                  <RightCircleFilled onClick={()=>navigate('/jasadetail')} className="text-violet-500" style={{ marginTop: '-5px', marginRight: 5, fontWeight: 700, fontSize: 30 }}/>
                 </div>                  
               </Card> 
             </List.Item>
