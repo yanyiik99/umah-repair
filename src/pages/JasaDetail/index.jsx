@@ -10,45 +10,12 @@ const { Title, Paragraph, Text } = Typography;
 const { Compact } = Space;
 
 import { BiBadgeCheck } from "react-icons/bi";
-import { showReadmore } from '../../utils/ui';
+import { formatCurrency, showReadmore } from '../../utils/ui';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
+import { DataJasa, dataTestimoni } from '../../utils/constans';
 
 
-const testimonials = [
-  {
-    id: 1,
-    name: "Ari Pramana",
-    title: "Software Engineer",
-    company: "TechCorp",
-    feedback: "This product has significantly improved my productivity!",
-    avatar: "https://randomuser.me/api/portraits/men/1.jpg",
-  },
-  {
-    id: 2,
-    name: "Wahyu Sucipta",
-    title: "Product Manager",
-    company: "Innovate Inc.",
-    feedback: "Fantastic experience with the service. Highly recommend it!",
-    avatar: "https://randomuser.me/api/portraits/men/5.jpg",
-  },
-  {
-    id: 3,
-    name: "Dea Amanda",
-    title: "Designer",
-    company: "Creative Studio",
-    feedback: "Beautifully designed and incredibly intuitive! Beautifully designed and incredibly",
-    avatar: "https://randomuser.me/api/portraits/women/1.jpg",
-  },
-  {
-    id: 4,
-    name: "Ayu Suputri",
-    title: "Freelance",
-    company: "Creative Studio",
-    feedback: "Beautifully designed and incredibly intuitive! Beautifully designed and incredibly",
-    avatar: "https://randomuser.me/api/portraits/women/3.jpg",
-  },
-];
 
 
 const Jasadetail = () => {
@@ -122,12 +89,14 @@ const Jasadetail = () => {
                   AVAILABLE
                 </div>
                 <Flex className='mx-4 my-3' align='center'>
-                  <Rate allowHalf  disabled defaultValue={3.5}/>
-                  <span className='font-bold text-lg mx-3'>4.5</span>
-                  <span className='font-bold text-lg text-gray-400'>(500 Reviews)</span>
+                  <Rate allowHalf  disabled defaultValue={DataJasa[0].rate}/>
+                  <span className='font-bold text-lg mx-3'>{DataJasa[0].rate}</span>
+                  <span className='font-bold text-lg text-gray-400'>({DataJasa[0].totalReviews} Reviews)</span>
                 </Flex>
               </Flex>
-              <Title level={2} style={{fontWeight: 700}} className='my-2'>Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum sat sat.</Title>
+              <Title level={2} style={{fontWeight: 700}} className='my-2'>
+                {DataJasa[0].nama}
+              </Title>
               <Row gutter={[10,10]} className='mt-5'>
                 <Col xs={12} xl={6}>
                   <Card size='small' className='bg-gray-100'>
@@ -135,8 +104,8 @@ const Jasadetail = () => {
                       <div>
                         <ClockCircleFilled className='text-4xl text-violet-500' />
                       </div>
-                      <div>
-                        <h4 className='font-bold text-lg'>15 Jam</h4>
+                      <div className='ms-3'>
+                        <h4 className='font-bold text-lg'>{DataJasa[0].estimasi}</h4>
                         <p className='text-gray-500 font-semibold'>Estimasi</p>
                       </div>
                     </Flex>
@@ -148,9 +117,9 @@ const Jasadetail = () => {
                       <div>
                         <CustomerServiceOutlined className='text-4xl text-violet-500' />
                       </div>
-                      <div>
+                      <div className='ms-3'>
                         <h4 className='font-bold text-lg'>Top Service</h4>
-                        <p className='text-gray-500 font-semibold'>Garansi</p>
+                        <p className='text-gray-500 font-semibold'>{DataJasa[0].topService}</p>
                       </div>
                     </Flex>
                   </Card>
@@ -161,8 +130,8 @@ const Jasadetail = () => {
                       <div>
                         <AppstoreAddOutlined className='text-4xl text-violet-500' />
                       </div>
-                      <div>
-                        <h4 className='font-bold text-lg'>Living Room</h4>
+                      <div className='ms-3'>
+                        <h4 className='font-bold text-lg'>{DataJasa[0].kategori}</h4>
                         <p className='text-gray-500 font-semibold'>Kategori</p>
                       </div>
                     </Flex>
@@ -174,9 +143,9 @@ const Jasadetail = () => {
                       <div>
                         <FileProtectOutlined className='text-4xl text-violet-500' />
                       </div>
-                      <div>
+                      <div className='ms-3'>
                         <h4 className='font-bold text-lg'>Our Tools</h4>
-                        <p className='text-gray-500 font-semibold'>SNI</p>
+                        <p className='text-gray-500 font-semibold'>{DataJasa[0].tools}</p>
                       </div>
                     </Flex>
                   </Card>
@@ -187,24 +156,13 @@ const Jasadetail = () => {
                   <Title level={3} style={{fontWeight: 600}}>Deskripsi</Title>
                   <Paragraph 
                     ellipsis={
-                      { rows: 3, expandable: 'collapsible', symbol: showReadmore(), expanded, onExpand: (_, info) => setExpanded(info.expanded),}
+                      { rows: 3, expandable: 'collapsible', symbol: showReadmore(expanded), onExpand: (_, info) => setExpanded(info.expanded),}
                     }>
-                    Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
-                    Design, a design language for background applications, is refined by Ant UED Team. Ant
-                    Design, a design language for background applications, is refined by Ant UED Team. Ant
-                    Design, a design language for background applications, is refined by Ant UED Team. Ant
-                    Design, a design language for background applications, is refined by Ant UED Team. Ant
-                    Design, a design language for background applications, is refined by Ant UED Team.
-                    Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
-                    Design, a design language for background applications, is refined by Ant UED Team. Ant
-                    Design, a design language for background applications, is refined by Ant UED Team. Ant
-                    Design, a design language for background applications, is refined by Ant UED Team. Ant
-                    Design, a design language for background applications, is refined by Ant UED Team. Ant
-                    Design, a design language for background applications, is refined by Ant UED Team.
+                      {DataJasa[0].deskripsi}
                   </Paragraph>  
                   <Title level={3} style={{fontWeight: 600, marginTop: 40}}>Review Customers</Title>
                   <Carousel autoplay draggable slidesToShow={2} dots={false}>
-                    {testimonials.map((testimonial) => (
+                    {dataTestimoni.map((testimonial) => (
                       <div key={testimonial.id}>
                         <Row justify="center" gutter={[20,0]}>
                           <Col xs={20} className='pb-10'>
@@ -273,7 +231,7 @@ const Jasadetail = () => {
             <Card className='rounded-xl shadow-lg mt-5'>
               <Title level={4} style={{fontWeight: 700}}>Harga Jasa</Title>
               <h2 className={classNames(validPromocode && 'line-through','text-3xl font-bold text-violet-900')} >
-                Rp500.000
+                Rp{formatCurrency(DataJasa[0].harga)}
                 <small className={classNames(validPromocode && 'line-through', 'text-base text-gray-400')}>/Rumah</small>
               </h2>
               {
@@ -286,30 +244,16 @@ const Jasadetail = () => {
               
               <Title level={4} style={{fontWeight: 700}} className='mt-10'>Service Benefits</Title>
               <Flex vertical >
-                <Flex align='start' className='mt-3'>
-                  <BiBadgeCheck className='text-5xl me-2 text-green-600' /> 
-                  <span>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita, porro?
-                  </span>
-                </Flex>
-                <Flex align='start' className='mt-3'>
-                  <BiBadgeCheck className='text-5xl me-2 text-green-600' /> 
-                  <span>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita, porro?
-                  </span>
-                </Flex>
-                <Flex align='start' className='mt-3'>
-                  <BiBadgeCheck className='text-5xl me-2 text-green-600' /> 
-                  <span>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita, porro?
-                  </span>
-                </Flex>
-                <Flex align='start' className='mt-3'>
-                  <BiBadgeCheck className='text-5xl me-2 text-green-600' /> 
-                  <span>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita, porro?
-                  </span>
-                </Flex>
+                {
+                  DataJasa[0].benefits.map((benefit, index)=>{
+                    return <Flex key={index} align='start' className='mt-3'>
+                        <BiBadgeCheck className='text-5xl me-2 text-green-600' /> 
+                        <span>
+                            {benefit}
+                        </span>
+                      </Flex>
+                  })
+                }
               </Flex>
               <Button onClick={()=>navigate('/proses-transaksi')} className='bg-purple-600 text-white font-semibold w-full py-6 text-xl mt-10 hover:!border-violet-700 hover:!text-violet-950' >
                 Pesan Jasa

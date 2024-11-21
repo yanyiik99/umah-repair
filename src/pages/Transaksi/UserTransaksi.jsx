@@ -1,7 +1,7 @@
 import { BankFilled, CreditCardOutlined, HomeOutlined, UserAddOutlined, InboxOutlined, PlusOutlined } from "@ant-design/icons";
 import { Breadcrumb, Card, Col, Flex, Row, Steps, Button, message,  Select, Image,Typography, Collapse, Form, Input, DatePicker, Upload, Result, Divider, Space  } from "antd";
 import { useRef, useState } from "react";
-import { showReadmore } from "../../utils/ui";
+import { formatCurrency, showReadmore } from "../../utils/ui";
 import { useNavigate } from "react-router-dom";
 import Meta from "antd/es/card/Meta";
 const { Title, Paragraph} = Typography;
@@ -13,6 +13,7 @@ import Bni from '../../assets/bni.png';
 import Gopay from '../../assets/gopay.png';
 import Jago from '../../assets/jago.png';
 import Dana from '../../assets/dana.png';
+import { DataJasa } from "../../utils/constans";
 
 const steps = [
     {
@@ -111,7 +112,7 @@ const UserTransaksi = () => {
         </Col>
       </Row>
 
-      <div className="container mx-auto relative -top-32">
+      <div className="container px-10 mx-auto relative -top-32">
         <Row gutter={[20, 12]} >
             <Col xs={24}>
                 <Card>
@@ -123,30 +124,21 @@ const UserTransaksi = () => {
                                     <Col xs={10} className="!pe-10">
                                         <div>
                                             <Image preview={false} width="100%" height={300} className='object-cover rounded-xl' src={Img} />
-                                            <Title level={4} style={{fontWeight: 700}} className='my-2'>Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum sat sat.</Title>
+                                            <Title level={4} style={{fontWeight: 700}} className='my-2'>
+                                                {DataJasa[0].nama}
+                                            </Title>
                                             <Title level={3} style={{fontWeight: 600}}>Deskripsi</Title>
                                             <Paragraph 
                                                 ellipsis={
-                                                { rows: 3, expandable: 'collapsible', symbol: showReadmore(), expanded, onExpand: (_, info) => setExpanded(info.expanded),}
+                                                { rows: 3, expandable: 'collapsible', symbol: showReadmore(expanded), onExpand: (_, info) => setExpanded(info.expanded),}
                                                 }>
-                                                Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team.
-                                                Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team.
+                                               {DataJasa[0].deskripsi}
                                             </Paragraph> 
                                             <Title level={3} style={{fontWeight: 600}}>Detail Pembayaran</Title> 
                                             <Flex justify="space-between" align="center">
                                                 <p>Harga</p>
                                                 <h2 className='text-xl font-bold text-violet-900'>
-                                                    Rp250.000
+                                                    Rp{formatCurrency(DataJasa[0].harga)}
                                                 </h2>
                                             </Flex>
                                             <Flex justify="space-between" align="center" className="mt-4">
@@ -159,7 +151,7 @@ const UserTransaksi = () => {
                                             <Flex justify="space-between" align="center" className="mt-4">
                                                 <p>Total</p>
                                                 <h2 className='text-xl font-bold text-violet-900'>
-                                                    Rp280.000
+                                                    Rp530.000
                                                 </h2>
                                             </Flex>
                                         </div> 
@@ -175,7 +167,7 @@ const UserTransaksi = () => {
                                                         label: 'Transfer Bank', 
                                                         children: <Card>
                                                         <Flex justify="space-between" align="center">
-                                                            <Image preview={false} src={Bca} className="!h-14" />
+                                                            <Image preview={false} src={Bca} className="!h-10" />
                                                             <div>
                                                                 <Paragraph className="text-lg font-semibold" >BCA ACTIVE BANK</Paragraph>
                                                                 <Paragraph className="text-2xl font-bold" copyable>123123123</Paragraph>
@@ -183,7 +175,7 @@ const UserTransaksi = () => {
                                                         </Flex>
                                                         <hr className="my-4" />
                                                         <Flex justify="space-between" align="center">
-                                                            <Image preview={false} src={Bni} className="!h-14" />
+                                                            <Image preview={false} src={Bni} className="!h-10" />
                                                             <div>
                                                                 <Paragraph className="text-lg font-semibold" >BNI ACTIVE BANK</Paragraph>
                                                                 <Paragraph className="text-2xl font-bold" copyable>999999999</Paragraph>
@@ -191,7 +183,7 @@ const UserTransaksi = () => {
                                                         </Flex>
                                                         <hr className="my-4" />
                                                         <Flex justify="space-between" align="center">
-                                                            <Image preview={false} src={Bri} className="!h-20" />
+                                                            <Image preview={false} src={Bri} className="!h-16" />
                                                             <div>
                                                                 <Paragraph className="text-lg font-semibold" >BRI ACTIVE BANK</Paragraph>
                                                                 <Paragraph className="text-2xl font-bold" copyable>5555555555</Paragraph>
@@ -199,7 +191,7 @@ const UserTransaksi = () => {
                                                         </Flex>
                                                         <hr className="my-4" />
                                                         <Flex justify="space-between" align="center">
-                                                            <Image preview={false} src={Jago} className="!h-20" />
+                                                            <Image preview={false} src={Jago} className="!h-10" />
                                                             <div>
                                                                 <Paragraph className="text-lg font-semibold" >JAGO ACTIVE BANK</Paragraph>
                                                                 <Paragraph className="text-2xl font-bold" copyable>777777777</Paragraph>
@@ -207,7 +199,7 @@ const UserTransaksi = () => {
                                                         </Flex>
                                                         <hr className="my-4" />
                                                         <Flex justify="space-between" align="center">
-                                                            <Image preview={false} src={Dana} className="!h-20" />
+                                                            <Image preview={false} src={Dana} className="!h-10" />
                                                             <div>
                                                                 <Paragraph className="text-lg font-semibold" >DANA ACTIVE BANK</Paragraph>
                                                                 <Paragraph className="text-2xl font-bold" copyable>085946370867</Paragraph>
@@ -215,7 +207,7 @@ const UserTransaksi = () => {
                                                         </Flex>
                                                         <hr className="my-4" />
                                                         <Flex justify="space-between" align="center">
-                                                            <Image preview={false} src={Gopay} className="!h-20" />
+                                                            <Image preview={false} src={Gopay} className="!h-10" />
                                                             <div>
                                                                 <Paragraph className="text-lg font-semibold" >GOPAY ACTIVE BANK</Paragraph>
                                                                 <Paragraph className="text-2xl font-bold" copyable>085946370867</Paragraph>
@@ -227,13 +219,103 @@ const UserTransaksi = () => {
                                             }
                                         />
                                         
-                                        <Title level={3} style={{fontWeight: 600}}>Instruksi Transaksi</Title>
+                                        <Title level={3} style={{fontWeight: 600}} className="mt-10">Instruksi Transaksi</Title>
                                         <ol className="list-decimal list-inside">
-                                            <li>
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt facere et soluta? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi assumenda fugit nam sapiente ipsam iste corrupti rem ipsum obcaecati, reiciendis, cupiditate enim. Provident aliquam repellat consectetur sit dicta impedit ducimus.
+                                            <li className="text-xl font-bold">
+                                                Pembayaran dengan Transfer Bank
+                                                <ul className="list-disc list-inside ms-5">
+                                                    <li className="text-lg">
+                                                        ATM
+                                                        <ul className="list-[lower-alpha] list-inside ms-10 font-normal">
+                                                            <li>
+                                                                Pilih Metode Pembayaran: Pilih Transfer Bank.
+                                                            </li>
+                                                            <li>
+                                                                Pilih Bank Tujuan: Pilih bank yang ingin digunakan (misalnya BCA, Mandiri).
+                                                            </li>
+                                                            <li>
+                                                                Dapatkan Detail Rekening: Sistem akan menampilkan nomor rekening, nama penerima, dan jumlah yang harus dibayar.
+                                                            </li>
+                                                            <li>
+                                                                Lakukan Transfer: Transfer sesuai jumlah yang tertera melalui aplikasi atau ATM.
+                                                            </li>
+                                                            <li>
+                                                                Verifikasi Pembayaran: Kembali ke website dan pilih Konfirmasi Pembayaran.
+                                                            </li>
+                                                            <li>
+                                                                Upload Bukti Transfer: Unggah foto bukti transfer.
+                                                            </li>
+                                                            <li>
+                                                                Tunggu Konfirmasi: Pembayaran akan diverifikasi dan Anda akan menerima notifikasi status pembayaran.
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                                <ul className="list-disc list-inside ms-5">
+                                                    <li className="text-lg">
+                                                        MOBILE BANKING
+                                                        <ul className="list-[lower-alpha] list-inside ms-10 font-normal">
+                                                            <li>
+                                                                Pilih metode Mobile Banking
+                                                            </li>
+                                                            <li>
+                                                                Salin nomor rekening tujuan yang diberikan
+                                                            </li>
+                                                            <li>
+                                                                Buka aplikasi mobile banking Anda.
+                                                            </li>
+                                                            <li>
+                                                                Pilih menu Transfer ke Rekening Lain.
+                                                            </li>
+                                                            <li>
+                                                                Masukkan nomor rekening tujuan, bank, dan jumlah transfer.
+                                                            </li>
+                                                            <li>
+                                                                Verifikasi Pembayaran: Kembali ke website dan pilih Konfirmasi Pembayaran.
+                                                            </li>
+                                                            <li>
+                                                                Upload Bukti Transfer: Unggah foto bukti transfer.
+                                                            </li>
+                                                            <li>
+                                                                Tunggu Konfirmasi: Pembayaran akan diverifikasi dan Anda akan menerima notifikasi status pembayaran.
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
                                             </li>
-                                            <li className="mt-3">
-                                                Lakukan asdas
+                                            <li className="mt-3 text-xl font-bold">
+                                                Pembayaran dengan E-wallet (Dompet Digital)
+                                                <ul className="list-disc font-normal list-inside ms-5">
+                                                    <li className="text-lg">
+                                                        Pilih Metode Pembayaran: Pilih E-wallet ( DANA, GoPay.).
+                                                    </li>
+                                                    <li className="text-lg">
+                                                        Salin Nomor E-Wallet : Salin nomor e-wallet ( DANA, GoPay.).
+                                                    </li>
+                                                    <li className="text-lg">
+                                                        Transfer Melalui E-Wallet
+                                                        <ul className="list-[lower-alpha] list-inside ms-10 font-normal">
+                                                            <li>
+                                                                Buka aplikasi e-wallet (GoPay, DANA).
+                                                            </li>
+                                                            <li>
+                                                                Pilih menu Transfer dan tempel nomor yang disalin.
+                                                            </li>
+                                                            <li>
+                                                                Masukkan nominal:  Rp100.000
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li className="text-lg">
+                                                        Verifikasi Pembayaran: Kembali ke website dan pilih Konfirmasi Pembayaran.
+                                                    </li>
+                                                    <li className="text-lg">
+                                                        Upload Bukti Transfer: Unggah foto bukti transfer.
+                                                    </li>
+                                                    <li className="text-lg">
+                                                        Tunggu Konfirmasi: Pembayaran akan diverifikasi dan Anda akan menerima notifikasi status pembayaran.
+                                                    </li>
+                                                </ul>
                                             </li>
                                         </ol>
                                     </Col>
@@ -247,30 +329,21 @@ const UserTransaksi = () => {
                                     <Col xs={10} className="!pe-10">
                                         <div>
                                             <Image preview={false} width="100%" height={300} className='object-cover rounded-xl' src={Img} />
-                                            <Title level={4} style={{fontWeight: 700}} className='my-2'>Lorem ipsum dolor sit, amet consectetur adipisicing elit ipsum sat sat.</Title>
+                                            <Title level={4} style={{fontWeight: 700}} className='my-2'>
+                                                {DataJasa[0].nama}    
+                                            </Title>
                                             <Title level={3} style={{fontWeight: 600}}>Deskripsi</Title>
                                             <Paragraph 
                                                 ellipsis={
-                                                { rows: 3, expandable: 'collapsible', symbol: showReadmore(), expanded, onExpand: (_, info) => setExpanded(info.expanded),}
+                                                { rows: 3, expandable: 'collapsible', symbol: showReadmore(expanded), onExpand: (_, info) => setExpanded(info.expanded),}
                                                 }>
-                                                Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team.
-                                                Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                                                Design, a design language for background applications, is refined by Ant UED Team.
+                                                    {DataJasa[0].deskripsi}    
                                             </Paragraph> 
                                             <Title level={3} style={{fontWeight: 600}}>Detail Pembayaran</Title> 
                                             <Flex justify="space-between" align="center">
                                                 <p>Harga</p>
                                                 <h2 className='text-xl font-bold text-violet-900'>
-                                                    Rp250.000
+                                                    Rp{formatCurrency(DataJasa[0].harga)}    
                                                 </h2>
                                             </Flex>
                                             <Flex justify="space-between" align="center" className="mt-4">
@@ -283,7 +356,7 @@ const UserTransaksi = () => {
                                             <Flex justify="space-between" align="center" className="mt-4">
                                                 <p>Total</p>
                                                 <h2 className='text-xl font-bold text-violet-900'>
-                                                    Rp280.000
+                                                    Rp530.000
                                                 </h2>
                                             </Flex>
                                         </div> 
@@ -291,11 +364,15 @@ const UserTransaksi = () => {
                                     <Col xs={14}>
                                         <Form
                                             layout="vertical"
+                                            requiredMark={true}
                                             form={form}
                                         >
                                             <Form.Item
                                                 label="Nama Penjamu"
                                                 name="namapenjamu"
+                                                rules={[
+                                                    {required: true, message: "Nama Penjamu Wajib Diisi"}
+                                                ]}
                                             >
                                                 <Input placeholder="Masukan Nama Penjamu" />
                                             </Form.Item>
@@ -303,6 +380,9 @@ const UserTransaksi = () => {
                                             <Form.Item
                                                 label="Alamat/Lokasi"
                                                 name="alamat"
+                                                rules={[
+                                                    {required: true, message: "Alamat/Lokasi Wajib Diisi"}
+                                                ]}
                                             >
                                                 <Select 
                                                     placeholder="Masukan Alamat/Lokasi" 
@@ -343,6 +423,9 @@ const UserTransaksi = () => {
                                             <Form.Item
                                                 label="Jadwal"
                                                 name="jadwal"
+                                                rules={[
+                                                    {required: true, message: "Jadwal Wajib Diisi"}
+                                                ]}
                                             >
                                                 <DatePicker showTime style={{ width: '100%' }} />
                                             </Form.Item>
@@ -357,18 +440,27 @@ const UserTransaksi = () => {
                                             <Form.Item
                                                 label="Nama Bank"
                                                 name="bank"
+                                                rules={[
+                                                    {required: true, message: "Bank Account Wajib Diisi"}
+                                                ]}
                                             >
                                                 <Input size="large" placeholder="Masukan Nama Bank" prefix={<BankFilled className="pe-3" />} />
                                             </Form.Item>
                                             <Form.Item
                                                 label="Nama Lengkap"
                                                 name="namalengkap"
+                                                rules={[
+                                                    {required: true, message: "Nama Lengkap Wajib Diisi"}
+                                                ]}
                                             >
                                                 <Input size="large" placeholder="Masukan Nama Pengirim Bank" prefix={<UserAddOutlined className="pe-3" />} />
                                             </Form.Item>
                                             <Form.Item
                                                 label="Akun Nomor Bank"
                                                 name="nobank"
+                                                rules={[
+                                                    {required: true, message: "No Bank Wajib Diisi"}
+                                                ]}
                                             >
                                                 <Input size="large" placeholder="Masukan Akun Nomor Bank" prefix={<CreditCardOutlined className="pe-3" />} />
                                             </Form.Item>
@@ -418,9 +510,26 @@ const UserTransaksi = () => {
                                 Sebelumnya
                             </Button>
                         )}
-                        {current < steps.length - 1 && (
+                        {current == 0 && (
                             <Button className="bg-violet-800 text-white hover:!bg-violet-700 hover:!text-white hover:!border-none" onClick={() => next()}>
                                 Selanjutnya
+                            </Button>
+                        )}
+                        {current == 1 && (
+                            <Button 
+                                className="bg-violet-800 text-white hover:!bg-violet-700 hover:!text-white hover:!border-none"
+                                onClick={() => {
+                                    form.validateFields()
+                                        .then(()=>{
+                                            next();
+                                            console.log("SUKSES")
+                                        })
+                                        .catch((err) => {
+                                        console.log(err);
+                                        })
+                                }}
+                            >
+                                Konfirmasi
                             </Button>
                         )}
                     </div>

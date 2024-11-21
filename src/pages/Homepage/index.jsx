@@ -5,6 +5,8 @@ import './index.css';
 import ImageCard from './img/1.png';
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
+import { DataJasa } from "../../utils/constans";
+import { formatCurrency } from "../../utils/ui";
 
 const dataDummy = [
   {key: 1, title: "Develop Your Skills Laravel and Filament", category: "Living Room", description: "The boy wtih blue hat", price: "150.000", tools: "Customer-Provided Tools", duration: "1 Hours"},
@@ -16,15 +18,18 @@ const dataDummy = [
 ]
 
 const dataCategory = [
-  {id: 0, label: "All", value: "all"},
-  {id: 1, label: "Living Room", value: "Living Room"},
-  {id: 2, label: "Garden", value: "Garden"},
-  {id: 3, label: "Kitchen", value: "Kitchen"},
+  {id: 0, label: "Semua", value: "Semua"},
+  {id: 1, label: "Kamar Tamu", value: "Kamar Tamu"},
+  {id: 3, label: "Dapur", value: "Dapur"},
+  {id: 3, label: "Kamar Tidur", value: "Kamar Tidur"},
+  {id: 2, label: "Kebun", value: "Kebun"},
+  {id: 3, label: "Toilet", value: "Toilet"},
+  {id: 3, label: "Atap", value: "Atap"},
 ]
 
 const Homepage = () => {
 
-  const [activeTabs, setActiveTabs] = useState("all");
+  const [activeTabs, setActiveTabs] = useState("Semua");
   const [searchCategory, setSearchCategory] = useState("");
   const navigate = useNavigate();
 
@@ -33,14 +38,14 @@ const Homepage = () => {
   }
 
   const handleSearchCategory = (e) => {
-    setActiveTabs("all");
+    setActiveTabs("Semua");
       setSearchCategory(e.target.value.toLowerCase());
   };
 
-  const filteredData = activeTabs === 'all' ? dataDummy.filter((item) =>
-    item.title.toLowerCase().includes(searchCategory) ||
-    item.description.toLowerCase().includes(searchCategory)) : 
-    dataDummy.filter((item) => item.category === activeTabs);
+  const filteredData = activeTabs === 'Semua' ? DataJasa.filter((item) =>
+    item.nama.toLowerCase().includes(searchCategory) ||
+    item.deskripsi.toLowerCase().includes(searchCategory)) : 
+    DataJasa.filter((item) => item.kategori === activeTabs);
 
   return (
     <div>
@@ -60,7 +65,6 @@ const Homepage = () => {
 
       <div className="layout">
         <Layout className="bg-transparent">
-
           <div className="bg-category mt-10">
             <Row gutter={[24, 0]}>
               <Col md={24} xl={12}>              
@@ -128,20 +132,20 @@ const Homepage = () => {
                 <div className="extras-jasa flex mt-5">
                   <div className="type-jasa" style={{ display: 'flex' }}>
                     <FormatPainterFilled className="text-violet-500"/>
-                    <p style={{ color: '#666', marginLeft: '5px' }}> {item?.tools}</p>
+                    <p style={{ color: '#666', marginLeft: '5px' }}> {item?.topService}</p>
                   </div>
 
                   <div className="durasi-jasa" style={{ display: 'flex', marginLeft: 20 }}>
                     <ClockCircleFilled className="text-violet-500"/>
-                    <p style={{ color: '#666', marginLeft: '5px' }}> {item?.duration}</p>
+                    <p style={{ color: '#666', marginLeft: '5px' }}> {item?.estimasi}</p>
                   </div>
                 </div>
 
-                <h2 className="text-lg mt-3 leading-5">{item?.title}</h2>
-                <p style={{ color: '#acacac', marginTop: 10 }}>{item?.category}</p>
+                <h2 className="text-lg mt-3 leading-5">{item?.nama}</h2>
+                <p style={{ color: '#acacac', marginTop: 10 }}>{item?.kategori}</p>
 
                 <div className="harga-card text-xl" style={{ marginTop: 30, display: 'flex', justifyContent: 'space-between'}}>
-                  <h2 className="text-violet-500">Rp {item?.price}</h2>
+                  <h2 className="text-violet-500">Rp {formatCurrency(item?.harga)}</h2>
                   <RightCircleFilled onClick={()=>navigate('/jasadetail')} className="text-violet-500" style={{ marginTop: '-5px', marginRight: 5, fontWeight: 700, fontSize: 30 }}/>
                 </div>                  
               </Card> 
