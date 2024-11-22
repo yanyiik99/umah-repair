@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Row, Col, Flex, Card, Modal, Form, Input, notification} from 'antd';
 import { UserOutlined, MailOutlined, PhoneOutlined, EditOutlined, PushpinOutlined, EnvironmentOutlined, BankOutlined, CompressOutlined, ExpandOutlined, LeftOutlined, EyeOutlined, ArrowLeftOutlined} from '@ant-design/icons';
 import './index.css';
@@ -30,6 +30,50 @@ const Profile = () => {
             description: description
         })
     }
+
+    useEffect(() => {
+        const handleLoad = () => {
+            const banner = document.querySelector('.banner');
+            if (banner) {
+                banner.style.height = '24rem';
+            }
+
+            const layout = document.querySelector('.bg-layout');
+            if (layout) {
+                layout.style.height = 'unset';
+                layout.style.transitionDelay = '1s'; 
+            }
+
+            const textBanner = document.querySelector('.text-banner');
+            if (textBanner) {
+                textBanner.style.marginTop = '0';
+                textBanner.style.opacity = '1';   
+                textBanner.style.transition = '.7s';         
+                textBanner.style.transitionDelay = '.5s';         
+            }
+
+            const personalAvatar = document.querySelector('.personal-avatar-card');
+            if (personalAvatar) {
+                personalAvatar.style.opacity = '1';   
+                personalAvatar.style.height = '200px';        
+                personalAvatar.style.transition = '1s';        
+                personalAvatar.style.transitionDelay = '.7s';        
+            }
+
+            const personalInfo = document.querySelector('.personal-information-card');
+            if (personalInfo) {
+                personalInfo.style.opacity = '1';  
+                personalInfo.style.height = '600px';        
+                personalInfo.style.transition = '1s';        
+                personalInfo.style.transitionDelay = '1s';        
+            }
+        };
+
+        window.addEventListener("load", handleLoad);
+        return () => {
+            window.removeEventListener("load", handleLoad);
+        };
+    }, []);
 
     const showModalPreview = () => {
         setIsModalPreviewOpen(true)
@@ -186,8 +230,8 @@ const Profile = () => {
                 <img src={AvatarImage} alt="Preview Avatar" className="rounded-full w-48 h-48 mx-auto my-10" />
             </Modal>
 
-            <Row className='bg-violet-500 w-full h-96'>
-                <Col xs={24}>
+            <Row className='bg-violet-500 w-full h-0 banner' style={{ transition: '.7s' }}>
+                <Col xs={24} className="text-banner mt-5 opacity-0">
                     <div className="layout px-4 lg:px-48 !bg-violet-500">
                         <Flex className="pt-10"  justify='space-between'>
                             <div className="left">
@@ -203,11 +247,11 @@ const Profile = () => {
                 </Col>
             </Row>
 
-            <div className="layout px-4 lg:px-48" style={{ backgroundColor: '#f9f9f9'}}>
+            <div className="layout bg-layout px-4 lg:px-48" style={{ backgroundColor: '#f9f9f9'}}>
 
                 <div className="personal-avatar relative -top-20">
                     <Card   
-                        className="rounded-2xl"
+                        className="rounded-2xl personal-avatar-card h-0 overflow-hidden opacity-0"
                         style={{ fontFamily: 'Poppins', padding: '20px' }} 
                         bordered={false}>
                         <Flex justify="space-between">
@@ -225,7 +269,7 @@ const Profile = () => {
 
                 <div className="personal-information relative -top-10">
                     <Card   
-                        className="rounded-2xl"
+                        className="rounded-2xl personal-information-card h-0 overflow-hidden opacity-0"
                         title="Personal Informations" 
                         style={{ fontFamily: 'Poppins', padding: '20px' }} 
                         bordered={false}
