@@ -1,25 +1,204 @@
 import { useState } from "react";
-import { Row, Col, Flex, Card} from 'antd';
-import { UserOutlined, MailOutlined, PhoneOutlined, EditOutlined, PushpinOutlined, EnvironmentOutlined, BankOutlined, CompressOutlined, ExpandOutlined, ArrowLeftOutlined, LeftOutlined} from '@ant-design/icons';
+import { Row, Col, Flex, Card, Modal, Form, Input, notification} from 'antd';
+import { UserOutlined, MailOutlined, PhoneOutlined, EditOutlined, PushpinOutlined, EnvironmentOutlined, BankOutlined, CompressOutlined, ExpandOutlined, LeftOutlined, EyeOutlined, ArrowLeftOutlined} from '@ant-design/icons';
 import './index.css';
 import AvatarImage from './img/1.jpg';
 import { useNavigate } from "react-router-dom";
 
+const dataProfile = {
+    id: 0,
+    fullname: "I Gede Wahyu Parama Sucipta",
+    email: "wahyuscpta13@gmail.com",
+    phone: "+62 896 352 086 86",
+    address: "Taman Wira Sambangan Blok Cempaka I No. 4",
+    province: "Provinsi Bali",
+    regency: "Kabupaten Buleleng",
+    district: "Kecamatan Sukasada",
+    village: "Desa Sambangan",
+};
+
 const Profile = () => {
     const navigate = useNavigate();
+    const [form] = Form.useForm();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [profile, setProfile] = useState(dataProfile);
+    const [isModalPreviewOpen, setIsModalPreviewOpen] = useState(false);
+
+    const showAlert = (status, title, description) => {
+        notification[status]({
+            message: title,
+            description: description
+        })
+    }
+
+    const showModalPreview = () => {
+        setIsModalPreviewOpen(true)
+    };
+
+    const handleCancelPreview = () => {
+        setIsModalPreviewOpen(false)
+    };
+
+    const showModal = () => {
+        form.setFieldsValue(profile);
+        setIsModalOpen(true);
+    };
+  
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleSubmit = () => {
+        form.validateFields().then((values) => {            
+            setProfile(values);
+            setIsModalOpen(false);
+            if(setProfile){
+                showAlert(
+                    "success", "Berhasil", "Data Berhasil Diupdate"
+                );
+            } else {
+                showAlert("error", "Gagal", "Data Tidak Berhasil Diupdate");
+            }
+        }).catch((e) => {
+            console.log('Validation Failed:', e);
+            showAlert("error", "Gagal", "Error Update");
+        });
+    };
+
 
     return (
         <div>
-            <Row className='bg-violet-500 w-full h-72'>
+            <Modal 
+            width={1000}
+              title={'EDIT PROFILE'}
+              style={{ fontFamily: 'Poppins' }} 
+              open={isModalOpen} 
+              onCancel={handleCancel}
+              onOk={handleSubmit}
+            >
+                <Form 
+                    layout="vertical"
+                    requiredMark={true}
+                    form={form}
+                >
+
+                    <Flex className='mt-5' gap={"small"} align="flex-start" horizontal>
+                        <Form.Item 
+                            label="Fullname" 
+                            name="fullname" 
+                            style={{ fontFamily: 'Poppins', width: '100%' }} 
+                            rules={[
+                                { required: true, message: "Fullname Name Wajib Diisi" }
+                            ]}
+                        >
+                            <Input placeholder="Fullname" style={{ fontFamily: 'Montserrat', width: '100%' }}/>
+                        </Form.Item>
+
+                        <Form.Item 
+                            label="Phone" 
+                            name="phone" 
+                            style={{ fontFamily: 'Poppins', width: '100%' }} 
+                            rules={[
+                                { required: true, message: "Phone Name Wajib Diisi" }
+                            ]}
+                        >
+                            <Input placeholder="Phone" style={{ fontFamily: 'Montserrat', width: '100%' }}/>
+                        </Form.Item>
+
+                        <Form.Item 
+                            label="Email" 
+                            name="email" 
+                            style={{ fontFamily: 'Poppins', width: '100%' }} 
+                            rules={[
+                                { required: true, message: "Email Name Wajib Diisi" }
+                            ]}
+                        >
+                            <Input placeholder="Email" style={{ fontFamily: 'Montserrat', width: '100%' }}/>
+                        </Form.Item>
+                    </Flex>
+
+                    <Form.Item 
+                        label="Address" 
+                        name="address" 
+                        style={{ marginTop: '-10px', fontFamily: 'Poppins' }} 
+                        rules={[
+                        {required: true, message: "Address Name Wajib Diisi"}
+                    ]}>
+                        <Input.TextArea rows={3} placeholder="Address" style={{ fontFamily: 'Montserrat' }}/>
+                    </Form.Item>
+
+                    <Flex gap="16px" align="flex-start" horizontal style={{ marginTop: '-10px', }}>
+                        <Form.Item 
+                            label="Province" 
+                            name="province" 
+                            style={{ fontFamily: 'Poppins', width: '100%' }} 
+                            rules={[
+                                { required: true, message: "Province Name Wajib Diisi" }
+                            ]}
+                        >
+                            <Input placeholder="Province" style={{ fontFamily: 'Montserrat', width: '100%' }}/>
+                        </Form.Item>
+
+                        <Form.Item 
+                            label="Regency" 
+                            name="regency" 
+                            style={{ fontFamily: 'Poppins', width: '100%' }} 
+                            rules={[
+                                { required: true, message: "Regency Name Wajib Diisi" }
+                            ]}
+                        >
+                            <Input placeholder="Regency" style={{ fontFamily: 'Montserrat', width: '100%' }}/>
+                        </Form.Item>
+                    </Flex>
+
+                    <Flex gap="16px" align="flex-start" horizontal style={{ marginTop: '-10px', }}>
+                        <Form.Item 
+                            label="District" 
+                            name="district" 
+                            style={{ fontFamily: 'Poppins', width: '100%' }} 
+                            rules={[
+                                { required: true, message: "District Name Wajib Diisi" }
+                            ]}
+                        >
+                            <Input placeholder="District" style={{ fontFamily: 'Montserrat', width: '100%' }}/>
+                        </Form.Item>
+
+                        <Form.Item 
+                            label="Village" 
+                            name="village" 
+                            style={{ fontFamily: 'Poppins', width: '100%' }} 
+                            rules={[
+                                { required: true, message: "Village Name Wajib Diisi" }
+                            ]}
+                        >
+                            <Input placeholder="Village" style={{ fontFamily: 'Montserrat', width: '100%' }}/>
+                        </Form.Item>
+                    </Flex>
+
+                </Form>
+            </Modal>
+
+            <Modal
+                open={isModalPreviewOpen}
+                footer={null}
+                onCancel={handleCancelPreview}
+                centered>
+                <img src={AvatarImage} alt="Preview Avatar" className="rounded-full w-48 h-48 mx-auto my-10" />
+            </Modal>
+
+            <Row className='bg-violet-500 w-full h-96'>
                 <Col xs={24}>
                     <div className="layout !bg-violet-500">
-                        <Flex className="pt-5"  justify='start' align='end'>
-                        <LeftOutlined onClick={()=>navigate('/')} className="text-xl text-white"/>
+                        <Flex className="pt-10"  justify='space-between'>
+                            <div className="left">
+                                <p onClick={()=>navigate('/')} className="text-white font-semibold cursor-pointer"><ArrowLeftOutlined className="mr-2 bg-white p-2 rounded-full text-violet-500"/> Back to Homepage</p>                            
+                            </div>
+                            <UserOutlined onClick={()=>navigate('/profile')} className="bg-white p-2 rounded-full text-violet-500"/>
                         </Flex>
                     </div>
                     <Flex className='h-full pt-10' vertical justify='start' align='center'>
                         <h1 className='text-4xl font-bold mb-2 mt-10 text-white'>Your Profile</h1>
-                        <p className="text-slate-300">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <p className="text-slate-300">Easily edit your information to keep everything up-to-date.</p>
                     </Flex>
                 </Col>
             </Row>
@@ -35,11 +214,11 @@ const Profile = () => {
                             <div className="left-avatar flex">
                                 <img src={AvatarImage} className="w-28 rounded-full" />
                                 <div className="text-left-avatar ml-5 mt-8">
-                                    <h1>I Gede Wahyu Parama Sucipta</h1>
-                                    <p>wahyuscpta13@gmail.com</p>
+                                    <h1>{profile.fullname}</h1>
+                                    <p>{profile.email}</p>
                                 </div>
                             </div>
-                            <button className="mt-8 border border-violet-500 text-violet-500 h-8 w-24 rounded-full">Edit <EditOutlined className="ml-2"/></button>
+                            <button onClick={showModalPreview} className="mt-8 border border-violet-500 text-violet-500 h-8 w-28 rounded-full hover:bg-purple-500 hover:text-white transition">Preview <EyeOutlined className="ml-2"/></button>
                         </Flex>
                     </Card>
                 </div>
@@ -50,7 +229,7 @@ const Profile = () => {
                         title="Personal Informations" 
                         style={{ fontFamily: 'Poppins', padding: '20px' }} 
                         bordered={false}
-                        extra={<button className="border border-violet-500 text-violet-500 py-1 px-6 mb-3 rounded-full">Edit <EditOutlined className="ml-2"/></button>}>
+                        extra={<button onClick={showModal} className="border border-violet-500 text-violet-500 py-1 px-7 mb-3 rounded-full hover:bg-purple-500 hover:text-white transition">Edit <EditOutlined className="ml-2"/></button>}>
                         <Row>
                             <Col xl={12} sm={24}>
                                 <div className="personal flex mt-5">
@@ -58,7 +237,7 @@ const Profile = () => {
                                         <UserOutlined className="font-bold text-slate-600 text-lg"/>
                                     </div>
                                     <div className="text-personal pt-2">
-                                        <h1>I Gede Wahyu Parama Sucipta</h1>
+                                        <h1>{profile.fullname}</h1>
                                         <p className="text-slate-500">Fullname</p>
                                     </div>
                                 </div>
@@ -68,7 +247,7 @@ const Profile = () => {
                                         <MailOutlined className="font-bold text-slate-600 text-lg"/>
                                     </div>
                                     <div className="text-personal pt-2">
-                                        <h1>wahyuscpta13@gmail.com</h1>
+                                        <h1>{profile.email}</h1>
                                         <p className="text-slate-500">Email Address</p>
                                     </div>
                                 </div>
@@ -80,7 +259,7 @@ const Profile = () => {
                                         <PhoneOutlined className="font-bold text-slate-600 text-lg"/>
                                     </div>
                                     <div className="text-personal pt-2">
-                                        <h1>+62 896 352 086 86</h1>
+                                        <h1>{profile.phone}</h1>
                                         <p className="text-slate-500">Phone</p>
                                     </div>
                                 </div>
@@ -90,7 +269,7 @@ const Profile = () => {
                                         <EnvironmentOutlined className="font-bold text-slate-600 text-lg"/>
                                     </div>
                                     <div className="text-personal pt-2">
-                                        <h1>Taman Wira Sambangan Blok Cempaka I No. 4</h1>
+                                        <h1>{profile.address}</h1>
                                         <p className="text-slate-500">Address</p>
                                     </div>
                                 </div>                                
@@ -107,7 +286,7 @@ const Profile = () => {
                                         <BankOutlined className="font-bold text-slate-600 text-lg"/>
                                     </div>
                                     <div className="text-personal pt-2">
-                                        <h1>Provinsi Bali</h1>
+                                        <h1>{profile.province}</h1>
                                         <p className="text-slate-500">Province</p>
                                     </div>
                                 </div>
@@ -117,7 +296,7 @@ const Profile = () => {
                                         <CompressOutlined className="font-bold text-slate-600 text-lg"/>
                                     </div>
                                     <div className="text-personal pt-2">
-                                        <h1>Kabupaten Buleleng</h1>
+                                        <h1>{profile.regency}</h1>
                                         <p className="text-slate-500">Regency</p>
                                     </div>
                                 </div>
@@ -129,7 +308,7 @@ const Profile = () => {
                                         <PushpinOutlined className="font-bold text-slate-600 text-lg"/>
                                     </div>
                                     <div className="text-personal pt-2">
-                                        <h1>Kecamatan Sukasada</h1>
+                                        <h1>{profile.district}</h1>
                                         <p className="text-slate-500">District</p>
                                     </div>
                                 </div>
@@ -139,7 +318,7 @@ const Profile = () => {
                                         <ExpandOutlined className="font-bold text-slate-600 text-lg"/>
                                     </div>
                                     <div className="text-personal pt-2">
-                                        <h1>Desa Sambangan</h1>
+                                        <h1>{profile.village}</h1>
                                         <p className="text-slate-500">Village</p>
                                     </div>
                                 </div>
