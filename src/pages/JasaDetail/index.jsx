@@ -83,12 +83,12 @@ const Jasadetail = () => {
           <Col xs={24} lg={16}>
             <Card className='rounded-xl shadow-lg'>
               <Image preview={false} width="100%" height={300} className='object-cover rounded-xl' src={Img} />
-              <Flex align='center'>
+              <Flex className='flex-col md:flex-row' align='center'>
                 <div className='bg-green-300 text-green-800 py-1 px-3 font-bold flex items-center rounded-md border border-lime-700'>
                   <FullscreenOutlined className='text-xl me-2' />
                   AVAILABLE
                 </div>
-                <Flex className='mx-4 my-3' align='center'>
+                <Flex className='mx-4 my-3 flex-col md:flex-row' align='center'>
                   <Rate allowHalf  disabled defaultValue={DataJasa[0].rate}/>
                   <span className='font-bold text-lg mx-3'>{DataJasa[0].rate}</span>
                   <span className='font-bold text-lg text-gray-400'>({DataJasa[0].totalReviews} Reviews)</span>
@@ -98,7 +98,7 @@ const Jasadetail = () => {
                 {DataJasa[0].nama}
               </Title>
               <Row gutter={[10,10]} className='mt-5'>
-                <Col xs={12} xl={6}>
+                <Col xs={24} md={12} xl={6}>
                   <Card size='small' className='bg-gray-100'>
                     <Flex align='center' justify='space-around'>
                       <div>
@@ -111,7 +111,7 @@ const Jasadetail = () => {
                     </Flex>
                   </Card>
                 </Col>
-                <Col xs={12} xl={6}>
+                <Col xs={24} md={12} xl={6}>
                   <Card size='small' className='bg-gray-100'>
                     <Flex align='center' justify='space-around'>
                       <div>
@@ -124,7 +124,7 @@ const Jasadetail = () => {
                     </Flex>
                   </Card>
                 </Col>
-                <Col xs={12} xl={6}>
+                <Col xs={24} md={12} xl={6}>
                   <Card size='small' className='bg-gray-100'>
                     <Flex align='center' justify='space-around'>
                       <div>
@@ -137,7 +137,7 @@ const Jasadetail = () => {
                     </Flex>
                   </Card>
                 </Col>
-                <Col xs={12} xl={6}>
+                <Col xs={24} md={12} xl={6}>
                   <Card size='small' className='bg-gray-100'>
                     <Flex align='center' justify='space-around'>
                       <div>

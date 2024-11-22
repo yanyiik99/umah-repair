@@ -121,7 +121,7 @@ const UserTransaksi = () => {
                         {
                             (current == 0) && (
                                 <Row gutter={[30]}>
-                                    <Col xs={10} className="!pe-10">
+                                    <Col xs={24} lg={10} className="!pe-10">
                                         <div>
                                             <Image preview={false} width="100%" height={300} className='object-cover rounded-xl' src={Img} />
                                             <Title level={4} style={{fontWeight: 700}} className='my-2'>
@@ -138,7 +138,7 @@ const UserTransaksi = () => {
                                             <Flex justify="space-between" align="center">
                                                 <p>Harga</p>
                                                 <h2 className='text-xl font-bold text-violet-900'>
-                                                    Rp{formatCurrency(DataJasa[0].harga)}
+                                                    Rp250.000
                                                 </h2>
                                             </Flex>
                                             <Flex justify="space-between" align="center" className="mt-4">
@@ -151,12 +151,12 @@ const UserTransaksi = () => {
                                             <Flex justify="space-between" align="center" className="mt-4">
                                                 <p>Total</p>
                                                 <h2 className='text-xl font-bold text-violet-900'>
-                                                    Rp530.000
+                                                    Rp280.000
                                                 </h2>
                                             </Flex>
                                         </div> 
                                     </Col>
-                                    <Col xs={14}>
+                                    <Col xs={24} lg={14}>
                                         <Title level={3} style={{fontWeight: 600}}>Transfer Detail</Title>
                                         <Collapse
                                             size="large"
@@ -326,7 +326,7 @@ const UserTransaksi = () => {
                         {
                             (current == 1) && (
                                 <Row gutter={[30,0]}>
-                                    <Col xs={10} className="!pe-10">
+                                    <Col xs={24} lg={10} className="!pe-10">
                                         <div>
                                             <Image preview={false} width="100%" height={300} className='object-cover rounded-xl' src={Img} />
                                             <Title level={4} style={{fontWeight: 700}} className='my-2'>
@@ -343,7 +343,7 @@ const UserTransaksi = () => {
                                             <Flex justify="space-between" align="center">
                                                 <p>Harga</p>
                                                 <h2 className='text-xl font-bold text-violet-900'>
-                                                    Rp{formatCurrency(DataJasa[0].harga)}    
+                                                    Rp250.000
                                                 </h2>
                                             </Flex>
                                             <Flex justify="space-between" align="center" className="mt-4">
@@ -356,12 +356,12 @@ const UserTransaksi = () => {
                                             <Flex justify="space-between" align="center" className="mt-4">
                                                 <p>Total</p>
                                                 <h2 className='text-xl font-bold text-violet-900'>
-                                                    Rp530.000
+                                                    Rp280.000
                                                 </h2>
                                             </Flex>
                                         </div> 
                                     </Col>
-                                    <Col xs={14}>
+                                    <Col xs={24} lg={14}>
                                         <Form
                                             layout="vertical"
                                             requiredMark={true}

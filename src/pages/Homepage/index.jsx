@@ -51,7 +51,7 @@ const Homepage = () => {
     <div>
       <Row className='bg-violet-500 w-full h-72'>
         <Col xs={24}>
-          <div className="layout !bg-violet-500">
+          <div className="layout px-4 lg:px-48 !bg-violet-500">
             <Flex className="pt-5"  justify='end' align='end'>
               <UserOutlined onClick={()=>navigate('/profile')} className="text-3xl text-white"/>
             </Flex>
@@ -63,7 +63,7 @@ const Homepage = () => {
         </Col>
       </Row>
 
-      <div className="layout">
+      <div className="layout px-4 lg:px-48">
         <Layout className="bg-transparent">
           <div className="bg-category mt-10">
             <Row gutter={[24, 0]}>
@@ -72,6 +72,7 @@ const Homepage = () => {
                   grid={{
                     gutter: 10,
                     xs: 2,
+                    sm: 4,
                     md: 5
                   }}
                   dataSource={dataCategory}
@@ -91,7 +92,7 @@ const Homepage = () => {
                 /> 
               </Col>
 
-              <Col md={24} xl={12}>
+              <Col xs={24} xl={12}>
                 <Input 
                   className='custom-input bg-transparent text-slate-500 border-slate-400'
                   style={{ 
@@ -124,7 +125,7 @@ const Homepage = () => {
               <Card  style={{ borderRadius: 20, marginTop: 25, border: 'none' }}>
                 <div className="img-card">
                   <div className="rate">
-                    <span>4.5</span> <StarFilled style={{ marginTop: '4px', color: 'orange' }}/>
+                    <span>{item?.rate}</span> <StarFilled style={{ marginTop: '4px', color: 'orange' }}/>
                   </div>
                   <img src={ImageCard} alt="" style={{ borderRadius: 10 }}/>
                 </div>
