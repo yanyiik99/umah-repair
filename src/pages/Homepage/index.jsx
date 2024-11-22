@@ -127,7 +127,7 @@ const Homepage = () => {
                   <div className="rate">
                     <span>{item?.rate}</span> <StarFilled style={{ marginTop: '4px', color: 'orange' }}/>
                   </div>
-                  <img src={ImageCard} alt="" style={{ borderRadius: 10 }}/>
+                  <img src={item?.img} alt="" style={{ borderRadius: 10 }}/>
                 </div>
 
                 <div className="extras-jasa flex mt-5">

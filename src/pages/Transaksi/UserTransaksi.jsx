@@ -123,7 +123,7 @@ const UserTransaksi = () => {
                                 <Row gutter={[30]}>
                                     <Col xs={24} lg={10} className="!pe-10">
                                         <div>
-                                            <Image preview={false} width="100%" height={300} className='object-cover rounded-xl' src={Img} />
+                                            <Image preview={false} width="100%" height={300} className='object-cover rounded-xl' src={DataJasa[0].img} />
                                             <Title level={4} style={{fontWeight: 700}} className='my-2'>
                                                 {DataJasa[0].nama}
                                             </Title>
@@ -328,7 +328,7 @@ const UserTransaksi = () => {
                                 <Row gutter={[30,0]}>
                                     <Col xs={24} lg={10} className="!pe-10">
                                         <div>
-                                            <Image preview={false} width="100%" height={300} className='object-cover rounded-xl' src={Img} />
+                                            <Image preview={false} width="100%" height={300} className='object-cover rounded-xl' src={DataJasa[0].img} />
                                             <Title level={4} style={{fontWeight: 700}} className='my-2'>
                                                 {DataJasa[0].nama}    
                                             </Title>

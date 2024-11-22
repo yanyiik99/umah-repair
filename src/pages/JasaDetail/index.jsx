@@ -82,7 +82,7 @@ const Jasadetail = () => {
         <Row gutter={[20, 12]} >
           <Col xs={24} lg={16}>
             <Card className='rounded-xl shadow-lg'>
-              <Image preview={false} width="100%" height={300} className='object-cover rounded-xl' src={Img} />
+              <Image preview={false} width="100%" height={300} className='object-cover rounded-xl' src={DataJasa[0].img} />
               <Flex className='flex-col md:flex-row' align='center'>
                 <div className='bg-green-300 text-green-800 py-1 px-3 font-bold flex items-center rounded-md border border-lime-700'>
                   <FullscreenOutlined className='text-xl me-2' />
@@ -246,7 +246,7 @@ const Jasadetail = () => {
               <Flex vertical >
                 {
                   DataJasa[0].benefits.map((benefit, index)=>{
-                    return <Flex key={index} align='start' className='mt-3'>
+                    return <Flex key={index} align='center' className='mt-3'>
                         <BiBadgeCheck className='text-5xl me-2 text-green-600' /> 
                         <span>
                             {benefit}

@@ -1,3 +1,8 @@
+import Img1 from '../assets/img1.jpg';
+import Img2 from '../assets/img2.jpg';
+import Img3 from '../assets/img3.jpg';
+import Img4 from '../assets/img4.jpg';
+
 export const DataJasa = [
     {
         id: 1,
@@ -11,6 +16,7 @@ export const DataJasa = [
         totalReviews: 467,
         promoCode: "XXX123",
         tools: "SNI",
+        img: Img1,
         benefits: [
             "Menghilangkan noda membandel hingga 99%.",
             "Membunuh kuman dan bakteri untuk kualitas udara yang lebih sehat.",
@@ -31,6 +37,7 @@ export const DataJasa = [
         totalReviews: 123,
         promoCode: "XXX123",
         tools: "ISO",
+        img: Img2,
         benefits: [
             "Membersihkan seluruh dapur secara menyeluruh.",
             "Menghilangkan debu dan kotoran dari tempat yang sulit dijangkau.",
@@ -51,6 +58,7 @@ export const DataJasa = [
         totalReviews: 140,
         promoCode: "XXX123",
         tools: "SNI",
+        img: Img3,
         benefits: [
             "AC kembali dingin dan hemat energi.",
             "Menghilangkan debu dan kotoran pada filter AC.",
@@ -71,6 +79,7 @@ export const DataJasa = [
         totalReviews: 340,
         promoCode: "XXX123",
         tools: "ISO",
+        img: Img4,
         benefits: [
             "Membersihkan seluruh ruangan secara menyeluruh.",
             "Menghilangkan debu dan kotoran dari tempat yang sulit dijangkau.",
@@ -100,7 +109,7 @@ export const dataTestimoni = [
     },
     {
       id: 3,
-      name: "Deamanda Asih",
+      name: "Deamanda",
       title: "Designer",
       company: "Creative Studio",
       feedback: "Beautifully designed and incredibly intuitive! Beautifully designed and incredibly",
