@@ -22,11 +22,8 @@ const dataDummy = [
 const dataCategory = [
   {id: 0, label: "Semua", value: "Semua"},
   {id: 1, label: "Kamar Tamu", value: "Kamar Tamu"},
-  {id: 3, label: "Dapur", value: "Dapur"},
+  {id: 2, label: "Dapur", value: "Dapur"},
   {id: 3, label: "Kamar Tidur", value: "Kamar Tidur"},
-  {id: 2, label: "Kebun", value: "Kebun"},
-  {id: 3, label: "Toilet", value: "Toilet"},
-  {id: 3, label: "Atap", value: "Atap"},
 ]
 
 const Homepage = () => {
