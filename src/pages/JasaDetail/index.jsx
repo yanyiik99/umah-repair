@@ -3,17 +3,19 @@ import './index.css';
 
 import Img from '../../assets/clean-service.jpg';
 import ImgPromo from '../../assets/promo-banner.jpg';
-import { AppstoreAddOutlined, ClockCircleFilled, ContainerFilled, CustomerServiceOutlined, FileProtectOutlined, FullscreenOutlined, HomeOutlined } from '@ant-design/icons';
+import { AppstoreAddOutlined, ClockCircleFilled, ContainerFilled, CustomerServiceOutlined, FileProtectOutlined, FullscreenOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import Countdown from 'react-countdown';
 const { Title, Paragraph, Text } = Typography;
 const { Compact } = Space;
+import Logo from '../../assets/logo.png';
 
 import { BiBadgeCheck } from "react-icons/bi";
 import { formatCurrency, showReadmore } from '../../utils/ui';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import { DataJasa, dataTestimoni } from '../../utils/constans';
+import Link from 'antd/es/typography/Link';
 
 
 
@@ -56,10 +58,21 @@ const Jasadetail = () => {
 
   return (
     <div>
-      <Row className='bg-violet-500 w-full h-72'>
+      <Row className='bg-violet-500 w-full h-96'>
         {contextHolder}
         <Col xs={24}>
+          <div className="layout px-4 lg:px-48 !bg-violet-500">
+            <Flex className="pt-10"  justify='space-between' align='end'>
+              <Link href="/">
+                <Image src={Logo} className="!w-40" preview={false} />
+              </Link>
+              <Link href="/profile">
+                <UserOutlined className="bg-white p-2 rounded-full text-violet-500"/>
+              </Link>
+            </Flex>
+          </div>
           <Flex className='h-full pt-10' vertical justify='start' align='center'>
+            
             <h1 className='text-4xl font-bold mb-2 text-white' data-aos="fade-up" data-aos-duration="2000">
               Detail Home Service
             </h1>

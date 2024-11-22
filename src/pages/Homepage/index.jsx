@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Button, Layout, Card, Row, Col, Flex, List, Input } from 'antd';
+import { Button, Layout, Card, Row, Col, Flex, List, Input, Image } from 'antd';
 import { FormatPainterFilled, RightCircleFilled, SearchOutlined, ClockCircleFilled, StarFilled, UserOutlined } from '@ant-design/icons'
 import './index.css';
 import ImageCard from './img/1.png';
+import Logo from '../../assets/logo.png';
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 import { DataJasa } from "../../utils/constans";
@@ -50,16 +51,19 @@ const Homepage = () => {
 
   return (
     <div>
-      <Row className='bg-violet-500 w-full h-72'>
+      <Row className='bg-violet-500 w-full h-96'>
         <Col xs={24}>
           <div className="layout px-4 lg:px-48 !bg-violet-500">
-            <Flex className="pt-5"  justify='end' align='end'>
+            <Flex className="pt-10"  justify='space-between' align='end'>
+              <Link href="/">
+                <Image src={Logo} className="!w-40" preview={false} />
+              </Link>
               <Link href="/profile">
-                <UserOutlined className="text-3xl text-white"/>
+                <UserOutlined className="bg-white p-2 rounded-full text-violet-500"/>
               </Link>
             </Flex>
           </div>
-          <Flex className='h-full pt-5' vertical justify='start' align='center'>
+          <Flex className='h-full pt-14' vertical justify='start' align='center'>
             <h1 className='text-4xl font-bold mb-2 mt-10 text-white text-center' data-aos="fade-up" data-aos-duration="2000">Temukan Jasa Yang Anda Butuhkan</h1>
             <p className="text-slate-300" data-aos="fade-up" data-aos-duration="3000">Solusi Rumah Anda, Kami yang Urus!,</p>
           </Flex>

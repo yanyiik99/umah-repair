@@ -1,4 +1,4 @@
-import { BankFilled, CreditCardOutlined, HomeOutlined, UserAddOutlined, InboxOutlined, PlusOutlined } from "@ant-design/icons";
+import { BankFilled, CreditCardOutlined, HomeOutlined, UserAddOutlined, InboxOutlined, PlusOutlined, UserOutlined } from "@ant-design/icons";
 import { Breadcrumb, Card, Col, Flex, Row, Steps, Button, message,  Select, Image,Typography, Collapse, Form, Input, DatePicker, Upload, Result, Divider, Space  } from "antd";
 import { useRef, useState } from "react";
 import { formatCurrency, showReadmore } from "../../utils/ui";
@@ -14,6 +14,8 @@ import Gopay from '../../assets/gopay.png';
 import Jago from '../../assets/jago.png';
 import Dana from '../../assets/dana.png';
 import { DataJasa } from "../../utils/constans";
+import Link from "antd/es/typography/Link";
+import Logo from '../../assets/logo.png';
 
 const steps = [
     {
@@ -87,8 +89,18 @@ const UserTransaksi = () => {
     
 
     return <div>
-      <Row className='bg-violet-500 w-full h-72'>
+      <Row className='bg-violet-500 w-full h-96'>
         <Col xs={24}>
+            <div className="layout px-4 lg:px-48 !bg-violet-500">
+            <Flex className="pt-10"  justify='space-between' align='end'>
+              <Link href="/">
+                <Image src={Logo} className="!w-40" preview={false} />
+              </Link>
+              <Link href="/profile">
+                <UserOutlined className="bg-white p-2 rounded-full text-violet-500"/>
+              </Link>
+            </Flex>
+          </div>
           <Flex className='h-full pt-10' vertical justify='start' align='center'>
             <h1 className='text-4xl font-bold mb-2 text-white' data-aos="fade-up" data-aos-duration="2000">
               Proses Transaksi
