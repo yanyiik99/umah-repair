@@ -6,7 +6,7 @@ import Img4 from '../assets/img4.jpg';
 export const DataJasa = [
     {
         id: 1,
-        nama: "Jasa Pembersihan Sofa dan Karpet",
+        nama: "Jasa Pembersihan Sofa",
         deskripsi: "Jasa pembersihan sofa dan karpet menggunakan metode steam cleaning profesional yang didukung peralatan modern sesuai standar kebersihan. Layanan ini bertujuan untuk menghilangkan noda membandel, kuman, dan bau tidak sedap pada sofa dan karpet Anda, sehingga ruangan menjadi lebih nyaman dan sehat. Teknisi kami memiliki pengalaman bertahun-tahun dalam pembersihan rumah, memastikan setiap sudut sofa dan serat karpet kembali seperti baru. Proses ini aman untuk semua jenis bahan dan ramah lingkungan.",
         harga: "500000",
         estimasi: "15 Jam",

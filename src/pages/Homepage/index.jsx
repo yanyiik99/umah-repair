@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Layout, Card, Row, Col, Flex, List, Input, Image } from 'antd';
-import { FormatPainterFilled, RightCircleFilled, SearchOutlined, ClockCircleFilled, StarFilled, UserOutlined } from '@ant-design/icons'
+import { FormatPainterFilled, RightCircleFilled, SearchOutlined, ClockCircleFilled, StarFilled, UserOutlined, FileDoneOutlined } from '@ant-design/icons'
 import './index.css';
 import ImageCard from './img/1.png';
 import Logo from '../../assets/logo.png';
@@ -139,7 +139,8 @@ const Homepage = () => {
 
                 <div className="extras-jasa flex mt-5">
                   <div className="type-jasa" style={{ display: 'flex' }}>
-                    <FormatPainterFilled className="text-violet-500"/>
+                    {/* <FormatPainterFilled className="text-violet-500"/> */}
+                    <FileDoneOutlined className="text-violet-500" />
                     <p style={{ color: '#666', marginLeft: '5px' }}> {item?.topService}</p>
                   </div>
 
