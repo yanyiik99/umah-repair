@@ -188,7 +188,7 @@ const Profile = () => {
 
             <Row className='bg-violet-500 w-full h-96'>
                 <Col xs={24}>
-                    <div className="layout !bg-violet-500">
+                    <div className="layout px-4 lg:px-48 !bg-violet-500">
                         <Flex className="pt-10"  justify='space-between'>
                             <div className="left">
                                 <p onClick={()=>navigate('/')} className="text-white font-semibold cursor-pointer"><ArrowLeftOutlined className="mr-2 bg-white p-2 rounded-full text-violet-500"/> Back to Homepage</p>                            
@@ -203,7 +203,7 @@ const Profile = () => {
                 </Col>
             </Row>
 
-            <div className="layout" style={{ padding: '0 200px', backgroundColor: '#f9f9f9'}}>
+            <div className="layout px-4 lg:px-48" style={{ backgroundColor: '#f9f9f9'}}>
 
                 <div className="personal-avatar relative -top-20">
                     <Card   
@@ -231,7 +231,7 @@ const Profile = () => {
                         bordered={false}
                         extra={<button onClick={showModal} className="border border-violet-500 text-violet-500 py-1 px-7 mb-3 rounded-full hover:bg-purple-500 hover:text-white transition">Edit <EditOutlined className="ml-2"/></button>}>
                         <Row>
-                            <Col xl={12} sm={24}>
+                            <Col  xs={24} lg={12}>
                                 <div className="personal flex mt-5">
                                     <div className="icon-personal w-14 h-14 flex justify-center bg-slate-100 rounded-xl mr-3">
                                         <UserOutlined className="font-bold text-slate-600 text-lg"/>
