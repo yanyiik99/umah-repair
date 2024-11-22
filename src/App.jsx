@@ -4,8 +4,17 @@ import Jasadetail from "./pages/JasaDetail";
 import UserTransaksi from "./pages/Transaksi/UserTransaksi";
 import Profile from "./pages/Profile";
 import ScrollTop from "./components/ScrollTop";
+import { useEffect } from "react";
+import AOS from "aos";
+import 'aos/dist/aos.css';
 
-function App() {  
+function App() { 
+
+  useEffect(()=>{
+    AOS.init({
+      once: true
+    })
+  },[]);
 
   return (
     <>

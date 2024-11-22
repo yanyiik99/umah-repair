@@ -60,10 +60,11 @@ const Jasadetail = () => {
         {contextHolder}
         <Col xs={24}>
           <Flex className='h-full pt-10' vertical justify='start' align='center'>
-            <h1 className='text-4xl font-bold mb-2 text-white'>
+            <h1 className='text-4xl font-bold mb-2 text-white' data-aos="fade-up" data-aos-duration="2000">
               Detail Home Service
             </h1>
             <Breadcrumb
+              data-aos="fade-up" data-aos-duration="2600"
               items={[
                 {
                   href: '/',

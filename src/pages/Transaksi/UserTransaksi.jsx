@@ -90,10 +90,11 @@ const UserTransaksi = () => {
       <Row className='bg-violet-500 w-full h-72'>
         <Col xs={24}>
           <Flex className='h-full pt-10' vertical justify='start' align='center'>
-            <h1 className='text-4xl font-bold mb-2 text-white'>
+            <h1 className='text-4xl font-bold mb-2 text-white' data-aos="fade-up" data-aos-duration="2000">
               Proses Transaksi
             </h1>
             <Breadcrumb
+                data-aos="fade-up" data-aos-duration="2600"
                   items={[
                     {
                       href: '/',

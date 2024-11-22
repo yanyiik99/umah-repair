@@ -60,8 +60,8 @@ const Homepage = () => {
             </Flex>
           </div>
           <Flex className='h-full pt-5' vertical justify='start' align='center'>
-            <h1 className='text-4xl font-bold mb-2 mt-10 text-white text-center'>Temukan Jasa Yang Anda Butuhkan</h1>
-            <p className="text-slate-300">Solusi Rumah Anda, Kami yang Urus!,</p>
+            <h1 className='text-4xl font-bold mb-2 mt-10 text-white text-center' data-aos="fade-up" data-aos-duration="2000">Temukan Jasa Yang Anda Butuhkan</h1>
+            <p className="text-slate-300" data-aos="fade-up" data-aos-duration="3000">Solusi Rumah Anda, Kami yang Urus!,</p>
           </Flex>
         </Col>
       </Row>
