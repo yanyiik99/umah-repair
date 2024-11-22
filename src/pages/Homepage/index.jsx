@@ -7,6 +7,7 @@ import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 import { DataJasa } from "../../utils/constans";
 import { formatCurrency } from "../../utils/ui";
+import Link from "antd/es/typography/Link";
 
 const dataDummy = [
   {key: 1, title: "Develop Your Skills Laravel and Filament", category: "Living Room", description: "The boy wtih blue hat", price: "150.000", tools: "Customer-Provided Tools", duration: "1 Hours"},
@@ -53,7 +54,9 @@ const Homepage = () => {
         <Col xs={24}>
           <div className="layout px-4 lg:px-48 !bg-violet-500">
             <Flex className="pt-5"  justify='end' align='end'>
-              <UserOutlined onClick={()=>navigate('/profile')} className="text-3xl text-white"/>
+              <Link href="/profile">
+                <UserOutlined className="text-3xl text-white"/>
+              </Link>
             </Flex>
           </div>
           <Flex className='h-full pt-5' vertical justify='start' align='center'>
