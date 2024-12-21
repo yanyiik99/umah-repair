@@ -7,6 +7,7 @@ import ScrollTop from "./components/ScrollTop";
 import { useEffect } from "react";
 import AOS from "aos";
 import 'aos/dist/aos.css';
+import Jasa from "./pages/Jasa";
 
 function App() { 
 
@@ -22,6 +23,7 @@ function App() {
         <ScrollTop>
           <Routes>
               <Route path="/" element={<Homepage/>} />
+              <Route path="/jasa" element={<Jasa/>} />
               <Route path="/jasadetail" element={<Jasadetail/>} />
               <Route path="/proses-transaksi" element={<UserTransaksi/>} />
               <Route path="/profile" element={<Profile/>} />
