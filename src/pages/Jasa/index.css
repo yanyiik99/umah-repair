@@ -5,16 +5,6 @@
     background-color: #f9f9f9;
 }
 
-h1, h2, h3, h4, h5, h6{
-    font-family: 'Poppins' !important;
-    font-weight: bold;
-}
-
-p{
-    font-family: 'Montserrat' !important;
-    color: #666;
-}
-
 .bg-jasa{
     display: flex;
     justify-content: space-between;
