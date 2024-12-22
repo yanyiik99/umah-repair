@@ -37,11 +37,11 @@ function App() {
               {/* <Route path="/admin/dashboard" element={<Dashboard/>} /> */}
               <Route 
                 exact
-                path="/admin/dashboard" 
+                path="/ternaklele/admin/dashboard" 
                 element={<AdminRoute component={<Dashboard/>} />} />
               <Route 
                 exact
-                path="/admin/member" 
+                path="/ternaklele/admin/member" 
                 element={<AdminRoute component={<MasterMember/>} />} />
           </Routes>
         </ScrollTop>
