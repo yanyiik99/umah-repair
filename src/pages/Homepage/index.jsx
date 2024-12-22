@@ -280,7 +280,7 @@ const Homepage = () => {
 
               <nav class="flex gap-16 justify-end text-white">
                   <ul class="flex flex-col gap-4">
-                      <p class="font-semibold tracking-03">Ketahui Lebih Banyak</p>
+                      <p class="font-semibold tracking-03 text-facility">Ketahui Lebih Banyak</p>
                       <li>
                           <a href="#" class="tracking-03">Tentang Kami</a>
                       </li>
@@ -296,7 +296,7 @@ const Homepage = () => {
                   </ul>
 
                   <ul class="flex flex-col gap-4">
-                      <p class="font-semibold tracking-03">Kontak Kami</p>
+                      <p class="font-semibold tracking-03 text-facility">Kontak Kami</p>
                       <li>
                           <a href="#" class="tracking-03">021 543 545 676</a>
                       </li>
@@ -312,7 +312,7 @@ const Homepage = () => {
 
           <hr class="border-white/50 mt-16"/>
           <div class="flex items-center justify-between mt-[30px]">
-              <p class="font-semibold tracking-03 text-white">© 2024 Umahrepairproductions</p>
+              <p class="font-semibold tracking-03 text-white text-facility">© 2024 umahrepairproductions</p>
               <ul class="flex items-center justify-end gap-6 text-white">
                   <li>
                       <a href="#" class="tracking-03">Syarat dan Ketentuan</a>
