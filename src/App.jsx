@@ -7,6 +7,11 @@ import ScrollTop from "./components/ScrollTop";
 import { useEffect } from "react";
 import AOS from "aos";
 import 'aos/dist/aos.css';
+import LoginUser from "./pages/LoginUser";
+import RegisterUser from "./pages/RegisterUser";
+import Dashboard from "./admin/Dashboard";
+import MasterMember from "./admin/Member";
+import AdminRoute from "./Layout/AdminRoute";
 
 function App() { 
 
@@ -25,6 +30,17 @@ function App() {
               <Route path="/jasadetail" element={<Jasadetail/>} />
               <Route path="/proses-transaksi" element={<UserTransaksi/>} />
               <Route path="/profile" element={<Profile/>} />
+              <Route path="/auth/login" element={<LoginUser/>} />
+              <Route path="/auth/register" element={<RegisterUser/>} />
+              {/* <Route path="/admin/dashboard" element={<Dashboard/>} /> */}
+              <Route 
+                exact
+                path="/admin/dashboard" 
+                element={<AdminRoute component={<Dashboard/>} />} />
+              <Route 
+                exact
+                path="/admin/member" 
+                element={<AdminRoute component={<MasterMember/>} />} />
           </Routes>
         </ScrollTop>
       </div>
