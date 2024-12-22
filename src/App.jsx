@@ -12,6 +12,7 @@ import RegisterUser from "./pages/RegisterUser";
 import Dashboard from "./admin/Dashboard";
 import MasterMember from "./admin/Member";
 import AdminRoute from "./Layout/AdminRoute";
+import Jasa from "./pages/Jasa";
 
 function App() { 
 
@@ -27,6 +28,7 @@ function App() {
         <ScrollTop>
           <Routes>
               <Route path="/" element={<Homepage/>} />
+              <Route path="/jasa" element={<Jasa/>} />
               <Route path="/jasadetail" element={<Jasadetail/>} />
               <Route path="/proses-transaksi" element={<UserTransaksi/>} />
               <Route path="/profile" element={<Profile/>} />

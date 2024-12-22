@@ -15,14 +15,16 @@ export const DataJasa = [
         rate: 4.5,
         totalReviews: 467,
         promoCode: "XXX123",
-        tools: "SNI",
+        tools: "Dari Kami",
+        warranty: "30 Hari",
+        support: "24/7",
         img: Img1,
         benefits: [
-            "Menghilangkan noda membandel hingga 99%.",
-            "Membunuh kuman dan bakteri untuk kualitas udara yang lebih sehat.",
-            "Meningkatkan estetika ruang tamu dengan sofa dan karpet bersih.",
-            "Proses cepat dan aman menggunakan teknologi terkini.",
-            "Garansi hasil maksimal, jika tidak puas bisa mendapatkan layanan ulang"
+            "Menghilangkan noda 99%",
+            "Membunuh kuman dan bakteri",
+            "Meningkatkan estetika ruang tamu",
+            "Proses cepat dan aman",
+            "Garansi hasil maksimal"
         ]
     },
     {
@@ -36,7 +38,9 @@ export const DataJasa = [
         rate: 5,
         totalReviews: 123,
         promoCode: "XXX123",
-        tools: "ISO",
+        tools: "Dari Kami",
+        warranty: "30 Hari",
+        support: "24/7",
         img: Img2,
         benefits: [
             "Membersihkan seluruh dapur secara menyeluruh.",
@@ -57,7 +61,9 @@ export const DataJasa = [
         rate: 3,
         totalReviews: 140,
         promoCode: "XXX123",
-        tools: "SNI",
+        tools: "Dari Kami",
+        warranty: "30 Hari",
+        support: "24/7",
         img: Img3,
         benefits: [
             "AC kembali dingin dan hemat energi.",
@@ -78,7 +84,9 @@ export const DataJasa = [
         rate: 4,
         totalReviews: 340,
         promoCode: "XXX123",
-        tools: "ISO",
+        tools: "Dari Kami",
+        warranty: "30 Hari",
+        support: "24/7",
         img: Img4,
         benefits: [
             "Membersihkan seluruh ruangan secara menyeluruh.",

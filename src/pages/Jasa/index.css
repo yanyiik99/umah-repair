@@ -12,7 +12,8 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bolder !important;
 }
 
-.text-facility{
-    font-family: "Space Grotesk", serif !important;
-    font-weight: bolder !important;
+.custom-input{
+    outline: none !important;
+    border: none !important;
+    font-family: "Inter", serif !important;
 }
