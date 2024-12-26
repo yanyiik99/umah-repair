@@ -320,7 +320,7 @@ const Profile = () => {
                                         </div>
                                         <div className="text-personal pt-2">
                                             <h1>{profile.fullname}</h1>
-                                            <p className="text-slate-500">Fullname</p>
+                                            <p className="text-slate-500 font-[Inter]">Fullname</p>
                                         </div>
                                     </div>
 
@@ -330,7 +330,7 @@ const Profile = () => {
                                         </div>
                                         <div className="text-personal pt-2">
                                             <h1>{profile.email}</h1>
-                                            <p className="text-slate-500">Email Address</p>
+                                            <p className="text-slate-500 font-[Inter]">Email Address</p>
                                         </div>
                                     </div>
                                 </Col>
@@ -342,7 +342,7 @@ const Profile = () => {
                                         </div>
                                         <div className="text-personal pt-2">
                                             <h1>{profile.phone}</h1>
-                                            <p className="text-slate-500">Phone</p>
+                                            <p className="text-slate-500 font-[Inter]">Phone</p>
                                         </div>
                                     </div>
 
@@ -352,7 +352,7 @@ const Profile = () => {
                                         </div>
                                         <div className="text-personal pt-2">
                                             <h1>{profile.address}</h1>
-                                            <p className="text-slate-500">Address</p>
+                                            <p className="text-slate-500 font-[Inter]">Address</p>
                                         </div>
                                     </div>                                
                                 </Col>

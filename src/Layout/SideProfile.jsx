@@ -42,7 +42,7 @@ function SideProfile (props) {
                 <div className="img-profile flex flex-col items-center">
                     <Image src={AvatarImage} width="100px" className="rounded-full" preview={false} />
                     <h3 class="text-md leading-17 tracking-05 mt-3">Wahyu Sucipta</h3>
-                    <p class="text-sm leading-14 tracking-05 opacity-50">wahyuscpta13@gmail.com</p>
+                    <p class="text-xs leading-14 tracking-05 opacity-50 font-[Inter]">wahyuscpta13@gmail.com</p>
                 </div>
                 
                 <hr class="border-black opacity-10 my-5"/>
