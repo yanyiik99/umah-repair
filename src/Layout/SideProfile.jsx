@@ -18,7 +18,7 @@ function SideProfile (props) {
         {
             key: '1',
             icon: <UserOutlined />,
-            label: ( <NavLink to="/profile/dataprofile">
+            label: ( <NavLink to="/profile">
                 <span className="label">Profile</span>
             </NavLink>),
         },
