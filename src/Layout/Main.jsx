@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import {
+  LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from '@ant-design/icons';
 import { Button, Layout, theme } from 'antd';
 import Sidebar from './Sidebar';
+import { useNavigate } from 'react-router-dom';
+import { jwtStorage } from '../utils/jwt_storage';
 
 const { Header } = Layout;
 
@@ -14,17 +17,26 @@ function Main({children}) {
         token: { colorBgContainer },
     } = theme.useToken();
 
+    const navigate = useNavigate()
+    
+    const doLogout = () => {
+      jwtStorage.removeItem();
+      navigate('/ternaklele/admin/login', {replace: true})
+    }
+
 
     return (
         <Layout>
             <Sidebar collapse={collapsed} />
             <Layout>
                 <Header
-                style={{
-                    padding: 0,
-                    background: colorBgContainer,
-                }}
+                  style={{
+                      padding: 0,
+                      background: colorBgContainer,
+                  }}
+                  className='flex justify-between items-center'
                 >
+               
                 <Button
                     type="text"
                     icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -35,6 +47,10 @@ function Main({children}) {
                     height: 64,
                     }}
                 />
+                 <Button className="btn-sign-out" type="button" onClick={() => doLogout()}>
+                  <LogoutOutlined />
+                  <span>Logout</span>
+                </Button>
                 </Header>
                 {children}
             </Layout>
