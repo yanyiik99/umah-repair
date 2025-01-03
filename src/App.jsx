@@ -29,7 +29,7 @@ function App() {
           <Routes>
               <Route path="/" element={<Homepage/>} />
               <Route path="/jasa" element={<Jasa/>} />
-              <Route path="/jasadetail" element={<Jasadetail/>} />
+              <Route path="/jasadetail/:id" element={<Jasadetail/>} />
               <Route path="/proses-transaksi" element={<UserTransaksi/>} />
               <Route path="/profile" element={<Profile/>} />
               <Route path="/auth/login" element={<LoginUser/>} />

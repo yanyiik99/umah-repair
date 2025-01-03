@@ -1,8 +1,8 @@
 import { BankFilled, CreditCardOutlined, HomeOutlined, UserAddOutlined, InboxOutlined, PlusOutlined, UserOutlined, ArrowRightOutlined, InfoCircleFilled, InfoCircleOutlined } from "@ant-design/icons";
 import { Breadcrumb, Card, Col, Flex, Row, Steps, Button, message,  Select, Image,Typography, Collapse, Form, Input, DatePicker, Upload, Result, Divider, Space, Modal, Tooltip  } from "antd";
-import { useMemo, useRef, useState } from "react";
-import { showReadmore } from "../../utils/ui";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { formatCurrency, showReadmore } from "../../utils/ui";
+import { useLocation, useNavigate } from "react-router-dom";
 const { Title, Paragraph} = Typography;
 const { Dragger } = Upload;
 // import Img from '../../assets/clean-service.jpg';
@@ -59,18 +59,52 @@ const UserTransaksi = () => {
     const [expanded, setExpanded] = useState(false);
     const [form] = Form.useForm();
     const navigate = useNavigate();
+    const location = useLocation();
     const [alamat, setAlamat] = useState(['Taman Wira Sambangan Blok Cempaka I No. 4']);
+    const [selectedAlamat, setSelectedAlamat] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(false);
     const [name, setName] = useState('');
     const inputRef = useRef(null);
-    const [isModalOpen, setIsModalOpen] = useState(true);
     const [arrow, setArrow] = useState('Show');
+    const [dataJasa, setDataJasa] = useState(location.state);
+    const tax = dataJasa?.harga * 0.12;
+
+    const [dataCustomer, setDataCustomer] = useState({});
+    
+    useEffect(() => {
+        console.log(dataJasa);
+
+    },[dataCustomer]);
 
     const next = () => {
       setCurrent(current + 1);
     };
+
     const prev = () => {
       setCurrent(current - 1);
     };
+    
+    const handleTempSaveDataCustomer = () => {
+        let namapenerima = form.getFieldValue("namapenerima");
+        let notlpn = form.getFieldValue("notlpn");
+        let catatan = form.getFieldValue("catatan");
+
+        setDataCustomer({
+            namapenerima: namapenerima,
+            notlpn: notlpn,
+            catatan: catatan,
+            alamat: selectedAlamat,
+            jadwal: selectedDate
+        })
+
+        setCurrent(current + 1);
+
+    }
+
+    
+    const onSelectDate = (date, dateString) => {
+        setSelectedDate(dateString);
+    }
 
   
     const mergedArrow = useMemo(() => {
@@ -89,13 +123,14 @@ const UserTransaksi = () => {
       key: item.title,
       title: item.title,
       description: item.description,
+      disabled: true
     }))
     
     const onNameChange = (event) => {
         setName(event.target.value);
     };
 
-    const onChange = (value) => {
+    const onChangeSteps = (value) => {
         console.log('onChange:', value);
         setCurrent(value);
     };
@@ -111,41 +146,6 @@ const UserTransaksi = () => {
     
 
     return <div>
-        {/* <Modal title="Transfer Bank, Pilih Salah Satu Tujuan" open={isModalOpen} closable={false} footer={null}>
-            <Flex justify="space-between" className="cursor-pointer" align="center" onClick={()=>{setIsModalOpen(false)}}>
-                <Image preview={false} src={Bca} className="!h-10" />
-                <div>
-                    <Paragraph className="text-lg font-semibold" >BCA ACTIVE BANK</Paragraph>
-                    <Paragraph className="text-2xl font-bold" onClick={()=>{setIsModalOpen(false)}} copyable>123123123</Paragraph>
-                </div>
-            </Flex>
-            <hr className="my-4" />
-            <Flex justify="space-between" align="center" className="cursor-pointer">
-                <Image preview={false} src={Bni} className="!h-10" />
-                <div>
-                    <Paragraph className="text-lg font-semibold" >BNI ACTIVE BANK</Paragraph>
-                    <Paragraph className="text-2xl font-bold" copyable>999999999</Paragraph>
-                </div>
-            </Flex>
-            <hr className="my-4" />
-            <Flex justify="space-between" align="center" className="cursor-pointer">
-                <Image preview={false} src={Dana} className="!h-10" />
-                <div>
-                    <Paragraph className="text-lg font-semibold" >DANA ACTIVE BANK</Paragraph>
-                    <Paragraph className="text-2xl font-bold" copyable>085946370867</Paragraph>
-                </div>
-            </Flex>
-            <hr className="my-4" />
-            <Flex justify="space-between" align="center" className="cursor-pointer">
-                <Image preview={false} src={Gopay} className="!h-10" />
-                <div>
-                    <Paragraph className="text-lg font-semibold" >GOPAY ACTIVE BANK</Paragraph>
-                    <Paragraph className="text-2xl font-bold" copyable>085946370867</Paragraph>
-                </div>
-            </Flex>
-
-        </Modal> */}
-
         <div id="background" class="absolute w-full h-[450px] top-0 -z-10 bg-[#9FDDFF]"></div>
         <nav class="relative flex items-center justify-between w-full max-w-[1280px] mx-auto px-10 mt-10">
             <a href="/">
@@ -172,7 +172,12 @@ const UserTransaksi = () => {
 
         <section id="features" class="relative w-full max-w-[1280px] h-[280px] mx-auto px-10 mt-32">
           <div className="flex items-center justify-center w-full gap-16 bg-white rounded-2xl p-5">         
-                <Steps current={current} onChange={onChange} items={items} style={{ fontFamily: 'Inter', margin: '10px' }}/>
+                <Steps 
+                    current={current} 
+                    onChange={onChangeSteps} 
+                    items={items} 
+                    style={{ fontFamily: 'Inter', margin: '10px' }}
+                />
           </div>
         </section>
 
@@ -188,9 +193,9 @@ const UserTransaksi = () => {
 
                         <Form layout="vertical" requiredMark={true} form={form}>
                             <Form.Item
-                                name="namapenjamu"
+                                name="namapenerima"
                                 rules={[
-                                    {required: true, message: "Nama Penjamu Wajib Diisi"}
+                                    {required: true, message: "Nama Penerima Wajib Diisi"}
                                 ]}
                             >
                                 <label class="group flex items-center font-[Inter]">
@@ -202,7 +207,7 @@ const UserTransaksi = () => {
                             </Form.Item>
 
                             <Form.Item
-                                name="notelepon"
+                                name="notlpn"
                                 rules={[
                                     {required: true, message: "Nomor Telepon Wajib Diisi"}
                                 ]}
@@ -218,7 +223,7 @@ const UserTransaksi = () => {
                             <Form.Item
                                 name="alamat"
                                 rules={[
-                                    {required: true, message: "Alamat/Lokasi Wajib Diisi"}
+                                    {required: false, message: "Alamat/Lokasi Wajib Diisi"}
                                 ]}
                             >
                                 <label class="group flex items-center font-[Inter]">
@@ -229,7 +234,16 @@ const UserTransaksi = () => {
                                         className="font-[Inter] focus:border-none focus:outline-none outline-none flex w-full rounded-xl border-[#BFBFBF] bg-white text-sm leading-[22px] tracking-03 placeholder:text-[#BFBFBF] transition-all duration-300 group-focus-within:border-black"
                                         style={{ fontFamily: 'Inter' }}
                                         size="large"
-                                        placeholder="Masukan alamat atau lokasi" 
+                                        placeholder="Masukan alamat atau lokasi"
+                                        name="alamat"
+                                        dropdownClassName="custom-dropdown"
+                                        options={alamat.map((item) => ({
+                                            label: item,
+                                            value: item,
+                                        }))}
+                                        onChange={(value) => {
+                                            setSelectedAlamat(value);
+                                        }}
                                         dropdownRender={(menu) => (
                                             <>
                                             {menu}
@@ -254,11 +268,7 @@ const UserTransaksi = () => {
                                             </div>                                        
                                             </>
                                         )}
-                                        dropdownClassName="custom-dropdown"
-                                        options={alamat.map((item) => ({
-                                            label: item,
-                                            value: item,
-                                        }))}
+                                        
                                     />
                                 </label>
                             </Form.Item>
@@ -266,14 +276,18 @@ const UserTransaksi = () => {
                             <Form.Item
                                 name="jadwal"
                                 rules={[
-                                    {required: true, message: "Jadwal Wajib Diisi"}
+                                    {required: false, message: "Jadwal Wajib Diisi"}
                                 ]}
                             >
                                 <label class="group flex items-center font-[Inter]">
                                     <h2 class="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
                                         <span class="text-red-500 mr-1">*</span> Jadwal Layanan
                                     </h2>
-                                    <DatePicker showTime placeholder="Masukkan jadwal layanan" className="font-[Inter] focus:border-none focus:outline-none outline-none flex w-full rounded-xl px-3 py-4 border border-[#BFBFBF] bg-white text-sm leading-[22px] tracking-03 placeholder:text-[#BFBFBF] transition-all duration-300 group-focus-within:border-black"/>
+                                    <DatePicker 
+                                        showTime 
+                                        placeholder="Masukkan jadwal layanan" 
+                                        onChange={onSelectDate}
+                                        className="font-[Inter] focus:border-none focus:outline-none outline-none flex w-full rounded-xl px-3 py-4 border border-[#BFBFBF] bg-white text-sm leading-[22px] tracking-03 placeholder:text-[#BFBFBF] transition-all duration-300 group-focus-within:border-black"/>
                                 </label>
                             </Form.Item>
 
@@ -289,28 +303,6 @@ const UserTransaksi = () => {
                             </Form.Item>
                         </Form>
                     </div>
-                    <div id="booking-items" class="flex flex-col w-full rounded-3xl p-8 gap-6 bg-white">
-                        <div class="flex flex-col gap-2">
-                            <h2 class="text-xl leading-6 tracking-05">Detail Pesanan</h2>
-                            <p class="text-sm leading-16 tracking-03 opacity-60">Layanan berikutnya menanti, periksa detail pemesanan Anda di sini</p>
-                        </div>
-                        <hr class="border-black opacity-10"/>
-                        <div class="items flex flex-nowrap gap-4 w-full">
-                            
-                            <div class="flex flex-col gap-2 w-full">
-                                <div class="flex justify-between">
-                                    <h2 class="leading-19 tracking-05">Pembersihan Sofa</h2>
-                                    <div class="flex gap-4 items-center">
-                                        <h2 class="leading-19 tracking-05">Rp 199.000</h2>
-                                        <button class="appearance-none">
-                                            
-                                        </button>
-                                    </div>
-                                </div>
-                                <p class="text-sm leading-16 tracking-03 opacity-60">Kebersihan Rumah</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="flex flex-col gap-6 w-full">
@@ -322,7 +314,11 @@ const UserTransaksi = () => {
                         <hr class="border-black opacity-10"/>
                         <div class="flex items-center justify-between">
                             <h2 class="leading-19 tracking-05">Subtotal</h2>
-                            <p class="leading-19">Rp 199.000</p>
+                            <p class="leading-19">Rp {formatCurrency(dataJasa?.harga)}</p>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <h2 class="leading-19 tracking-05">Promo</h2>
+                            <p class="leading-19 tracking-05 text-[#EC0307]">-Rp {formatCurrency((Number(dataJasa?.harga) - Number(dataJasa?.hargaPromo)).toString())}</p>
                         </div>
                         <div class="flex items-center justify-between">
                             <h2 class="leading-19 tracking-05 flex">
@@ -331,14 +327,28 @@ const UserTransaksi = () => {
                                     <InfoCircleOutlined/>
                                 </Tooltip>
                             </h2>
-                            <p class="leading-19">Rp 21.890</p>
+                            <p class="leading-19">Rp {formatCurrency(tax.toString())}</p>
                         </div>
                         <hr class="border-black border-dashed"/>
                         <div class="flex items-center justify-between">
                             <h2 class="text-xl leading-6 tracking-05">Total</h2>
-                            <h2 class="text-xl leading-6 tracking-05">Rp 220.890</h2>
+                            <h2 class="text-xl leading-6 tracking-05">
+                                Rp  {   
+                                        (dataJasa?.hargaPromo != null && dataJasa?.hargaPromo != undefined) ?
+                                            formatCurrency((Number(dataJasa?.hargaPromo) + tax).toString()) : 
+                                            formatCurrency((Number(dataJasa?.harga) + tax).toString())
+
+                                    }
+                            </h2>
                         </div>
-                        <button onClick={() => next()} type="submit" class="rounded-full py-3 px-6 bg-[#606DE5] font-semibold leading-19 tracking-05 text-white text-center">Bayar</button>
+                        <button onClick={() => {
+                            form
+                            .validateFields()
+                            .then(handleTempSaveDataCustomer)
+                            .catch((err) => {
+                                console.log(err);
+                            })
+                        }} type="submit" class="rounded-full py-3 px-6 bg-[#606DE5] font-semibold leading-19 tracking-05 text-white text-center">Bayar</button>
 
                     </div>
                 </div>
@@ -356,52 +366,67 @@ const UserTransaksi = () => {
                         <hr class="border-black opacity-10"/>
                         <div class="group flex items-center justify-between">
                             <h2 class="flex w-[162px] shrink-0 leading-19 tracking-05">Nama Lengkap</h2>
-                            <p class="leading-19 tracking-05">Dhimas Prio Utomo</p>
+                            <p class="leading-19 tracking-05">{dataCustomer.namapenerima}</p>
                         </div>
                         <div class="group flex items-center justify-between">
                             <h2 class="flex w-[162px] shrink-0 leading-19 tracking-05">Nomor Telepon</h2>
-                            <p class="leading-19 tracking-05">081294885604</p>
+                            <p class="leading-19 tracking-05">{dataCustomer.notlpn}</p>
                         </div>
                         <div class="group flex items-center justify-between">
                             <h2 class="flex w-[162px] shrink-0 leading-19 tracking-05">Alamat</h2>
-                            <p class="leading-19 tracking-05">Jl. Nakula Sahadewa No.46 Singaraja</p>
+                            <p class="leading-19 tracking-05">{dataCustomer.alamat}</p>
                         </div>
                         <div class="group flex items-center justify-between">
                             <h2 class="flex w-[162px] shrink-0 leading-19 tracking-05">Jadwal</h2>
-                            <p class="leading-19 tracking-05">2024-12-31 08:00:00</p>
+                            <p class="leading-19 tracking-05">{dataCustomer.jadwal}</p>
                         </div>
                         <div class="group flex items-center justify-between">
                             <h2 class="flex w-[162px] shrink-0 leading-19 tracking-05">Catatan</h2>
-                            <p class="leading-19 tracking-05">-</p>
+                            <p class="leading-19 tracking-05">{dataCustomer.catatan}</p>
                         </div>
                     </div>
 
                     <div id="booking-items" class="flex flex-col w-full rounded-3xl p-8 gap-6 bg-white">
-                        <div class="flex flex-col gap-2">
+                        {/* <div class="flex flex-col gap-2">
                             <h2 class="text-xl leading-6 tracking-05">
                                 No Pesanan : <span class="text-[#606DE5]">10294</span>
                             </h2>
-                        </div>
+                        </div> */}
                         <div class="items flex flex-nowrap gap-4 w-full">
                             <div class="flex flex-col gap-2 w-full">
                                 <div class="flex justify-between">
-                                    <h2 class="leading-19 tracking-05">Jasa Pembersih Sofa</h2>
+                                    <h2 class="leading-19 tracking-05">{dataJasa.nama}</h2>
                                 </div>
-                                <p class="text-sm leading-16 tracking-03 opacity-60">Kebersihan - All Benefits Included</p>
+                                <p class="text-sm leading-16 tracking-03 opacity-60">{dataJasa.kategori} - All Benefits Included</p>
                             </div>
                         </div>
                         <div class="group flex items-center justify-between">
                             <h2 class="flex w-[162px] shrink-0 leading-19 tracking-05">Subtotal</h2>
-                            <p class="leading-19 tracking-05">Rp 220.890</p>
+                            <p class="leading-19 tracking-05">Rp {formatCurrency((Number(dataJasa?.harga) + tax).toString())}</p>
                         </div>
                         <div class="group flex items-center justify-between">
                             <h2 class="flex w-[162px] shrink-0 leading-19 tracking-05">Promo Code</h2>
-                            <p class="leading-19 tracking-05 text-[#EC0307]">-Rp 0</p>
+                            <p class="leading-19 tracking-05 text-[#EC0307]">-Rp {formatCurrency((Number(dataJasa?.harga) - Number(dataJasa?.hargaPromo)).toString())}</p>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <h2 class="leading-19 tracking-05 flex">
+                                Tax 12%
+                                <Tooltip className="ms-2" placement="top" title="Berdasarkan Regulasi Pemerintah UU 12 No.12 Tahun 2024" arrow={mergedArrow}>
+                                    <InfoCircleOutlined/>
+                                </Tooltip>
+                            </h2>
+                            <p class="leading-19">Rp {formatCurrency(tax.toString())}</p>
                         </div>
                         <hr class="border-black border-dashed my-2"/>
                         <div class=" w-full flex justify-between items-center rounded-2xl py-4 px-8 bg-[#D0EEFF]">
                             <h2 class="text-xl leading-[43px] tracking-05">Total Payment</h2>
-                            <h2 class="text-xl leading-[43px] tracking-05 text-right">Rp220.890</h2>
+                            <h2 class="text-xl leading-[43px] tracking-05 text-right">
+                                Rp {
+                                      (dataJasa?.hargaPromo != null && dataJasa?.hargaPromo != undefined) ?
+                                      formatCurrency((Number(dataJasa?.hargaPromo) + tax).toString()) : 
+                                      formatCurrency((Number(dataJasa?.harga) + tax).toString())
+                                }
+                            </h2>
                         </div>
                     </div>
                 </div>
