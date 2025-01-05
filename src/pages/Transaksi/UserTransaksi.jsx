@@ -17,6 +17,8 @@ import Link from "antd/es/typography/Link";
 import Logo from '../../assets/logo.png';
 import LogoBlack from '../../assets/logo-bl.png';
 import './index.css';
+import Header from "../../Layout/Header";
+import Footer from "../../Layout/Footer";
 
 const steps = [
     {
@@ -146,29 +148,7 @@ const UserTransaksi = () => {
     
 
     return <div>
-        <div id="background" class="absolute w-full h-[450px] top-0 -z-10 bg-[#9FDDFF]"></div>
-        <nav class="relative flex items-center justify-between w-full max-w-[1280px] mx-auto px-10 mt-10">
-            <a href="/">
-            <Image src={LogoBlack} className="!w-40" preview={false} />
-            </a>
-            <ul class="flex items-center gap-8 justify-end">
-                <li>
-                    <a href="#" class="leading-19 tracking-03 text-black">Layanan</a>
-                </li>
-                <li>
-                    <a href="#" class="leading-19 tracking-03 text-black">Tentang Kami</a>
-                </li>
-                <li>
-                    <a href="#" class="leading-19 tracking-03 text-black">Testimonial</a>
-                </li>
-                <li>
-                    <a href="#" class="leading-19 tracking-03 text-black">Kontak Kami</a>
-                </li>
-                <li>
-                    <a href="#" class="leading-19 tracking-0.5 text-white font-semibold rounded-[22px] py-2 px-6 bg-[#606DE5]">Login</a>
-                </li>
-            </ul>
-        </nav>   
+        <Header />  
 
         <section id="features" class="relative w-full max-w-[1280px] h-[280px] mx-auto px-10 mt-32">
           <div className="flex items-center justify-center w-full gap-16 bg-white rounded-2xl p-5">         
@@ -508,64 +488,7 @@ const UserTransaksi = () => {
             </div>
         )}
 
-      <footer class="flex flex-col w-full max-w-[1312px] mx-auto rounded-[32px] bg-black p-[120px] mt-[120px] mb-16">
-        <div class="flex justify-between">
-            <div class="flex flex-col gap-6 max-w-[306px] text-start">
-                <Image src={Logo} className="!w-40" preview={false} />
-                <p class="tracking-03 text-white">Nikmati kenyamanan layanan fleksibel dan hemat waktu, tanpa harus meninggalkan rumah</p>
-            </div>
-
-            <nav class="flex gap-16 justify-end text-white">
-                <ul class="flex flex-col gap-4">
-                    <p class="font-semibold tracking-03 text-facility">Ketahui Lebih Banyak</p>
-                    <li>
-                        <a href="#" class="tracking-03">Tentang Kami</a>
-                    </li>
-                    <li>
-                        <a href="#" class="tracking-03">Layanan</a>
-                    </li>
-                    <li>
-                        <a href="#" class="tracking-03">Testimonial</a>
-                    </li>
-                    <li>
-                        <a href="#" class="tracking-03">Kontak Kami</a>
-                    </li>
-                </ul>
-
-                <ul class="flex flex-col gap-4">
-                    <p class="font-semibold tracking-03 text-facility">Kontak Kami</p>
-                    <li>
-                        <a href="#" class="tracking-03">021 543 545 676</a>
-                    </li>
-                    <li>
-                        <a href="#" class="tracking-03">@umah.repair</a>
-                    </li>
-                    <li>
-                        <a href="#" class="tracking-03">admin@umahrepair.com</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-
-        <hr class="border-white/50 mt-16"/>
-        <div class="flex items-center justify-between mt-[30px]">
-            <p class="font-semibold tracking-03 text-white text-facility">© 2024 umahrepairproductions</p>
-            <ul class="flex items-center justify-end gap-6 text-white">
-                <li>
-                    <a href="#" class="tracking-03">Syarat dan Ketentuan</a>
-                </li>
-                <li>
-                    <a href="#" class="tracking-03">Kebijakan Privasi</a>
-                </li>
-                <li>
-                    <a href="#" class="tracking-03">Cookies</a>
-                </li>
-                <li>
-                    <a href="#" class="tracking-03">Legal</a>
-                </li>
-            </ul>
-        </div>
-      </footer>
+      <Footer />
 
     </div>
 }

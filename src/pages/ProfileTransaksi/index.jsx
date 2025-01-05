@@ -7,6 +7,8 @@ import './index.css';
 import SideProfile from "../../Layout/SideProfile";
 import LogoBlack from '../../assets/logo-bl.png';
 
+import Header from "../../Layout/Header";
+
 const columns = [
   {
     title: 'No Transaksi',
@@ -101,29 +103,7 @@ const ProfileTransaksi = () => {
 
     return (
         <div>
-            <div id="background" class="absolute w-full h-[450px] top-0 -z-10 bg-[#9FDDFF]"></div>
-            <nav class="relative flex items-center justify-between w-full max-w-[1280px] mx-auto px-10 mt-10">
-                <a href="/">
-                    <Image src={LogoBlack} className="!w-40" preview={false} />
-                </a>
-                <ul class="flex items-center gap-8 justify-end">
-                    <li>
-                        <a href="#" class="leading-19 tracking-03 text-black">Layanan</a>
-                    </li>
-                    <li>
-                        <a href="#" class="leading-19 tracking-03 text-black">Tentang Kami</a>
-                    </li>
-                    <li>
-                        <a href="#" class="leading-19 tracking-03 text-black">Testimonial</a>
-                    </li>
-                    <li>
-                        <a href="#" class="leading-19 tracking-03 text-black">Kontak Kami</a>
-                    </li>
-                    <li>
-                        <a href="#" class="leading-19 tracking-0.5 text-white font-semibold rounded-[22px] py-2 px-6 bg-[#606DE5]">Login</a>
-                    </li>
-                </ul>
-            </nav>   
+            <Header />
 
             <main id="content" class="relative flex w-full max-w-[1280px] gap-6 mx-auto px-10 mt-[96px]">
                 <aside class="flex flex-col gap-6">    
