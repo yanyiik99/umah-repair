@@ -17,6 +17,7 @@ import Dashboard from "./admin/Dashboard";
 import MasterMember from "./admin/Member";
 import MasterStaff from "./admin/Staff";
 import MasterLayanan from "./admin/Layanan";
+import MasterTransaksi from "./admin/Transaksi";
 import PrivateRoute from "./Layout/PrivateRoute";
 import Jasa from "./pages/Jasa";
 
@@ -52,6 +53,7 @@ function App() {
               <Route exact path="/ternaklele/admin/member" element={<MasterMember/>} />
               <Route exact path="/ternaklele/admin/staff" element={<MasterStaff/>} />
               <Route exact path="/ternaklele/admin/layanan" element={<MasterLayanan/>} />
+              <Route exact path="/ternaklele/admin/transaksi" element={<MasterTransaksi/>} />
           </Routes>
         </AuthProvider>
         </ScrollTop>
