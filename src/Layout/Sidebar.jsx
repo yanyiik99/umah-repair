@@ -39,21 +39,21 @@ function Sidebar (props) {
         {
             key: '3',
             icon: <FiSmile  />,
-            label: ( <NavLink to="#">
+            label: ( <NavLink to="/ternaklele/admin/staff">
                 <span className="label font-[Inter]">Staff</span>
             </NavLink>),
         },
         {
             key: '4',
             icon: <FiLayers  />,
-            label: ( <NavLink to="#">
+            label: ( <NavLink to="/ternaklele/admin/layanan">
                 <span className="label font-[Inter]">Layanan</span>
             </NavLink>),
         },
         {
             key: '5',
             icon: <FiList   />,
-            label: ( <NavLink to="#">
+            label: ( <NavLink to="/ternaklele/admin/transaksi">
                 <span className="label font-[Inter]">Transaksi</span>
             </NavLink>),
         },

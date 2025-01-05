@@ -15,6 +15,7 @@ import LoginUser from "./pages/LoginUser";
 import RegisterUser from "./pages/RegisterUser";
 import Dashboard from "./admin/Dashboard";
 import MasterMember from "./admin/Member";
+import MasterStaff from "./admin/Staff";
 import PrivateRoute from "./Layout/PrivateRoute";
 import Jasa from "./pages/Jasa";
 
@@ -46,14 +47,9 @@ function App() {
               <Route path="/auth/login" element={<LoginUser/>} />
               <Route path="/auth/register" element={<RegisterUser/>} />
               {/* <Route path="/admin/dashboard" element={<Dashboard/>} /> */}
-              <Route 
-                exact
-                path="/ternaklele/admin/dashboard" 
-                element={<Dashboard/>} />
-              <Route 
-                exact
-                path="/ternaklele/admin/member" 
-                element={<MasterMember/>} />
+              <Route exact path="/ternaklele/admin/dashboard" element={<Dashboard/>} />
+              <Route exact path="/ternaklele/admin/member" element={<MasterMember/>} />
+              <Route exact path="/ternaklele/admin/staff" element={<MasterStaff/>} />
           </Routes>
         </AuthProvider>
         </ScrollTop>
