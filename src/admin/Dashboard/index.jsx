@@ -17,9 +17,11 @@ import Sidebar from '../../Layout/Sidebar';
 const { Header, Sider, Content } = Layout;
 
 const Dashboard = () => {
-    return (
-        <Row justify="space-around" className='mt-4'>
-            <Col xs={11}>
+    return (        
+        <>
+            <Sidebar />
+
+            {/* <Col xs={11}>
                 <Card className='bg-red-400'>
                     DASHBOARD SIDE
                 </Card>
@@ -28,8 +30,8 @@ const Dashboard = () => {
                 <Card className='bg-red-400'>
                     RIGHT SIDE
                 </Card>
-            </Col>
-        </Row>
+            </Col> */}
+        </>
     );
 };
 export default Dashboard;

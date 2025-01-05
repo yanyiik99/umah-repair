@@ -53,7 +53,7 @@ function App() {
               <Route 
                 exact
                 path="/ternaklele/admin/member" 
-                element={<PrivateRoute component={<MasterMember/>} />} />
+                element={<MasterMember/>} />
           </Routes>
         </AuthProvider>
         </ScrollTop>
