@@ -16,6 +16,7 @@ import RegisterUser from "./pages/RegisterUser";
 import Dashboard from "./admin/Dashboard";
 import MasterMember from "./admin/Member";
 import MasterStaff from "./admin/Staff";
+import MasterLayanan from "./admin/Layanan";
 import PrivateRoute from "./Layout/PrivateRoute";
 import Jasa from "./pages/Jasa";
 
@@ -50,6 +51,7 @@ function App() {
               <Route exact path="/ternaklele/admin/dashboard" element={<Dashboard/>} />
               <Route exact path="/ternaklele/admin/member" element={<MasterMember/>} />
               <Route exact path="/ternaklele/admin/staff" element={<MasterStaff/>} />
+              <Route exact path="/ternaklele/admin/layanan" element={<MasterLayanan/>} />
           </Routes>
         </AuthProvider>
         </ScrollTop>
