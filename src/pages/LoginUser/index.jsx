@@ -14,9 +14,10 @@ const LoginUser = () => {
             alignItems: "center",
             }}
       >
+        <div id="background" class="absolute w-full h-[350px] top-0 -z-10 bg-[#9FDDFF]"></div>
         <section className="min-h-screen flex items-center justify-center">
             <Row className="bg-white flex rounded-2xl max-w-3xl p-5 items-center">
-                <Col md={12} className="px-8 md:px-16">
+                <Col md={12} className="px-5">
                     <Title className="font-bold text-2xl">Login</Title>
                     <Paragraph className="text-sm font-[Inter]">Jika anda sudah menjadi member, ayo login dengan mudah</Paragraph>
 
@@ -51,7 +52,7 @@ const LoginUser = () => {
 
                     <div className="mt-3 text-xs flex justify-between items-center text-[#606DE5]">
                         <Paragraph className="font-[Inter] mt-3">Belum punya akun?</Paragraph>
-                        <Button onClick={()=>navigate('/auth/register')} className="py-2 px-5 bg-white border rounded-lg hover:scale-110 duration-300 font-[Inter]">Register</Button>
+                        <Button onClick={()=>navigate('/auth/register')} className="py-2 px-5 bg-white border rounded-lg hover:bg-[#606DE5] duration-300 font-[Inter]">Register</Button>
                     </div>
                 </Col>
 
