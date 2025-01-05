@@ -49,7 +49,7 @@ function App() {
               <Route 
                 exact
                 path="/ternaklele/admin/dashboard" 
-                element={<PrivateRoute component={<Dashboard/>} />} />
+                element={<Dashboard/>} />
               <Route 
                 exact
                 path="/ternaklele/admin/member" 
