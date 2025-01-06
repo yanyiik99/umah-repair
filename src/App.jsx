@@ -20,6 +20,7 @@ import MasterLayanan from "./admin/Layanan";
 import MasterTransaksi from "./admin/Transaksi";
 import PrivateRoute from "./Layout/PrivateRoute";
 import Jasa from "./pages/Jasa";
+import Testimoni from "./pages/Testimoni";
 
 import AuthProvider from "./providers/AuthProvider";
 import LoginAdmin from "./pages/LoginAdmin";
@@ -40,6 +41,7 @@ function App() {
           <Routes>
               <Route path="/" element={<Homepage/>} />
               <Route path="/jasa" element={<Jasa/>} />
+              <Route path="/testimonial" element={<Testimoni/>} />
               <Route path="/jasadetail/:id" element={<Jasadetail/>} />
               <Route path="/proses-transaksi" element={<UserTransaksi/>} />
               <Route path="/profile" element={<Profile/>} />
