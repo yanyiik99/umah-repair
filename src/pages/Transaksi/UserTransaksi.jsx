@@ -18,6 +18,8 @@ import Logo from '../../assets/logo.png';
 import LogoBlack from '../../assets/logo-bl.png';
 import './index.css';
 import { AuthContextMember } from "../../providers/MemberProvider";
+import Header from "../../Layout/Header";
+import Footer from "../../Layout/Footer";
 
 const steps = [
     {
@@ -152,32 +154,8 @@ const UserTransaksi = () => {
         }, 0);
       };
     
-    
     return <div>
-        <div id="background" className="absolute w-full h-[450px] top-0 -z-10 bg-[#9FDDFF]"></div>
-        <nav className="relative flex items-center justify-between w-full max-w-[1280px] mx-auto px-10 mt-10">
-            <a href="/">
-            <Image src={LogoBlack} className="!w-40" preview={false} />
-            </a>
-            <ul className="flex items-center gap-8 justify-end">
-                <li>
-                    <a href="#" className="leading-19 tracking-03 text-black">Layanan</a>
-                </li>
-                <li>
-                    <a href="#" className="leading-19 tracking-03 text-black">Tentang Kami</a>
-                </li>
-                <li>
-                    <a href="#" className="leading-19 tracking-03 text-black">Testimonial</a>
-                </li>
-                <li>
-                    <a href="#" className="leading-19 tracking-03 text-black">Kontak Kami</a>
-                </li>
-                <li>
-                    <a href="#" className="leading-19 tracking-0.5 text-white font-semibold rounded-[22px] py-2 px-6 bg-[#606DE5]">Login</a>
-                </li>
-            </ul>
-        </nav>   
-
+        <Header />  
         <section id="features" className="relative w-full max-w-[1280px] h-[280px] mx-auto px-10 mt-32">
           <div className="flex items-center justify-center w-full gap-16 bg-white rounded-2xl p-5">         
                 <Steps 
@@ -516,64 +494,8 @@ const UserTransaksi = () => {
             </div>
         )}
 
-      <footer className="flex flex-col w-full max-w-[1312px] mx-auto rounded-[32px] bg-black p-[120px] mt-[120px] mb-16">
-        <div className="flex justify-between">
-            <div className="flex flex-col gap-6 max-w-[306px] text-start">
-                <Image src={Logo} className="!w-40" preview={false} />
-                <p className="tracking-03 text-white">Nikmati kenyamanan layanan fleksibel dan hemat waktu, tanpa harus meninggalkan rumah</p>
-            </div>
-
-            <nav className="flex gap-16 justify-end text-white">
-                <ul className="flex flex-col gap-4">
-                    <p className="font-semibold tracking-03 text-facility">Ketahui Lebih Banyak</p>
-                    <li>
-                        <a href="#" className="tracking-03">Tentang Kami</a>
-                    </li>
-                    <li>
-                        <a href="#" className="tracking-03">Layanan</a>
-                    </li>
-                    <li>
-                        <a href="#" className="tracking-03">Testimonial</a>
-                    </li>
-                    <li>
-                        <a href="#" className="tracking-03">Kontak Kami</a>
-                    </li>
-                </ul>
-
-                <ul className="flex flex-col gap-4">
-                    <p className="font-semibold tracking-03 text-facility">Kontak Kami</p>
-                    <li>
-                        <a href="#" className="tracking-03">021 543 545 676</a>
-                    </li>
-                    <li>
-                        <a href="#" className="tracking-03">@umah.repair</a>
-                    </li>
-                    <li>
-                        <a href="#" className="tracking-03">admin@umahrepair.com</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-
-        <hr className="border-white/50 mt-16"/>
-        <div className="flex items-center justify-between mt-[30px]">
-            <p className="font-semibold tracking-03 text-white text-facility">© 2024 umahrepairproductions</p>
-            <ul className="flex items-center justify-end gap-6 text-white">
-                <li>
-                    <a href="#" className="tracking-03">Syarat dan Ketentuan</a>
-                </li>
-                <li>
-                    <a href="#" className="tracking-03">Kebijakan Privasi</a>
-                </li>
-                <li>
-                    <a href="#" className="tracking-03">Cookies</a>
-                </li>
-                <li>
-                    <a href="#" className="tracking-03">Legal</a>
-                </li>
-            </ul>
-        </div>
-      </footer>
+      
+      <Footer />
 
     </div>
 }

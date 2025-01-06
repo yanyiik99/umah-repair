@@ -15,6 +15,9 @@ import LoginUser from "./pages/LoginUser";
 import RegisterUser from "./pages/RegisterUser";
 import Dashboard from "./admin/Dashboard";
 import MasterMember from "./admin/Member";
+import MasterStaff from "./admin/Staff";
+import MasterLayanan from "./admin/Layanan";
+import MasterTransaksi from "./admin/Transaksi";
 import PrivateRoute from "./Layout/PrivateRoute";
 import Jasa from "./pages/Jasa";
 
@@ -35,7 +38,7 @@ function App() {
       <div>
         <ScrollTop>
           <AuthProvider>
-            <>
+            <MemberProvider>
               <Routes>
                   <Route path="/" element={<Homepage/>} />
                   <Route path="/jasa" element={<Jasa/>} />
@@ -56,8 +59,20 @@ function App() {
                     exact
                     path="/ternaklele/admin/member" 
                     element={<PrivateRoute reqiredRole={"admin"} component={<MasterMember/>} />} />
+                  <Route 
+                    exact
+                    path="/ternaklele/admin/staff" 
+                    element={<PrivateRoute reqiredRole={"admin"} component={<MasterStaff/>} />} />
+                  <Route 
+                    exact
+                    path="/ternaklele/admin/layanan" 
+                    element={<PrivateRoute reqiredRole={"admin"} component={<MasterLayanan/>} />} />
+                  <Route 
+                    exact
+                    path="/ternaklele/admin/transaksi" 
+                    element={<PrivateRoute reqiredRole={"admin"} component={<MasterTransaksi/>} />} />
               </Routes>
-            </>
+            </MemberProvider>
           </AuthProvider>
         </ScrollTop>
       </div>

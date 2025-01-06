@@ -1,4 +1,4 @@
-import { AppstoreOutlined, FileOutlined, UserOutlined } from '@ant-design/icons'
+import { AppstoreOutlined, FileOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons'
 import { Menu, theme, Layout, Button } from 'antd'
 import { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
@@ -26,44 +26,51 @@ function Sidebar (props) {
             key: '1',
             icon: <AppstoreOutlined />,
             label: ( <NavLink to="/ternaklele/admin/dashboard">
-                <span className="label">Dashboard</span>
+                <span className="label font-[Inter]">Dashboard</span>
             </NavLink>),
         },
         {
             key: '2',
             icon: <UserOutlined />,
             label: ( <NavLink to="/ternaklele/admin/member">
-                <span className="label">Setup Member</span>
+                <span className="label font-[Inter]">Member</span>
             </NavLink>),
         },
         {
             key: '3',
             icon: <FiSmile  />,
-            label: ( <NavLink to="#">
-                <span className="label">Setup Staff</span>
+            label: ( <NavLink to="/ternaklele/admin/staff">
+                <span className="label font-[Inter]">Staff</span>
             </NavLink>),
         },
         {
             key: '4',
             icon: <FiLayers  />,
-            label: ( <NavLink to="#">
-                <span className="label">Setup Layanan</span>
+            label: ( <NavLink to="/ternaklele/admin/layanan">
+                <span className="label font-[Inter]">Layanan</span>
             </NavLink>),
         },
         {
             key: '5',
             icon: <FiList   />,
-            label: ( <NavLink to="#">
-                <span className="label">Transaksi</span>
+            label: ( <NavLink to="/ternaklele/admin/transaksi">
+                <span className="label font-[Inter]">Transaksi</span>
+            </NavLink>),
+        },
+        {
+            key: '6',
+            icon: <FiLogOut   />,
+            label: ( <NavLink to="">
+                <span className="label font-[Inter]">Logout</span>
             </NavLink>),
         }
     ]
 
     return (
         <>
-            <Sider trigger={null} collapsible  collapsed={props.collapse} style={{height: '100vh'}}>
+            <Sider trigger={null} collapsible  collapsed={props.collapse} style={{height: '100vh', padding:'15px', position: 'fixed'}}>
                 <div className="demo-logo-vertical" />
-                <img className='img-fluid p-4' src={Logo} />
+                <img className='img-fluid p-4 mb-5' src={Logo} />
                 <Menu
                 theme="dark"
                 mode="inline"

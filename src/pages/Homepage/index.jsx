@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Image, List } from 'antd';
 import { FormatPainterFilled } from '@ant-design/icons'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Logo from '../../assets/logo.png';
 import TriplePhoto from './img/triple-photo.png';
 import Banner from './img/banner.jpg';
+import Footer from "../../Layout/Footer.jsx";
 import './index.css';
 import { getData, loadImage } from "../../utils/api";
 import { useNotification } from '../../components/NotificationContext/index.jsx';
@@ -53,18 +54,18 @@ const Homepage = () => {
         <header className="relative flex flex-col w-full h-[1044px] overflow-hidden -mb-[140px]">   
             <Image src={Banner} preview={false} className="absolute w-full h-full object-cover" />         
             <nav className="relative flex items-center justify-between w-full max-w-[1280px] mx-auto px-10 mt-10">
-                <a href="index.html">
+                <a href="/">
                     <Image src={Logo} className="!w-40" preview={false} />
                 </a>
-                <ul className="flex items-center gap-6 justify-end">
+                <ul className="flex items-center gap-8 justify-end">
                     <li>
-                        <a href="#" className="leading-19 tracking-03 text-white">Layanan</a>
+                        <Link to="/jasa" className="leading-19 tracking-03 text-white">Layanan</Link>
                     </li>
                     <li>
-                        <a href="#" className="leading-19 tracking-03 text-white">Tentang Kami</a>
+                        <Link to="/testimonial" className="leading-19 tracking-03 text-white">Testimonial</Link>
                     </li>
                     <li>
-                        <a href="#" className="leading-19 tracking-03 text-white">Testimonial</a>
+                        <Link to="/kontak-kami" className="leading-19 tracking-03 text-white">Kontak Kami</Link>
                     </li>
                     <li>
                         <a href="#" className="leading-19 tracking-03 text-white">Kontak Kami</a>
@@ -73,7 +74,7 @@ const Homepage = () => {
                         <a href="/auth/login" className="leading-19 tracking-0.5 text-white font-semibold rounded-[22px] py-3 px-6 bg-[#606DE5]">Login</a>
                     </li>
                 </ul>
-            </nav>
+            </nav> 
             <div id="hero-text" className="relative flex flex-col items-center mx-auto mt-32">
                 <div className="flex items-center w-fit rounded-full p-2 pl-4 pr-6 gap-3 bg-black">
                     <Image src={TriplePhoto} width={80} preview={false}/>
@@ -122,50 +123,32 @@ const Homepage = () => {
           </div>
             <div className="flex items-center gap-4 flex-wrap">
               <a href="location-result.html">
-                  <div className="flex items-center rounded-full p-3 pr-6 gap-3 bg-white">
-                      <div className="w-10 h-10 flex shrink-0 rounded-full overflow-hidden">
-                          
-                      </div>
+                  <div className="flex items-center rounded-full p-3 px-6 gap-3 bg-white hover:bg-[#606DE5] hover:text-white duration-300">
                       <span className="leading-19 tracking-03">Elektronik</span>
                   </div>
               </a>
               <a href="location-result.html">
-                  <div className="flex items-center rounded-full p-3 pr-6 gap-3 bg-white">
-                      <div className="w-10 h-10 flex shrink-0 rounded-full overflow-hidden">
-                          
-                      </div>
+                  <div className="flex items-center rounded-full p-3 px-6 gap-3 bg-white hover:bg-[#606DE5] hover:text-white duration-300">
                       <span className="leading-19 tracking-03">Renovasi</span>
                   </div>
               </a>
               <a href="location-result.html">
-                  <div className="flex items-center rounded-full p-3 pr-6 gap-3 bg-white">
-                      <div className="w-10 h-10 flex shrink-0 rounded-full overflow-hidden">
-                          
-                      </div>
+                  <div className="flex items-center rounded-full p-3 px-6 gap-3 bg-white hover:bg-[#606DE5] hover:text-white duration-300">
                       <span className="leading-19 tracking-03">Kebersihan</span>
                   </div>
               </a>              
               <a href="location-result.html">
-                  <div className="flex items-center rounded-full p-3 pr-6 gap-3 bg-white">
-                      <div className="w-10 h-10 flex shrink-0 rounded-full overflow-hidden">
-                          
-                      </div>
+                  <div className="flex items-center rounded-full p-3 px-6 gap-3 bg-white hover:bg-[#606DE5] hover:text-white duration-300">
                       <span className="leading-19 tracking-03">Instalasi</span>
                   </div>
               </a>              
               <a href="location-result.html">
-                  <div className="flex items-center rounded-full p-3 pr-6 gap-3 bg-white">
-                      <div className="w-10 h-10 flex shrink-0 rounded-full overflow-hidden">
-                          
-                      </div>
+                  <div className="flex items-center rounded-full p-3 px-6 gap-3 bg-white hover:bg-[#606DE5] hover:text-white duration-300">
                       <span className="leading-19 tracking-03">Dekorasi</span>
                   </div>
               </a>              
               <a href="location-result.html">
-                  <div className="flex items-center rounded-full p-3 pr-6 gap-3 bg-white">
-                      <div className="w-10 h-10 flex shrink-0 rounded-full overflow-hidden">
-                          
-                      </div>
+                  <div className="flex items-center rounded-full p-3 px-6 gap-3 bg-white hover:bg-[#606DE5] hover:text-white duration-300">
                       <span className="leading-19 tracking-03">Plumbing dan Air</span>
                   </div>
               </a>              
@@ -300,64 +283,7 @@ const Homepage = () => {
             </div>
         </section>
 
-        <footer className="flex flex-col w-full max-w-[1312px] mx-auto rounded-[32px] bg-black p-[120px] mt-[120px] mb-16">
-          <div className="flex justify-between">
-              <div className="flex flex-col gap-6 max-w-[306px] text-start">
-                  <Image src={Logo} className="!w-40" preview={false} />
-                  <p className="tracking-03 text-white">Nikmati kenyamanan layanan fleksibel dan hemat waktu, tanpa harus meninggalkan rumah</p>
-              </div>
-
-              <nav className="flex gap-16 justify-end text-white">
-                  <ul className="flex flex-col gap-4">
-                      <p className="font-semibold tracking-03 text-facility">Ketahui Lebih Banyak</p>
-                      <li>
-                          <a href="#" className="tracking-03">Tentang Kami</a>
-                      </li>
-                      <li>
-                          <a href="#" className="tracking-03">Layanan</a>
-                      </li>
-                      <li>
-                          <a href="#" className="tracking-03">Testimonial</a>
-                      </li>
-                      <li>
-                          <a href="#" className="tracking-03">Kontak Kami</a>
-                      </li>
-                  </ul>
-
-                  <ul className="flex flex-col gap-4">
-                      <p className="font-semibold tracking-03 text-facility">Kontak Kami</p>
-                      <li>
-                          <a href="#" className="tracking-03">021 543 545 676</a>
-                      </li>
-                      <li>
-                          <a href="#" className="tracking-03">@umah.repair</a>
-                      </li>
-                      <li>
-                          <a href="#" className="tracking-03">admin@umahrepair.com</a>
-                      </li>
-                  </ul>
-              </nav>
-          </div>
-
-          <hr className="border-white/50 mt-16"/>
-          <div className="flex items-center justify-between mt-[30px]">
-              <p className="font-semibold tracking-03 text-white text-facility">© 2024 umahrepairproductions</p>
-              <ul className="flex items-center justify-end gap-6 text-white">
-                  <li>
-                      <a href="#" className="tracking-03">Syarat dan Ketentuan</a>
-                  </li>
-                  <li>
-                      <a href="#" className="tracking-03">Kebijakan Privasi</a>
-                  </li>
-                  <li>
-                      <a href="#" className="tracking-03">Cookies</a>
-                  </li>
-                  <li>
-                      <a href="#" className="tracking-03">Legal</a>
-                  </li>
-              </ul>
-          </div>
-        </footer>
+        <Footer/>
 
     </div>
   )

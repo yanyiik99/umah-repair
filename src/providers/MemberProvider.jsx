@@ -56,7 +56,7 @@ const MemberProvider = ({ children }) => {
   };
 
   return (
-    <AuthContextMember.Provider value={{ isLoggedInMember, loginMember, logoutMember, userProfile, setRoleMember, role}}>
+    <AuthContextMember.Provider value={{ isLoggedInMember, loginMember, logoutMember, userProfile, setRoleMember}}>
       {children}
     </AuthContextMember.Provider>
   );
