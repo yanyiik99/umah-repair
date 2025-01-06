@@ -20,6 +20,8 @@ import MasterLayanan from "./admin/Layanan";
 import MasterTransaksi from "./admin/Transaksi";
 import PrivateRoute from "./Layout/PrivateRoute";
 import Jasa from "./pages/Jasa";
+import Testimoni from "./pages/Testimoni";
+import Kontak from "./pages/Kontak";
 
 import AuthProvider from "./providers/AuthProvider";
 import LoginAdmin from "./pages/LoginAdmin";
@@ -38,7 +40,6 @@ function App() {
       <div>
         <ScrollTop>
           <AuthProvider>
-            <MemberProvider>
               <Routes>
                   <Route path="/" element={<Homepage/>} />
                   <Route path="/jasa" element={<Jasa/>} />
@@ -72,7 +73,6 @@ function App() {
                     path="/ternaklele/admin/transaksi" 
                     element={<PrivateRoute reqiredRole={"admin"} component={<MasterTransaksi/>} />} />
               </Routes>
-            </MemberProvider>
           </AuthProvider>
         </ScrollTop>
       </div>
