@@ -1,8 +1,8 @@
 import { BankFilled, CreditCardOutlined, HomeOutlined, UserAddOutlined, InboxOutlined, PlusOutlined, UserOutlined, ArrowRightOutlined, InfoCircleFilled, InfoCircleOutlined } from "@ant-design/icons";
 import { Breadcrumb, Card, Col, Flex, Row, Steps, Button, message,  Select, Image,Typography, Collapse, Form, Input, DatePicker, Upload, Result, Divider, Space, Modal, Tooltip  } from "antd";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { formatCurrency, showReadmore } from "../../utils/ui";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 const { Title, Paragraph} = Typography;
 const { Dragger } = Upload;
 // import Img from '../../assets/clean-service.jpg';
@@ -17,6 +17,7 @@ import Link from "antd/es/typography/Link";
 import Logo from '../../assets/logo.png';
 import LogoBlack from '../../assets/logo-bl.png';
 import './index.css';
+import { AuthContextMember } from "../../providers/MemberProvider";
 
 const steps = [
     {
@@ -55,10 +56,17 @@ const props = {
 
 
 const UserTransaksi = () => {
+    const navigate = useNavigate();
+    
+    const { isLoggedInMember } = useContext(AuthContextMember);
+    if(!isLoggedInMember){
+        return <Navigate to="/auth/login" replace />
+    }
+    console.log("MemberProvider -> isLoggedInMember", isLoggedInMember);
+    
     const [current, setCurrent] = useState(0);
     const [expanded, setExpanded] = useState(false);
     const [form] = Form.useForm();
-    const navigate = useNavigate();
     const location = useLocation();
     const [alamat, setAlamat] = useState(['Taman Wira Sambangan Blok Cempaka I No. 4']);
     const [selectedAlamat, setSelectedAlamat] = useState(null);
@@ -144,33 +152,33 @@ const UserTransaksi = () => {
         }, 0);
       };
     
-
+    
     return <div>
-        <div id="background" class="absolute w-full h-[450px] top-0 -z-10 bg-[#9FDDFF]"></div>
-        <nav class="relative flex items-center justify-between w-full max-w-[1280px] mx-auto px-10 mt-10">
+        <div id="background" className="absolute w-full h-[450px] top-0 -z-10 bg-[#9FDDFF]"></div>
+        <nav className="relative flex items-center justify-between w-full max-w-[1280px] mx-auto px-10 mt-10">
             <a href="/">
             <Image src={LogoBlack} className="!w-40" preview={false} />
             </a>
-            <ul class="flex items-center gap-8 justify-end">
+            <ul className="flex items-center gap-8 justify-end">
                 <li>
-                    <a href="#" class="leading-19 tracking-03 text-black">Layanan</a>
+                    <a href="#" className="leading-19 tracking-03 text-black">Layanan</a>
                 </li>
                 <li>
-                    <a href="#" class="leading-19 tracking-03 text-black">Tentang Kami</a>
+                    <a href="#" className="leading-19 tracking-03 text-black">Tentang Kami</a>
                 </li>
                 <li>
-                    <a href="#" class="leading-19 tracking-03 text-black">Testimonial</a>
+                    <a href="#" className="leading-19 tracking-03 text-black">Testimonial</a>
                 </li>
                 <li>
-                    <a href="#" class="leading-19 tracking-03 text-black">Kontak Kami</a>
+                    <a href="#" className="leading-19 tracking-03 text-black">Kontak Kami</a>
                 </li>
                 <li>
-                    <a href="#" class="leading-19 tracking-0.5 text-white font-semibold rounded-[22px] py-2 px-6 bg-[#606DE5]">Login</a>
+                    <a href="#" className="leading-19 tracking-0.5 text-white font-semibold rounded-[22px] py-2 px-6 bg-[#606DE5]">Login</a>
                 </li>
             </ul>
         </nav>   
 
-        <section id="features" class="relative w-full max-w-[1280px] h-[280px] mx-auto px-10 mt-32">
+        <section id="features" className="relative w-full max-w-[1280px] h-[280px] mx-auto px-10 mt-32">
           <div className="flex items-center justify-center w-full gap-16 bg-white rounded-2xl p-5">         
                 <Steps 
                     current={current} 
@@ -182,14 +190,14 @@ const UserTransaksi = () => {
         </section>
 
         { (current == 0) && (
-            <div id="pesanan" class="relative flex w-full max-w-[1280px] gap-6 mx-auto px-10 -mt-40">
-                <div class="flex flex-col gap-6 w-full max-w-[820px] shrink-0">
-                    <div id="account" class="flex flex-col w-full rounded-3xl p-8 gap-6 bg-white">
-                        <div class="flex flex-col gap-2">
-                            <h2 class="text-xl leading-6 tracking-05">Detail Penerima Layanan</h2>
-                            <p class="text-sm leading-16 tracking-03 opacity-60">Isi data dan pastikan data sudah benar sebelum melanjutkan pembayaran</p>
+            <div id="pesanan" className="relative flex w-full max-w-[1280px] gap-6 mx-auto px-10 -mt-40">
+                <div className="flex flex-col gap-6 w-full max-w-[820px] shrink-0">
+                    <div id="account" className="flex flex-col w-full rounded-3xl p-8 gap-6 bg-white">
+                        <div className="flex flex-col gap-2">
+                            <h2 className="text-xl leading-6 tracking-05">Detail Penerima Layanan</h2>
+                            <p className="text-sm leading-16 tracking-03 opacity-60">Isi data dan pastikan data sudah benar sebelum melanjutkan pembayaran</p>
                         </div>
-                        <hr class="border-black opacity-10"/>
+                        <hr className="border-black opacity-10"/>
 
                         <Form layout="vertical" requiredMark={true} form={form}>
                             <Form.Item
@@ -198,9 +206,9 @@ const UserTransaksi = () => {
                                     {required: true, message: "Nama Penerima Wajib Diisi"}
                                 ]}
                             >
-                                <label class="group flex items-center font-[Inter]">
-                                    <h2 class="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
-                                        <span class="text-red-500 mr-1">*</span> Nama Lengkap
+                                <label className="group flex items-center font-[Inter]">
+                                    <h2 className="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
+                                        <span className="text-red-500 mr-1">*</span> Nama Lengkap
                                     </h2>
                                     <Input placeholder="Masukkan nama penerima layanan" className="font-[Inter] focus:border-none focus:outline-none outline-none flex w-full rounded-xl px-3 py-4 border border-[#BFBFBF] bg-white text-sm leading-[22px] tracking-03 placeholder:text-[#BFBFBF] transition-all duration-300 group-focus-within:border-black"/>
                                 </label>
@@ -212,9 +220,9 @@ const UserTransaksi = () => {
                                     {required: true, message: "Nomor Telepon Wajib Diisi"}
                                 ]}
                             >
-                                <label class="group flex items-center font-[Inter]">
-                                    <h2 class="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
-                                        <span class="text-red-500 mr-1">*</span> No Telepon
+                                <label className="group flex items-center font-[Inter]">
+                                    <h2 className="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
+                                        <span className="text-red-500 mr-1">*</span> No Telepon
                                     </h2>
                                     <Input placeholder="Masukkan nomor penerima layanan" className="font-[Inter] focus:border-none focus:outline-none outline-none flex w-full rounded-xl px-3 py-4 border border-[#BFBFBF] bg-white text-sm leading-[22px] tracking-03 placeholder:text-[#BFBFBF] transition-all duration-300 group-focus-within:border-black"/>
                                 </label>
@@ -226,9 +234,9 @@ const UserTransaksi = () => {
                                     {required: false, message: "Alamat/Lokasi Wajib Diisi"}
                                 ]}
                             >
-                                <label class="group flex items-center font-[Inter]">
-                                    <h2 class="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
-                                        <span class="text-red-500 mr-1">*</span> Alamat
+                                <label className="group flex items-center font-[Inter]">
+                                    <h2 className="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
+                                        <span className="text-red-500 mr-1">*</span> Alamat
                                     </h2>
                                     <Select 
                                         className="font-[Inter] focus:border-none focus:outline-none outline-none flex w-full rounded-xl border-[#BFBFBF] bg-white text-sm leading-[22px] tracking-03 placeholder:text-[#BFBFBF] transition-all duration-300 group-focus-within:border-black"
@@ -279,9 +287,9 @@ const UserTransaksi = () => {
                                     {required: false, message: "Jadwal Wajib Diisi"}
                                 ]}
                             >
-                                <label class="group flex items-center font-[Inter]">
-                                    <h2 class="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
-                                        <span class="text-red-500 mr-1">*</span> Jadwal Layanan
+                                <label className="group flex items-center font-[Inter]">
+                                    <h2 className="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
+                                        <span className="text-red-500 mr-1">*</span> Jadwal Layanan
                                     </h2>
                                     <DatePicker 
                                         showTime 
@@ -294,8 +302,8 @@ const UserTransaksi = () => {
                             <Form.Item
                                 name="catatan"
                             >
-                                <label class="group flex items-center font-[Inter]">
-                                    <h2 class="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
+                                <label className="group flex items-center font-[Inter]">
+                                    <h2 className="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
                                         Catatan
                                     </h2>
                                     <Input.TextArea rows={4} className="font-[Inter] focus:border-none focus:outline-none outline-none flex w-full rounded-xl px-3 py-4 border border-[#BFBFBF] bg-white text-sm leading-[22px] tracking-03 placeholder:text-[#BFBFBF] transition-all duration-300 group-focus-within:border-black" placeholder="Beri catatan untuk mitra kami"/>
@@ -305,34 +313,34 @@ const UserTransaksi = () => {
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-6 w-full">
-                    <div class="flex flex-col w-full rounded-3xl p-8 gap-6 bg-white">
-                        <div class="flex flex-col gap-2">
-                            <h2 class="text-xl leading-6 tracking-05">Detail Transaksi</h2>
-                            <p class="text-sm leading-16 tracking-03 opacity-60">Cek kembali tagihan layanan anda</p>
+                <div className="flex flex-col gap-6 w-full">
+                    <div className="flex flex-col w-full rounded-3xl p-8 gap-6 bg-white">
+                        <div className="flex flex-col gap-2">
+                            <h2 className="text-xl leading-6 tracking-05">Detail Transaksi</h2>
+                            <p className="text-sm leading-16 tracking-03 opacity-60">Cek kembali tagihan layanan anda</p>
                         </div>
-                        <hr class="border-black opacity-10"/>
-                        <div class="flex items-center justify-between">
-                            <h2 class="leading-19 tracking-05">Subtotal</h2>
-                            <p class="leading-19">Rp {formatCurrency(dataJasa?.harga)}</p>
+                        <hr className="border-black opacity-10"/>
+                        <div className="flex items-center justify-between">
+                            <h2 className="leading-19 tracking-05">Subtotal</h2>
+                            <p className="leading-19">Rp {formatCurrency(dataJasa?.harga)}</p>
                         </div>
-                        <div class="flex items-center justify-between">
-                            <h2 class="leading-19 tracking-05">Promo</h2>
-                            <p class="leading-19 tracking-05 text-[#EC0307]">-Rp {formatCurrency((Number(dataJasa?.harga) - Number(dataJasa?.hargaPromo)).toString())}</p>
+                        <div className="flex items-center justify-between">
+                            <h2 className="leading-19 tracking-05">Promo</h2>
+                            <p className="leading-19 tracking-05 text-[#EC0307]">-Rp {formatCurrency((Number(dataJasa?.harga) - Number(dataJasa?.hargaPromo)).toString())}</p>
                         </div>
-                        <div class="flex items-center justify-between">
-                            <h2 class="leading-19 tracking-05 flex">
+                        <div className="flex items-center justify-between">
+                            <h2 className="leading-19 tracking-05 flex">
                                 Tax 12%
                                 <Tooltip className="ms-2" placement="top" title="Berdasarkan Regulasi Pemerintah UU 12 No.12 Tahun 2024" arrow={mergedArrow}>
                                     <InfoCircleOutlined/>
                                 </Tooltip>
                             </h2>
-                            <p class="leading-19">Rp {formatCurrency(tax.toString())}</p>
+                            <p className="leading-19">Rp {formatCurrency(tax.toString())}</p>
                         </div>
-                        <hr class="border-black border-dashed"/>
-                        <div class="flex items-center justify-between">
-                            <h2 class="text-xl leading-6 tracking-05">Total</h2>
-                            <h2 class="text-xl leading-6 tracking-05">
+                        <hr className="border-black border-dashed"/>
+                        <div className="flex items-center justify-between">
+                            <h2 className="text-xl leading-6 tracking-05">Total</h2>
+                            <h2 className="text-xl leading-6 tracking-05">
                                 Rp  {   
                                         (dataJasa?.hargaPromo != null && dataJasa?.hargaPromo != undefined) ?
                                             formatCurrency((Number(dataJasa?.hargaPromo) + tax).toString()) : 
@@ -348,7 +356,7 @@ const UserTransaksi = () => {
                             .catch((err) => {
                                 console.log(err);
                             })
-                        }} type="submit" class="rounded-full py-3 px-6 bg-[#606DE5] font-semibold leading-19 tracking-05 text-white text-center">Bayar</button>
+                        }} type="submit" className="rounded-full py-3 px-6 bg-[#606DE5] font-semibold leading-19 tracking-05 text-white text-center">Bayar</button>
 
                     </div>
                 </div>
@@ -356,71 +364,71 @@ const UserTransaksi = () => {
         )}
         
         {(current == 1) && (
-            <div id="pembayaran" class="relative flex w-full max-w-[1280px] gap-6 mx-auto px-10 -mt-40">
-                <div class="flex flex-col gap-6 w-full max-w-[820px] shrink-0">
-                    <div id="account" class="flex flex-col w-full rounded-3xl p-8 gap-6 bg-white">
-                        <div class="flex flex-col gap-2">
-                            <h2 class="text-xl leading-6 tracking-05">Detail Penerima Layanan</h2>
-                            <p class="text-sm leading-16 tracking-03 opacity-60">Pastikan data sudah benar sebelum melakukan pembayaran</p>
+            <div id="pembayaran" className="relative flex w-full max-w-[1280px] gap-6 mx-auto px-10 -mt-40">
+                <div className="flex flex-col gap-6 w-full max-w-[820px] shrink-0">
+                    <div id="account" className="flex flex-col w-full rounded-3xl p-8 gap-6 bg-white">
+                        <div className="flex flex-col gap-2">
+                            <h2 className="text-xl leading-6 tracking-05">Detail Penerima Layanan</h2>
+                            <p className="text-sm leading-16 tracking-03 opacity-60">Pastikan data sudah benar sebelum melakukan pembayaran</p>
                         </div>
-                        <hr class="border-black opacity-10"/>
-                        <div class="group flex items-center justify-between">
-                            <h2 class="flex w-[162px] shrink-0 leading-19 tracking-05">Nama Lengkap</h2>
-                            <p class="leading-19 tracking-05">{dataCustomer.namapenerima}</p>
+                        <hr className="border-black opacity-10"/>
+                        <div className="group flex items-center justify-between">
+                            <h2 className="flex w-[162px] shrink-0 leading-19 tracking-05">Nama Lengkap</h2>
+                            <p className="leading-19 tracking-05">{dataCustomer.namapenerima}</p>
                         </div>
-                        <div class="group flex items-center justify-between">
-                            <h2 class="flex w-[162px] shrink-0 leading-19 tracking-05">Nomor Telepon</h2>
-                            <p class="leading-19 tracking-05">{dataCustomer.notlpn}</p>
+                        <div className="group flex items-center justify-between">
+                            <h2 className="flex w-[162px] shrink-0 leading-19 tracking-05">Nomor Telepon</h2>
+                            <p className="leading-19 tracking-05">{dataCustomer.notlpn}</p>
                         </div>
-                        <div class="group flex items-center justify-between">
-                            <h2 class="flex w-[162px] shrink-0 leading-19 tracking-05">Alamat</h2>
-                            <p class="leading-19 tracking-05">{dataCustomer.alamat}</p>
+                        <div className="group flex items-center justify-between">
+                            <h2 className="flex w-[162px] shrink-0 leading-19 tracking-05">Alamat</h2>
+                            <p className="leading-19 tracking-05">{dataCustomer.alamat}</p>
                         </div>
-                        <div class="group flex items-center justify-between">
-                            <h2 class="flex w-[162px] shrink-0 leading-19 tracking-05">Jadwal</h2>
-                            <p class="leading-19 tracking-05">{dataCustomer.jadwal}</p>
+                        <div className="group flex items-center justify-between">
+                            <h2 className="flex w-[162px] shrink-0 leading-19 tracking-05">Jadwal</h2>
+                            <p className="leading-19 tracking-05">{dataCustomer.jadwal}</p>
                         </div>
-                        <div class="group flex items-center justify-between">
-                            <h2 class="flex w-[162px] shrink-0 leading-19 tracking-05">Catatan</h2>
-                            <p class="leading-19 tracking-05">{dataCustomer.catatan}</p>
+                        <div className="group flex items-center justify-between">
+                            <h2 className="flex w-[162px] shrink-0 leading-19 tracking-05">Catatan</h2>
+                            <p className="leading-19 tracking-05">{dataCustomer.catatan}</p>
                         </div>
                     </div>
 
-                    <div id="booking-items" class="flex flex-col w-full rounded-3xl p-8 gap-6 bg-white">
-                        {/* <div class="flex flex-col gap-2">
-                            <h2 class="text-xl leading-6 tracking-05">
-                                No Pesanan : <span class="text-[#606DE5]">10294</span>
+                    <div id="booking-items" className="flex flex-col w-full rounded-3xl p-8 gap-6 bg-white">
+                        {/* <div className="flex flex-col gap-2">
+                            <h2 className="text-xl leading-6 tracking-05">
+                                No Pesanan : <span className="text-[#606DE5]">10294</span>
                             </h2>
                         </div> */}
-                        <div class="items flex flex-nowrap gap-4 w-full">
-                            <div class="flex flex-col gap-2 w-full">
-                                <div class="flex justify-between">
-                                    <h2 class="leading-19 tracking-05">{dataJasa.nama}</h2>
+                        <div className="items flex flex-nowrap gap-4 w-full">
+                            <div className="flex flex-col gap-2 w-full">
+                                <div className="flex justify-between">
+                                    <h2 className="leading-19 tracking-05">{dataJasa.nama}</h2>
                                 </div>
-                                <p class="text-sm leading-16 tracking-03 opacity-60">{dataJasa.kategori} - All Benefits Included</p>
+                                <p className="text-sm leading-16 tracking-03 opacity-60">{dataJasa.kategori} - All Benefits Included</p>
                             </div>
                         </div>
-                        <div class="group flex items-center justify-between">
-                            <h2 class="flex w-[162px] shrink-0 leading-19 tracking-05">Subtotal</h2>
-                            <p class="leading-19 tracking-05">Rp {formatCurrency((Number(dataJasa?.harga) + tax).toString())}</p>
+                        <div className="group flex items-center justify-between">
+                            <h2 className="flex w-[162px] shrink-0 leading-19 tracking-05">Subtotal</h2>
+                            <p className="leading-19 tracking-05">Rp {formatCurrency((Number(dataJasa?.harga) + tax).toString())}</p>
                         </div>
-                        <div class="group flex items-center justify-between">
-                            <h2 class="flex w-[162px] shrink-0 leading-19 tracking-05">Promo Code</h2>
-                            <p class="leading-19 tracking-05 text-[#EC0307]">-Rp {formatCurrency((Number(dataJasa?.harga) - Number(dataJasa?.hargaPromo)).toString())}</p>
+                        <div className="group flex items-center justify-between">
+                            <h2 className="flex w-[162px] shrink-0 leading-19 tracking-05">Promo Code</h2>
+                            <p className="leading-19 tracking-05 text-[#EC0307]">-Rp {formatCurrency((Number(dataJasa?.harga) - Number(dataJasa?.hargaPromo)).toString())}</p>
                         </div>
-                        <div class="flex items-center justify-between">
-                            <h2 class="leading-19 tracking-05 flex">
+                        <div className="flex items-center justify-between">
+                            <h2 className="leading-19 tracking-05 flex">
                                 Tax 12%
                                 <Tooltip className="ms-2" placement="top" title="Berdasarkan Regulasi Pemerintah UU 12 No.12 Tahun 2024" arrow={mergedArrow}>
                                     <InfoCircleOutlined/>
                                 </Tooltip>
                             </h2>
-                            <p class="leading-19">Rp {formatCurrency(tax.toString())}</p>
+                            <p className="leading-19">Rp {formatCurrency(tax.toString())}</p>
                         </div>
-                        <hr class="border-black border-dashed my-2"/>
-                        <div class=" w-full flex justify-between items-center rounded-2xl py-4 px-8 bg-[#D0EEFF]">
-                            <h2 class="text-xl leading-[43px] tracking-05">Total Payment</h2>
-                            <h2 class="text-xl leading-[43px] tracking-05 text-right">
+                        <hr className="border-black border-dashed my-2"/>
+                        <div className=" w-full flex justify-between items-center rounded-2xl py-4 px-8 bg-[#D0EEFF]">
+                            <h2 className="text-xl leading-[43px] tracking-05">Total Payment</h2>
+                            <h2 className="text-xl leading-[43px] tracking-05 text-right">
                                 Rp {
                                       (dataJasa?.hargaPromo != null && dataJasa?.hargaPromo != undefined) ?
                                       formatCurrency((Number(dataJasa?.hargaPromo) + tax).toString()) : 
@@ -431,47 +439,47 @@ const UserTransaksi = () => {
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-6 w-full">
-                    <div class="flex flex-col w-full rounded-3xl p-8 gap-6 bg-white">
-                        <div class="flex flex-col gap-2">
-                            <h2 class="text-xl leading-6 tracking-05">Transfer ke</h2>
-                            <p class="text-sm leading-16 tracking-03 opacity-60">Pilih metode pembayaran di bawah</p>
+                <div className="flex flex-col gap-6 w-full">
+                    <div className="flex flex-col w-full rounded-3xl p-8 gap-6 bg-white">
+                        <div className="flex flex-col gap-2">
+                            <h2 className="text-xl leading-6 tracking-05">Transfer ke</h2>
+                            <p className="text-sm leading-16 tracking-03 opacity-60">Pilih metode pembayaran di bawah</p>
                         </div>
-                        <hr class="border-black opacity-10"/>
-                        <div class="flex items-center gap-6">
+                        <hr className="border-black opacity-10"/>
+                        <div className="flex items-center gap-6">
                             <Image src={Bca} preview={false} width="80px" className="object-cover flex shrink-0" alt="logo"/>
-                            <div class="flex flex-col gap-1">
-                                <h2 class="leading-19 tracking-05">Umah Repair Corp</h2>
-                                <p class="leading-19">129405960495</p>
+                            <div className="flex flex-col gap-1">
+                                <h2 className="leading-19 tracking-05">Umah Repair Corp</h2>
+                                <p className="leading-19">129405960495</p>
                             </div>
                         </div>
-                        <div class="flex items-center gap-6">
+                        <div className="flex items-center gap-6">
                             <Image src={Bni} preview={false} width="80px" className="object-cover flex shrink-0" alt="logo"/>
-                            <div class="flex flex-col gap-1">
-                                <h2 class="leading-19 tracking-05">Umah Repair Corp</h2>
-                                <p class="leading-19">129405960495</p>
+                            <div className="flex flex-col gap-1">
+                                <h2 className="leading-19 tracking-05">Umah Repair Corp</h2>
+                                <p className="leading-19">129405960495</p>
                             </div>
                         </div>
-                        <div class="flex items-center gap-6">
+                        <div className="flex items-center gap-6">
                             <Image src={Dana} preview={false} width="80px" className="object-cover flex shrink-0" alt="logo"/>
-                            <div class="flex flex-col gap-1">
-                                <h2 class="leading-19 tracking-05">Umah Repair Corp</h2>
-                                <p class="leading-19">129405960495</p>
+                            <div className="flex flex-col gap-1">
+                                <h2 className="leading-19 tracking-05">Umah Repair Corp</h2>
+                                <p className="leading-19">129405960495</p>
                             </div>
                         </div>
-                        <div class="flex items-center gap-6">
+                        <div className="flex items-center gap-6">
                             <Image src={Gopay} preview={false} width="80px" className="object-cover flex shrink-0" alt="logo"/>
-                            <div class="flex flex-col gap-1">
-                                <h2 class="leading-19 tracking-05">Umah Repair Corp</h2>
-                                <p class="leading-19">129405960495</p>
+                            <div className="flex flex-col gap-1">
+                                <h2 className="leading-19 tracking-05">Umah Repair Corp</h2>
+                                <p className="leading-19">129405960495</p>
                             </div>
                         </div>
-                        <hr class="border-black opacity-10"/>
+                        <hr className="border-black opacity-10"/>
 
                         <Form layout="vertical" requiredMark={true} form={form}>
-                            <label id="upload-proof" class="flex flex-col gap-1 font-['Poppins']">
-                                <h2 class="font-semibold text-lg text-black mb-2">Bukti Transfer</h2>
-                                <div class="relative w-full rounded-xl border border-[#BFBFBF] py-4 px-3 bg-white">
+                            <label id="upload-proof" className="flex flex-col gap-1 font-['Poppins']">
+                                <h2 className="font-semibold text-lg text-black mb-2">Bukti Transfer</h2>
+                                <div className="relative w-full rounded-xl border border-[#BFBFBF] py-4 px-3 bg-white">
                                     <Dragger {...props}>
                                         <p className="ant-upload-drag-icon">
                                             <InboxOutlined />
@@ -483,7 +491,7 @@ const UserTransaksi = () => {
                                     </Dragger>
                                 </div>
                             </label>
-                            <button type="submit" onClick={() => next()} class="font-[Inter] w-full mt-7 rounded-full py-3 px-6 bg-[#606DE5] font-semibold leading-19 tracking-05 text-white text-center">Konfirmasi</button>
+                            <button type="submit" onClick={() => next()} className="font-[Inter] w-full mt-7 rounded-full py-3 px-6 bg-[#606DE5] font-semibold leading-19 tracking-05 text-white text-center">Konfirmasi</button>
                         </Form>
                     </div>
                 </div>
@@ -491,77 +499,77 @@ const UserTransaksi = () => {
         )}
 
         {(current == 2) && (
-            <div class="relative flex flex-col items-center w-full max-w-[645px] text-center rounded-3xl p-8 py-[85px] gap-6 bg-white mx-auto -mt-40">
+            <div className="relative flex flex-col items-center w-full max-w-[645px] text-center rounded-3xl p-8 py-[85px] gap-6 bg-white mx-auto -mt-40">
                 
-                <div class="flex flex-col items-center gap-4">
-                    <h1 class="text-[32px] leading-10 tracking-05">Pesanan Berhasil!</h1>
-                    <p class="text-xl leading-8 tracking-[1px] opacity-60">
+                <div className="flex flex-col items-center gap-4">
+                    <h1 className="text-[32px] leading-10 tracking-05">Pesanan Berhasil!</h1>
+                    <p className="text-xl leading-8 tracking-[1px] opacity-60">
                         Kami akan melakukan konfirmasi pembayaran <br/>
                         Mohon tunggu 1-5 menit
                     </p>
                 </div>
-                <div class="w-fit flex items-center rounded-2xl py-4 px-8 gap-4 bg-[#D0EEFF]">
+                <div className="w-fit flex items-center rounded-2xl py-4 px-8 gap-4 bg-[#D0EEFF]">
                     
-                    <h2 class="text-xl leading-[34px] tracking-05">No Pesanan:<span class="ml-2 text-[#835DFE]">TIX721637</span></h2>
+                    <h2 className="text-xl leading-[34px] tracking-05">No Pesanan:<span className="ml-2 text-[#835DFE]">TIX721637</span></h2>
                 </div>
-                <a href="/" class="w-fit rounded-full py-3 px-6 bg-[#606DE5] font-semibold leading-19 tracking-05 text-white text-center">Kembali ke Beranda</a>
+                <a href="/" className="w-fit rounded-full py-3 px-6 bg-[#606DE5] font-semibold leading-19 tracking-05 text-white text-center">Kembali ke Beranda</a>
             </div>
         )}
 
-      <footer class="flex flex-col w-full max-w-[1312px] mx-auto rounded-[32px] bg-black p-[120px] mt-[120px] mb-16">
-        <div class="flex justify-between">
-            <div class="flex flex-col gap-6 max-w-[306px] text-start">
+      <footer className="flex flex-col w-full max-w-[1312px] mx-auto rounded-[32px] bg-black p-[120px] mt-[120px] mb-16">
+        <div className="flex justify-between">
+            <div className="flex flex-col gap-6 max-w-[306px] text-start">
                 <Image src={Logo} className="!w-40" preview={false} />
-                <p class="tracking-03 text-white">Nikmati kenyamanan layanan fleksibel dan hemat waktu, tanpa harus meninggalkan rumah</p>
+                <p className="tracking-03 text-white">Nikmati kenyamanan layanan fleksibel dan hemat waktu, tanpa harus meninggalkan rumah</p>
             </div>
 
-            <nav class="flex gap-16 justify-end text-white">
-                <ul class="flex flex-col gap-4">
-                    <p class="font-semibold tracking-03 text-facility">Ketahui Lebih Banyak</p>
+            <nav className="flex gap-16 justify-end text-white">
+                <ul className="flex flex-col gap-4">
+                    <p className="font-semibold tracking-03 text-facility">Ketahui Lebih Banyak</p>
                     <li>
-                        <a href="#" class="tracking-03">Tentang Kami</a>
+                        <a href="#" className="tracking-03">Tentang Kami</a>
                     </li>
                     <li>
-                        <a href="#" class="tracking-03">Layanan</a>
+                        <a href="#" className="tracking-03">Layanan</a>
                     </li>
                     <li>
-                        <a href="#" class="tracking-03">Testimonial</a>
+                        <a href="#" className="tracking-03">Testimonial</a>
                     </li>
                     <li>
-                        <a href="#" class="tracking-03">Kontak Kami</a>
+                        <a href="#" className="tracking-03">Kontak Kami</a>
                     </li>
                 </ul>
 
-                <ul class="flex flex-col gap-4">
-                    <p class="font-semibold tracking-03 text-facility">Kontak Kami</p>
+                <ul className="flex flex-col gap-4">
+                    <p className="font-semibold tracking-03 text-facility">Kontak Kami</p>
                     <li>
-                        <a href="#" class="tracking-03">021 543 545 676</a>
+                        <a href="#" className="tracking-03">021 543 545 676</a>
                     </li>
                     <li>
-                        <a href="#" class="tracking-03">@umah.repair</a>
+                        <a href="#" className="tracking-03">@umah.repair</a>
                     </li>
                     <li>
-                        <a href="#" class="tracking-03">admin@umahrepair.com</a>
+                        <a href="#" className="tracking-03">admin@umahrepair.com</a>
                     </li>
                 </ul>
             </nav>
         </div>
 
-        <hr class="border-white/50 mt-16"/>
-        <div class="flex items-center justify-between mt-[30px]">
-            <p class="font-semibold tracking-03 text-white text-facility">© 2024 umahrepairproductions</p>
-            <ul class="flex items-center justify-end gap-6 text-white">
+        <hr className="border-white/50 mt-16"/>
+        <div className="flex items-center justify-between mt-[30px]">
+            <p className="font-semibold tracking-03 text-white text-facility">© 2024 umahrepairproductions</p>
+            <ul className="flex items-center justify-end gap-6 text-white">
                 <li>
-                    <a href="#" class="tracking-03">Syarat dan Ketentuan</a>
+                    <a href="#" className="tracking-03">Syarat dan Ketentuan</a>
                 </li>
                 <li>
-                    <a href="#" class="tracking-03">Kebijakan Privasi</a>
+                    <a href="#" className="tracking-03">Kebijakan Privasi</a>
                 </li>
                 <li>
-                    <a href="#" class="tracking-03">Cookies</a>
+                    <a href="#" className="tracking-03">Cookies</a>
                 </li>
                 <li>
-                    <a href="#" class="tracking-03">Legal</a>
+                    <a href="#" className="tracking-03">Legal</a>
                 </li>
             </ul>
         </div>

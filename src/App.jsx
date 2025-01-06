@@ -20,6 +20,7 @@ import Jasa from "./pages/Jasa";
 
 import AuthProvider from "./providers/AuthProvider";
 import LoginAdmin from "./pages/LoginAdmin";
+import MemberProvider from "./providers/MemberProvider";
 
 function App() { 
 
@@ -33,29 +34,31 @@ function App() {
     <>
       <div>
         <ScrollTop>
-        <AuthProvider>
-          <Routes>
-              <Route path="/" element={<Homepage/>} />
-              <Route path="/jasa" element={<Jasa/>} />
-              <Route path="/jasadetail/:id" element={<Jasadetail/>} />
-              <Route path="/proses-transaksi" element={<UserTransaksi/>} />
-              <Route path="/profile" element={<Profile/>} />
-              <Route path="/profile/transaksi" element={<ProfileTransaksi/>} />
-              <Route path="/profile/detail-transaksi" element={<DetailProfileTransaksi/>} />
-              <Route path="/ternaklele/admin/login" element={<LoginAdmin/>} />
-              <Route path="/auth/login" element={<LoginUser/>} />
-              <Route path="/auth/register" element={<RegisterUser/>} />
-              {/* <Route path="/admin/dashboard" element={<Dashboard/>} /> */}
-              <Route 
-                exact
-                path="/ternaklele/admin/dashboard" 
-                element={<PrivateRoute component={<Dashboard/>} />} />
-              <Route 
-                exact
-                path="/ternaklele/admin/member" 
-                element={<PrivateRoute component={<MasterMember/>} />} />
-          </Routes>
-        </AuthProvider>
+          <AuthProvider>
+            <>
+              <Routes>
+                  <Route path="/" element={<Homepage/>} />
+                  <Route path="/jasa" element={<Jasa/>} />
+                  <Route path="/jasadetail/:id" element={<Jasadetail/>} />
+                  <Route path="/proses-transaksi" element={<UserTransaksi/>} />
+                  <Route path="/profile" element={<Profile/>} />
+                  <Route path="/profile/transaksi" element={<ProfileTransaksi/>} />
+                  <Route path="/profile/detail-transaksi" element={<DetailProfileTransaksi/>} />
+                  <Route path="/auth/login" element={<LoginUser/>} />
+                  <Route path="/auth/register" element={<RegisterUser/>} />
+                  {/* <Route path="/admin/dashboard" element={<Dashboard/>} /> */}
+                  <Route path="/ternaklele/admin/login" element={<LoginAdmin/>} />
+                  <Route 
+                    exact
+                    path="/ternaklele/admin/dashboard" 
+                    element={<PrivateRoute reqiredRole={"admin"} component={<Dashboard/>} />} />
+                  <Route 
+                    exact
+                    path="/ternaklele/admin/member" 
+                    element={<PrivateRoute reqiredRole={"admin"} component={<MasterMember/>} />} />
+              </Routes>
+            </>
+          </AuthProvider>
         </ScrollTop>
       </div>
     </>

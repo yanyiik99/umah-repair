@@ -8,6 +8,7 @@ export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Replace with your logic
+  const [roles, setRoles] = useState("");
   const [userProfile, setUserProfile] = useState({});
 
   const navigate = useNavigate();
@@ -38,6 +39,10 @@ const AuthProvider = ({ children }) => {
     navigate("/ternaklele/admin/dashboard", { replace: true });
   };
 
+  const setRole = (roles) => {
+    setRoles(roles)
+  };
+
   const logout = () => {
     logoutAPI()
       .then((resp) => {
@@ -51,7 +56,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout, userProfile }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, userProfile, setRole, roles}}>
       {children}
     </AuthContext.Provider>
   );

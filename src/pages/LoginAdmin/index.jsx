@@ -14,7 +14,7 @@ const LoginAdmin = () => {
   const showAlert = useNotification();
   const [form] = Form.useForm();
   // Provider login hooked
-  const {login, isLoggedIn} = useContext(AuthContext);
+  const {login, setRole, isLoggedIn} = useContext(AuthContext);
   const [isUnauthorized, setIsUnauthorized] = useState(false);
 
   const handleSubmitLogin = async () => {
@@ -29,9 +29,9 @@ const LoginAdmin = () => {
       .then((resp) => {
         if(resp?.access_token){
           login(resp?.access_token);
+          setRole(resp?.role);
         }else{
           setIsUnauthorized(true);
-          failedLogin();
           showAlert('error', 'Failed to Login', 'Username or Password not Valid!')
         }
         
@@ -64,14 +64,14 @@ const LoginAdmin = () => {
                       <Form.Item 
                           name="email"    
                           rules={[
-                              {required: true, message: "Nama Penerima Wajib Diisi"}
+                              {required: true, message: "Email Wajib Diisi"}
                           ]}>
                           <Input className="p-2 mt-8 rounded-xl border" type="email" placeholder="Email"/>
                       </Form.Item>
                       <Form.Item
                         name="password"    
                         rules={[
-                            {required: true, message: "Nama Penerima Wajib Diisi"}
+                            {required: true, message: "Password Wajib Diisi"}
                         ]}
                       >
                         <div className="relative">

@@ -4,10 +4,11 @@ import { useNavigate } from "react-router";
 import { getDataPrivate, logoutAPI } from "../utils/api";
 import { jwtStorage } from "../utils/jwt_storage";
 
-export const AuthContext = createContext(null);
+export const AuthContextMember = createContext(null);
 
 const MemberProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Replace with your logic
+  const [isLoggedInMember, setIsLoggedInMember] = useState(false); // Replace with your logic
+  const [rolesMember, setRolesMember] = useState(""); // Replace with your logic
   const [userProfile, setUserProfile] = useState({});
 
   const navigate = useNavigate();
@@ -17,13 +18,13 @@ const MemberProvider = ({ children }) => {
       .then((resp) => {
         if (resp?.user_logged) {
           setUserProfile(resp);
-          setIsLoggedIn(true);
+          setIsLoggedInMember(true);
         } else {
-          setIsLoggedIn(false);
+          setIsLoggedInMember(false);
         }
       })
       .catch((err) => {
-        setIsLoggedIn(false);
+        setIsLoggedInMember(false);
         console.log(err);
       });
   };
@@ -32,28 +33,32 @@ const MemberProvider = ({ children }) => {
     getDataProfile();
   }, []);
 
-  const login = (access_token) => {
+  const loginMember = (access_token) => {
     jwtStorage.storeToken(access_token);
     getDataProfile();
-    navigate("/ternaklele/admin/dashboard", { replace: true });
+    navigate("/jasa", { replace: true });
   };
 
-  const logout = () => {
+  const setRoleMember = (role) => {
+    setRolesMember(role);
+  };
+
+  const logoutMember = () => {
     logoutAPI()
       .then((resp) => {
         if (resp?.isLoggedOut) {
           jwtStorage.removeItem();
-          setIsLoggedIn(false);
-          navigate("/ternaklele/admin/login", { replace: true });
+          setIsLoggedInMember(false);
+          navigate("/auth/login", { replace: true });
         }
       })
       .catch((err) => console.log(err));
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout, userProfile }}>
+    <AuthContextMember.Provider value={{ isLoggedInMember, loginMember, logoutMember, userProfile, setRoleMember, role}}>
       {children}
-    </AuthContext.Provider>
+    </AuthContextMember.Provider>
   );
 };
 

@@ -70,7 +70,7 @@ const Homepage = () => {
                         <a href="#" className="leading-19 tracking-03 text-white">Kontak Kami</a>
                     </li>
                     <li>
-                        <a href="#" className="leading-19 tracking-0.5 text-white font-semibold rounded-[22px] py-3 px-6 bg-[#606DE5]">Login</a>
+                        <a href="/auth/login" className="leading-19 tracking-0.5 text-white font-semibold rounded-[22px] py-3 px-6 bg-[#606DE5]">Login</a>
                     </li>
                 </ul>
             </nav>
