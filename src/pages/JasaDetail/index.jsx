@@ -30,6 +30,8 @@ const Jasadetail = () => {
   const [validPromocode, setValidPromocode] = useState(false);
   const [promoCode, setPromoCode] = useState("");
   const [timeCountdown, setTimeCountdown] = useState(0);
+  const [rating, setRating] = useState(0);
+  const [ratingLoading, setRatingLoading] = useState(false);
   const navigate = useNavigate();
   const params = useParams();
   const showAlert = useNotification();
@@ -37,9 +39,6 @@ const Jasadetail = () => {
   
   useEffect(() => {
     getDataJasa();
-    console.log('Updated newHargaPromo:', newHargaPromo);
-    console.log(dataJasa);
-
   }, []);
 
   const getDataJasa = () => {
@@ -50,6 +49,7 @@ const Jasadetail = () => {
           if(ress?.datas){
             setDataJasa(ress?.datas);
             getDataPromo(ress?.datas?.id_promo);
+            getRating(ress?.datas?.id_layanan);
           }else{
             showAlert('error', 'Failed', 'Data is Empty!')
           }
@@ -57,6 +57,20 @@ const Jasadetail = () => {
           setIsLoading(false);
           console.log(err);
       })
+  }
+
+  const getRating = (id_layanan) => {
+    getData(`/api/v1/layanan/read_rating/${id_layanan}`)
+    .then((ress) => {
+      if(ress?.datas){
+        setRating(ress?.avg);
+        console.log(rating);
+        setRatingLoading(true);
+      }
+    }).catch((err) => {
+      setRatingLoading(true);
+      console.log(err);
+    })
   }
 
   const getDataPromo = (id_promo) => {
@@ -125,7 +139,10 @@ const Jasadetail = () => {
           <div id="details" className="flex flex-col w-full rounded-3xl p-8 gap-12 bg-white">
               <div className="flex items-center justify-between gap-4">
                   <div className="flex flex-col gap-2">
-                      <h1 className="text-[32px] leading-[40px] tracking-05">{dataJasa?.nama}</h1>
+                      <h1 onClick={()=>{
+                        console.log(rating);
+                        
+                      }} className="text-[32px] leading-[40px] tracking-05">{dataJasa?.nama}</h1>
                       <div className="flex items-center gap-2">
                           
                           <p className="text-xl leading-6 tracking-05 opacity-50 capitalize">{dataJasa?.kategori}</p>
@@ -185,7 +202,7 @@ const Jasadetail = () => {
                     ellipsis={
                       { rows: 7, expandable: 'collapsible', symbol: showReadmore(expanded), onExpand: (_, info) => setExpanded(info.expanded),}
                     } 
-                    className="desc !leading-[34px] !tracking-05">{dataJasa.deskripsi}</Paragraph>
+                    className="desc !leading-[34px] !tracking-05">{dataJasa?.deskripsi}</Paragraph>
               </div>
 
               <hr className="opacity-10 border-black"/>
@@ -202,7 +219,9 @@ const Jasadetail = () => {
                       <div className="flex flex-col gap-3">
                           <h2 className=" text-xl leading-6 tracking-05">Rating</h2>
                           <p className="leading-[22px] tracking-05 opacity-50">
-                            <Rate allowHalf  disabled defaultValue={DataJasa[0].rate}/>
+                            {
+                              ratingLoading && <Rate allowHalf  disabled defaultValue={rating}/>
+                            }
                           </p>
                       </div>
                   </div>

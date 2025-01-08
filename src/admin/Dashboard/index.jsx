@@ -19,7 +19,7 @@ const { Header, Sider, Content } = Layout;
 const Dashboard = () => {
     return (        
         <>
-            <Sidebar />
+            {/* <Sidebar /> */}
 
             {/* <Col xs={11}>
                 <Card className='bg-red-400'>

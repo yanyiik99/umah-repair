@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Row, Col, Flex, Card, Modal, Form, Input, notification, Image, message, Upload} from 'antd';
-import { UserOutlined, MailOutlined, PhoneOutlined, EditOutlined, LoadingOutlined, EnvironmentOutlined, PlusOutlined} from '@ant-design/icons';
-import { useNavigate } from "react-router-dom";
+import { UserOutlined, MailOutlined, PhoneOutlined, EditOutlined, LoadingOutlined, EnvironmentOutlined, PlusOutlined, HomeOutlined, AimOutlined, PushpinOutlined} from '@ant-design/icons';
+import { Navigate, useNavigate } from "react-router-dom";
 
 import './index.css';
 import SideProfile from "../../Layout/SideProfile";
 import LogoBlack from '../../assets/logo-bl.png';
 
 import Header from "../../Layout/Header";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const dataProfile = {
     id: 0,
@@ -16,9 +17,9 @@ const dataProfile = {
     phone: "+62 896 352 086 86",
     address: "Taman Wira Sambangan Blok Cempaka I No. 4",
     province: "Provinsi Bali",
-    regency: "Kabupaten Buleleng",
-    district: "Kecamatan Sukasada",
-    village: "Desa Sambangan",
+    kabupaten: "Buleleng",
+    kecamatan: "Sukasada",
+    desa: "Sambangan",
 };
 
 const getBase64 = (img, callback) => {
@@ -41,6 +42,21 @@ const beforeUpload = (file) => {
 
 const Profile = () => {
     const navigate = useNavigate();
+   
+    const { loadingContext, isLoggedIn, roles } = useContext(AuthContext);
+    console.log("LOGIN Profile : " + isLoggedIn + roles);
+    
+    if(loadingContext) {
+      console.log("LOADING CONTEXT");
+      return <div>Loading...</div>;
+    }else if(!isLoggedIn || roles != "member") {
+      navigate('/auth/login', {replace: true})
+    }
+
+    
+    // useEffect(()=>{
+    // }, [loadingContext])
+
     const [form] = Form.useForm();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [profile, setProfile] = useState(dataProfile);
@@ -162,9 +178,9 @@ const Profile = () => {
                     </Flex>
 
                     <Flex className='mt-8' gap={"small"} align="flex-start" horizontal>
-                        <label class="group flex flex-col font-[Inter] w-full">
-                            <h2 class="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
-                                <span class="text-red-500 mr-1">*</span> Nama Lengkap
+                        <label className="group flex flex-col font-[Inter] w-full">
+                            <h2 className="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
+                                <span className="text-red-500 mr-1">*</span> Nama Lengkap
                             </h2>
                             <Form.Item                                 
                                 name="fullname" 
@@ -177,9 +193,9 @@ const Profile = () => {
                             </Form.Item>
                         </label>
 
-                        <label class="group flex flex-col font-[Inter] w-full">
-                            <h2 class="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
-                                <span class="text-red-500 mr-1">*</span> No Telepon
+                        <label className="group flex flex-col font-[Inter] w-full">
+                            <h2 className="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
+                                <span className="text-red-500 mr-1">*</span> No Telepon
                             </h2>
                             <Form.Item 
                                 name="phone" 
@@ -191,9 +207,9 @@ const Profile = () => {
                             </Form.Item>
                         </label>
 
-                        <label class="group flex flex-col font-[Inter] w-full">
-                            <h2 class="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
-                                <span class="text-red-500 mr-1">*</span> No Telepon
+                        <label className="group flex flex-col font-[Inter] w-full">
+                            <h2 className="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
+                                <span className="text-red-500 mr-1">*</span> Email
                             </h2>
                             <Form.Item 
                                 name="email" 
@@ -206,9 +222,9 @@ const Profile = () => {
                         </label>
                     </Flex>
 
-                    <label class="group flex flex-col font-[Inter] w-full">
-                        <h2 class="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
-                            <span class="text-red-500 mr-1">*</span> No Telepon
+                    <label className="group flex flex-col font-[Inter] w-full">
+                        <h2 className="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
+                            <span className="text-red-500 mr-1">*</span> No Telepon
                         </h2>
                         <Form.Item 
                             name="address" 
@@ -235,9 +251,9 @@ const Profile = () => {
                     form={form}
                 >
 
-                    <label class="group flex flex-col font-[Inter] w-full mt-5">
-                        <h2 class="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
-                            <span class="text-red-500 mr-1">*</span> Password Lama
+                    <label className="group flex flex-col font-[Inter] w-full mt-5">
+                        <h2 className="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
+                            <span className="text-red-500 mr-1">*</span> Password Lama
                         </h2>
                         <Form.Item 
                             name="passwordLama" 
@@ -248,9 +264,9 @@ const Profile = () => {
                         </Form.Item>     
                     </label>  
 
-                    <label class="group flex flex-col font-[Inter] w-full">
-                        <h2 class="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
-                            <span class="text-red-500 mr-1">*</span> Password Baru
+                    <label className="group flex flex-col font-[Inter] w-full">
+                        <h2 className="text-md flex w-[162px] shrink-0 leading-19 tracking-05"> 
+                            <span className="text-red-500 mr-1">*</span> Password Baru
                         </h2>
                         <Form.Item 
                             name="passwordBaru" 
@@ -261,9 +277,9 @@ const Profile = () => {
                         </Form.Item>     
                     </label>   
 
-                    <label class="group flex flex-col font-[Inter] w-full">
-                        <h2 class="text-md flex w-[162px] shrink-0 leading-19 tracking-05 w-full"> 
-                            <span class="text-red-500 mr-1">*</span> Konfirmasi Password Baru
+                    <label className="group flex flex-col font-[Inter] w-full">
+                        <h2 className="text-md flex w-[162px] shrink-0 leading-19 tracking-05 w-full"> 
+                            <span className="text-red-500 mr-1">*</span> Konfirmasi Password Baru
                         </h2>
                         <Form.Item 
                             name="konfirmasiPasswordBaru" 
@@ -279,12 +295,12 @@ const Profile = () => {
 
             <Header />
 
-            <main id="content" class="relative flex w-full max-w-[1280px] gap-6 mx-auto px-10 mt-[96px]">
-                <aside class="flex flex-col gap-6">    
+            <main id="content" className="relative flex w-full max-w-[1280px] gap-6 mx-auto px-10 mt-[96px]">
+                <aside className="flex flex-col gap-6">    
                     <SideProfile/>
                 </aside>   
 
-                <section id="bg-content" class="flex flex-col gap-6 w-full max-w-[1440px] flex-1">
+                <section id="bg-content" className="flex flex-col gap-6 w-full max-w-[1440px] flex-1">
                     <div className="personal-information">
                         <Card   
                             className="rounded-3xl shadow-none"
@@ -313,6 +329,26 @@ const Profile = () => {
                                             <p className="text-slate-500 font-[Inter]">Email Address</p>
                                         </div>
                                     </div>
+
+                                    <div className="personal flex mt-10">
+                                        <div className="icon-personal w-14 h-14 flex justify-center bg-slate-100 rounded-xl mr-3">
+                                            <HomeOutlined className="font-bold text-slate-600 text-lg"/>
+                                        </div>
+                                        <div className="text-personal pt-2">
+                                            <h1>{profile.desa}</h1>
+                                            <p className="text-slate-500 font-[Inter]">Desa</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="personal flex mt-10">
+                                        <div className="icon-personal w-14 h-14 flex justify-center bg-slate-100 rounded-xl mr-3">
+                                            <PushpinOutlined className="font-bold text-slate-600 text-lg"/>
+                                        </div>
+                                        <div className="text-personal pt-2">
+                                            <h1>{profile.kabupaten}</h1>
+                                            <p className="text-slate-500 font-[Inter]">Kabupaten</p>
+                                        </div>
+                                    </div>
                                 </Col>
 
                                 <Col>
@@ -334,7 +370,18 @@ const Profile = () => {
                                             <h1>{profile.address}</h1>
                                             <p className="text-slate-500 font-[Inter]">Address</p>
                                         </div>
-                                    </div>                                
+                                    </div>    
+
+                                    <div className="personal flex mt-10">
+                                        <div className="icon-personal w-14 h-14 flex justify-center bg-slate-100 rounded-xl mr-3">
+                                            <AimOutlined className="font-bold text-slate-600 text-lg"/>
+                                        </div>
+                                        <div className="text-personal pt-2">
+                                            <h1>{profile.kecamatan}</h1>
+                                            <p className="text-slate-500 font-[Inter]">Kecamatan</p>
+                                        </div>
+                                    </div>
+                               
                                 </Col>
 
                                 <button onClick={showModalPassword} className="mt-14 px-5 rounded-full text-sm text-[#606DE5] py-2 border-2 border-[#606DE5]">

@@ -25,6 +25,8 @@ import Kontak from "./pages/Kontak";
 
 import AuthProvider from "./providers/AuthProvider";
 import LoginAdmin from "./pages/LoginAdmin";
+import MemberProvider from "./providers/MemberProvider";
+import MasterSkillStaff from "./admin/Staff/skill";
 
 function App() { 
 
@@ -38,28 +40,47 @@ function App() {
     <>
       <div>
         <ScrollTop>
-        <AuthProvider>
-          <Routes>
-              <Route path="/" element={<Homepage/>} />
-              <Route path="/jasa" element={<Jasa/>} />
-              <Route path="/testimonial" element={<Testimoni/>} />
-              <Route path="/kontak-kami" element={<Kontak/>} />
-              <Route path="/jasadetail/:id" element={<Jasadetail/>} />
-              <Route path="/proses-transaksi" element={<UserTransaksi/>} />
-              <Route path="/profile" element={<Profile/>} />
-              <Route path="/profile/transaksi" element={<ProfileTransaksi/>} />
-              <Route path="/profile/detail-transaksi" element={<DetailProfileTransaksi/>} />
-              <Route path="/ternaklele/admin/login" element={<LoginAdmin/>} />
-              <Route path="/auth/login" element={<LoginUser/>} />
-              <Route path="/auth/register" element={<RegisterUser/>} />
-              {/* <Route path="/admin/dashboard" element={<Dashboard/>} /> */}
-              <Route exact path="/ternaklele/admin/dashboard" element={<Dashboard/>} />
-              <Route exact path="/ternaklele/admin/member" element={<MasterMember/>} />
-              <Route exact path="/ternaklele/admin/staff" element={<MasterStaff/>} />
-              <Route exact path="/ternaklele/admin/layanan" element={<MasterLayanan/>} />
-              <Route exact path="/ternaklele/admin/transaksi" element={<MasterTransaksi/>} />
-          </Routes>
-        </AuthProvider>
+          <AuthProvider>
+              <Routes>
+                  <Route path="/" element={<Homepage/>} />
+                  <Route path="/jasa" element={<Jasa/>} />
+                  <Route path="/testimonial" element={<Testimoni/>} />
+                  <Route path="/kontak-kami" element={<Kontak/>} />
+                  <Route path="/jasadetail/:id" element={<Jasadetail/>} />
+                  <Route path="/proses-transaksi" element={<UserTransaksi/>} />
+                  <Route path="/profile" element={<Profile/>} />
+                  <Route path="/profile/transaksi" element={<ProfileTransaksi/>} />
+                  <Route path="/profile/detail-transaksi" element={<DetailProfileTransaksi/>} />
+                  <Route path="/auth/login" element={<LoginUser/>} />
+                  <Route path="/auth/register" element={<RegisterUser/>} />
+                  {/* <Route path="/admin/dashboard" element={<Dashboard/>} /> */}
+                  <Route path="/ternaklele/admin/login" element={<LoginAdmin/>} />
+                  <Route 
+                    exact
+                    path="/ternaklele/admin/dashboard" 
+                    element={<PrivateRoute component={<Dashboard/>} />} />
+                  <Route 
+                    exact
+                    path="/ternaklele/admin/member" 
+                    element={<PrivateRoute component={<MasterMember/>} />} />
+                  <Route 
+                    exact
+                    path="/ternaklele/admin/skill_staff" 
+                    element={<PrivateRoute component={<MasterSkillStaff/>} />} />
+                  <Route 
+                    exact
+                    path="/ternaklele/admin/staff" 
+                    element={<PrivateRoute component={<MasterStaff/>} />} />
+                  <Route 
+                    exact
+                    path="/ternaklele/admin/layanan" 
+                    element={<PrivateRoute component={<MasterLayanan/>} />} />
+                  <Route 
+                    exact
+                    path="/ternaklele/admin/transaksi" 
+                    element={<PrivateRoute component={<MasterTransaksi/>} />} />
+              </Routes>
+          </AuthProvider>
         </ScrollTop>
       </div>
     </>
