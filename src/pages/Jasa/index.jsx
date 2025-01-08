@@ -14,14 +14,6 @@ import { formatCurrency } from "../../utils/ui";
 import { getData, loadImage } from "../../utils/api";
 import { useNotification } from '../../components/NotificationContext/index.jsx';
 
-const dataDummy = [
-  {key: 1, title: "Perbaikan Kulkas dan Mesin Cuci", category: "Elektronik", description: "The boy wtih blue hat", price: "150.000", warranty: "30 Hari", tools: "Dari Kami", support:"24/7", duration: "1 Jam"},
-  {key: 2, title: "Perbaikan Dinding dan Plafon", category: "Renovasi", description: "The girl wtih red hat", price: "150.000", warranty: "60 Hari", tools: "Dari Anda", support:"24/7", duration: "3 Jam"},
-  {key: 3, title: "Pembersihan Sofa dan Karpet", category: "Kebersihan", description: "The mysterious person in the class", price: "150.000", warranty: "30 Hari", tools: "Dari Kami", support:"24/7", duration: "5 Jam"},
-  {key: 4, title: "Instalasi CCTV dan Keamanan", category: "Instalasi", description: "The boy wtih blue hat", price: "150.000", warranty: "30 Hari", tools: "Dari Anda", support:"24/7", duration: "1 Jam"},
-  {key: 5, title: "Pembersihan Septic Tank", category: "Plumbing dan Air", description: "The girl wtih red hat", price: "150.000", warranty: "30 Hari", tools: "Dari Kami", support:"24/7", duration: "3 Jam"},
-  {key: 6, title: "Pembuatan dan Perbaikan Mebel", category: "Dekorasi", description: "The mysterious person in the class", price: "150.000", warranty: "60 Hari", tools: "Dari Kami", support:"24/7", duration: "5 Jam"},
-]
 
 const dataCategory = [
   {id: 0, label: "Semua", value: "Semua"},
@@ -85,7 +77,6 @@ const Jasa = () => {
   return (
     <div>
         <Header/>
-
         <div id="hero-text" className="relative flex flex-col items-center mx-auto mt-16">
             <h1 className="text-black mt-10 text-4xl" style={{ fontFamily: 'Inter' }}>Temukan Kebutuhan Anda</h1>
             <p className="leading-19 text-black mt-4">Semua Kebutuhan Rumah Anda Ada Di Sini</p>

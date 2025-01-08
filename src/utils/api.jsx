@@ -105,9 +105,8 @@ export const editDataPrivatePut = async (url, data) => {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: data,
   })
     .then((response) =>
       response.status === 401

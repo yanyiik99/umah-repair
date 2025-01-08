@@ -17,9 +17,11 @@ import Link from "antd/es/typography/Link";
 import Logo from '../../assets/logo.png';
 import LogoBlack from '../../assets/logo-bl.png';
 import './index.css';
-import { AuthContextMember } from "../../providers/MemberProvider";
+import { AuthContext } from "../../providers/AuthProvider";
 import Header from "../../Layout/Header";
 import Footer from "../../Layout/Footer";
+import { sendData } from "../../utils/api";
+import { useNotification } from "../../components/NotificationContext";
 
 const steps = [
     {
@@ -60,11 +62,21 @@ const props = {
 const UserTransaksi = () => {
     const navigate = useNavigate();
     
-    const { isLoggedInMember } = useContext(AuthContextMember);
-    if(!isLoggedInMember){
+    const {loadingContext, isLoggedIn, roles, userProfile } = useContext(AuthContext);
+    // console.log("LOGIN ? : " + isLoggedIn + " " + roles);
+    // if(!isLoggedIn || roles != "member"){
+    //     return <Navigate to="/auth/login" replace />
+    // }
+    
+    if(loadingContext) {
+        console.log("LOADING CONTEXT");
+        console.log(userProfile?.id);
+        
+        // return <div>Loading...</div>;
+    }else if(!isLoggedIn || roles != "member") {
         return <Navigate to="/auth/login" replace />
+        // navigate('/auth/login', {replace: true})
     }
-    console.log("MemberProvider -> isLoggedInMember", isLoggedInMember);
     
     const [current, setCurrent] = useState(0);
     const [expanded, setExpanded] = useState(false);
@@ -78,11 +90,14 @@ const UserTransaksi = () => {
     const [arrow, setArrow] = useState('Show');
     const [dataJasa, setDataJasa] = useState(location.state);
     const tax = dataJasa?.harga * 0.12;
+    const showAlert = useNotification();
+    const [tix, setTix] = useState("");
 
     const [dataCustomer, setDataCustomer] = useState({});
     
     useEffect(() => {
         console.log(dataJasa);
+        console.log(dataCustomer);
 
     },[dataCustomer]);
 
@@ -106,9 +121,7 @@ const UserTransaksi = () => {
             alamat: selectedAlamat,
             jadwal: selectedDate
         })
-
         setCurrent(current + 1);
-
     }
 
     
@@ -152,7 +165,49 @@ const UserTransaksi = () => {
         setTimeout(() => {
           inputRef.current?.focus();
         }, 0);
-      };
+    };
+
+    const generateTixCode = () => {
+      const randomDigits = Array.from({ length: 6 }, () =>
+        Math.floor(Math.random() * 10)
+      ).join("");
+      return `TIX${randomDigits}`;
+    };
+
+    const handleKonfirmasi = async () => {
+  
+      let formData = new FormData();
+
+      formData.append("id_member", userProfile?.id);
+      formData.append("id_layanan", dataJasa?.id_layanan);
+      formData.append("no_pesanan", generateTixCode());
+      formData.append("harga", dataJasa?.harga);
+      formData.append("ppn", tax);
+      formData.append("diskon", (dataJasa?.hargaPromo == undefined ? 0 : dataJasa?.hargaPromo));
+      formData.append("bukti_tf", "bukti_tf.png");
+      formData.append("nama_penerima", dataCustomer?.namapenerima);
+      formData.append("no_tlpn", dataCustomer?.notlpn);
+      formData.append("alamat", dataCustomer?.alamat);
+      formData.append("jadwal", dataCustomer?.jadwal);
+      formData.append("catatan", (dataCustomer?.catatan == undefined) ? null : dataCustomer?.catatan);
+
+      sendData('/api/v1/transaksi/create_transaksi', formData)
+          .then((resp) => {
+            if(resp?.status == "OK"){
+              setCurrent(current + 1);
+              setTix(resp?.tix)
+            }else{
+              showAlert('error', 'Failed to Login', resp?.message)
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            showAlert('error', 'Failed to Login', resp?.message)
+        })
+
+
+
+    }
     
     return <div>
         <Header />  
@@ -458,7 +513,13 @@ const UserTransaksi = () => {
                             <label id="upload-proof" className="flex flex-col gap-1 font-['Poppins']">
                                 <h2 className="font-semibold text-lg text-black mb-2">Bukti Transfer</h2>
                                 <div className="relative w-full rounded-xl border border-[#BFBFBF] py-4 px-3 bg-white">
-                                    <Dragger {...props}>
+                                    <Dragger 
+                                        {...props}
+                                        beforeUpload={(file)=>{
+                                            console.log({file});
+                                            return true;
+                                        }}
+                                    >
                                         <p className="ant-upload-drag-icon">
                                             <InboxOutlined />
                                         </p>
@@ -469,8 +530,8 @@ const UserTransaksi = () => {
                                     </Dragger>
                                 </div>
                             </label>
-                            <button type="submit" onClick={() => next()} className="font-[Inter] w-full mt-7 rounded-full py-3 px-6 bg-[#606DE5] font-semibold leading-19 tracking-05 text-white text-center">Konfirmasi</button>
                         </Form>
+                        <button type="submit" onClick={() => handleKonfirmasi()} className="font-[Inter] w-full mt-7 rounded-full py-3 px-6 bg-[#606DE5] font-semibold leading-19 tracking-05 text-white text-center">Konfirmasi</button>
                     </div>
                 </div>
             </div>
@@ -488,7 +549,7 @@ const UserTransaksi = () => {
                 </div>
                 <div className="w-fit flex items-center rounded-2xl py-4 px-8 gap-4 bg-[#D0EEFF]">
                     
-                    <h2 className="text-xl leading-[34px] tracking-05">No Pesanan:<span className="ml-2 text-[#835DFE]">TIX721637</span></h2>
+                    <h2 className="text-xl leading-[34px] tracking-05">No Pesanan:<span className="ml-2 text-[#835DFE]">{tix}</span></h2>
                 </div>
                 <a href="/" className="w-fit rounded-full py-3 px-6 bg-[#606DE5] font-semibold leading-19 tracking-05 text-white text-center">Kembali ke Beranda</a>
             </div>

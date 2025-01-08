@@ -7,6 +7,7 @@ import { AuthContextMember } from "../../providers/MemberProvider";
 import { sendData } from "../../utils/api";
 import { useNotification } from "../../components/NotificationContext";
 import { useContext, useState } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const LoginUser = () => {
 
@@ -14,7 +15,7 @@ const LoginUser = () => {
   const showAlert = useNotification();
   const [form] = Form.useForm();
   // Provider login hooked
-  const {loginMember, isLoggedInMember} = useContext(AuthContextMember);
+  const {loginMember, setRole} = useContext(AuthContext);
   const [isUnauthorized, setIsUnauthorized] = useState(false);
 
   const handleSubmitLogin = async () => {
@@ -29,6 +30,7 @@ const LoginUser = () => {
       .then((resp) => {
         if(resp?.access_token){
           loginMember(resp?.access_token);
+          setRole(resp?.role);
         }else{
           setIsUnauthorized(true);
           showAlert('error', 'Failed to Login', 'Username or Password not Valid!')
@@ -43,13 +45,13 @@ const LoginUser = () => {
 
   return(
       <div
-          style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          }}
+        style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        }}
     >
-       <div id="background" class="absolute w-full h-[350px] top-0 -z-10 bg-[#9FDDFF]"></div>
+       <div id="background" className="absolute w-full h-[350px] top-0 -z-10 bg-[#9FDDFF]"></div>
       <section className="min-h-screen flex items-center justify-center">
           <Row className="bg-white flex rounded-2xl  max-w-3xl p-5 items-center">
               <Col md={12} className="px-5">

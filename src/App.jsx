@@ -26,6 +26,7 @@ import Kontak from "./pages/Kontak";
 import AuthProvider from "./providers/AuthProvider";
 import LoginAdmin from "./pages/LoginAdmin";
 import MemberProvider from "./providers/MemberProvider";
+import MasterSkillStaff from "./admin/Staff/skill";
 
 function App() { 
 
@@ -43,6 +44,8 @@ function App() {
               <Routes>
                   <Route path="/" element={<Homepage/>} />
                   <Route path="/jasa" element={<Jasa/>} />
+                  <Route path="/testimonial" element={<Testimoni/>} />
+                  <Route path="/kontak-kami" element={<Kontak/>} />
                   <Route path="/jasadetail/:id" element={<Jasadetail/>} />
                   <Route path="/proses-transaksi" element={<UserTransaksi/>} />
                   <Route path="/profile" element={<Profile/>} />
@@ -55,23 +58,27 @@ function App() {
                   <Route 
                     exact
                     path="/ternaklele/admin/dashboard" 
-                    element={<PrivateRoute reqiredRole={"admin"} component={<Dashboard/>} />} />
+                    element={<PrivateRoute component={<Dashboard/>} />} />
                   <Route 
                     exact
                     path="/ternaklele/admin/member" 
-                    element={<PrivateRoute reqiredRole={"admin"} component={<MasterMember/>} />} />
+                    element={<PrivateRoute component={<MasterMember/>} />} />
+                  <Route 
+                    exact
+                    path="/ternaklele/admin/skill_staff" 
+                    element={<PrivateRoute component={<MasterSkillStaff/>} />} />
                   <Route 
                     exact
                     path="/ternaklele/admin/staff" 
-                    element={<PrivateRoute reqiredRole={"admin"} component={<MasterStaff/>} />} />
+                    element={<PrivateRoute component={<MasterStaff/>} />} />
                   <Route 
                     exact
                     path="/ternaklele/admin/layanan" 
-                    element={<PrivateRoute reqiredRole={"admin"} component={<MasterLayanan/>} />} />
+                    element={<PrivateRoute component={<MasterLayanan/>} />} />
                   <Route 
                     exact
                     path="/ternaklele/admin/transaksi" 
-                    element={<PrivateRoute reqiredRole={"admin"} component={<MasterTransaksi/>} />} />
+                    element={<PrivateRoute component={<MasterTransaksi/>} />} />
               </Routes>
           </AuthProvider>
         </ScrollTop>

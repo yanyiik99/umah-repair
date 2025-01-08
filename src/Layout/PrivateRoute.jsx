@@ -11,11 +11,12 @@ const PrivateRoute = ({ requiredRole, component }) => {
   console.log("Your Roles -> roles: ", roles);
 
 
-  if(isLoggedIn){
+  if(isLoggedIn && roles === "admin"){
     return <MainLayout> {component} </MainLayout>;
+  }else{
+    return <LoginAdmin/>;
   }
 
-  return <LoginAdmin/>;
 
 };
 

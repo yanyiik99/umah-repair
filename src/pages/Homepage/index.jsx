@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Image, List } from 'antd';
-import { FormatPainterFilled } from '@ant-design/icons'
+import { FormatPainterFilled, UserOutlined } from '@ant-design/icons'
 import { useNavigate, Link } from "react-router-dom";
 import Logo from '../../assets/logo.png';
 import TriplePhoto from './img/triple-photo.png';
@@ -10,6 +10,7 @@ import './index.css';
 import { getData, loadImage } from "../../utils/api";
 import { useNotification } from '../../components/NotificationContext/index.jsx';
 import { formatCurrency } from "../../utils/ui.jsx";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const dataDummy = [
   {key: 1, title: "Perbaikan Kulkas dan Mesin Cuci", category: "Elektronik", description: "The boy wtih blue hat", price: "150.000", warranty: "30 Hari", tools: "Dari Kami", support:"24/7", duration: "1 Jam"},
@@ -22,13 +23,18 @@ const dataDummy = [
 
 const Homepage = () => {
 
+  const navigate = useNavigate();
+  const { isLoggedIn, roles } = useContext(AuthContext);
+  console.log("LOGIN & Role : " + isLoggedIn + " " + roles);
+  
+
   const [dataJasa, setDataJasa] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const showAlert = useNotification();
 
-    useEffect(() => {
-        getDataJasa();
-    }, []);
+  useEffect(() => {
+    getDataJasa();
+  }, []);
 
     const getDataJasa = () => {
       setIsLoading(true);
@@ -71,7 +77,14 @@ const Homepage = () => {
                         <a href="#" className="leading-19 tracking-03 text-white">Kontak Kami</a>
                     </li>
                     <li>
-                        <a href="/auth/login" className="leading-19 tracking-0.5 text-white font-semibold rounded-[22px] py-3 px-6 bg-[#606DE5]">Login</a>
+                      {
+                        isLoggedIn && roles === 'member' ? 
+                        <Link to="/profile" className="leading-19 tracking-0.5 text-white font-semibold rounded-[22px] py-3 px-6 bg-[#606DE5] cursor-pointer">
+                          <UserOutlined/>
+                        </Link> : 
+                        <Link to="/auth/login" className="leading-19 tracking-0.5 text-white font-semibold rounded-[22px] py-3 px-6 bg-[#606DE5] cursor-pointer">Login</Link>
+                      }
+                        
                     </li>
                 </ul>
             </nav> 
@@ -180,7 +193,7 @@ const Homepage = () => {
             dataSource={dataJasa}
             renderItem={(item) => (
             <List.Item>
-              <a href="details.html" className="card-layanan">
+              <a onClick={()=>navigate(`/jasadetail/${btoa(item?.id_layanan)}`)} className="card-layanan">
                   <div className="flex flex-col rounded-3xl p-8 gap-6 bg-white">
                       <div className="title flex flex-col gap-2">
                           <h3 className="font-bold leading-19 tracking-03 text-lg">{item?.nama}</h3>
